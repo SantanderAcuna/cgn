@@ -1,0 +1,2 @@
+# docs
+Este directorio contiene los archivos fuente para el despliegue del sitio mediante GitHub Pages con Jekyll. Si vas a publicar documentación o una web, agrega aquí tus archivos Markdown, HTML, imágenes, etc.
