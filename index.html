@@ -3,779 +3,1732 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mapa Mental CGR – Concurso 2024-2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<title>CGR 2024-2026 — Guía de Estudio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #060a14;
-    --surface: #0d1525;
-    --border: rgba(255,255,255,0.07);
-    --accent1: #00d4ff;
-    --accent2: #7c3aed;
-    --accent3: #f59e0b;
-    --accent4: #10b981;
-    --accent5: #ef4444;
-    --accent6: #ec4899;
-    --text: #e2e8f0;
-    --muted: #64748b;
-    --glow1: rgba(0,212,255,0.15);
-    --glow2: rgba(124,58,237,0.15);
+    --gold: #C8A85A;
+    --gold-light: #E8C97A;
+    --gold-dim: rgba(200,168,90,0.15);
+    --ink: #0D1117;
+    --ink-soft: #1C2333;
+    --surface: #131920;
+    --surface2: #1A2332;
+    --surface3: #222E42;
+    --text: #E8EDF5;
+    --text-muted: #8A9BB5;
+    --accent-blue: #4A9EFF;
+    --accent-green: #3DD68C;
+    --accent-red: #FF6B6B;
+    --accent-purple: #B06EF3;
+    --border: rgba(200,168,90,0.2);
+    --radius: 12px;
   }
-  * { margin:0; padding:0; box-sizing:border-box; }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
   body {
-    background: var(--bg);
-    font-family: 'Sora', sans-serif;
+    font-family: 'DM Sans', sans-serif;
+    background: var(--ink);
     color: var(--text);
     min-height: 100vh;
     overflow-x: hidden;
   }
 
-  /* NOISE TEXTURE */
-  body::before {
-    content:'';
-    position:fixed; inset:0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events:none; z-index:0; opacity:.4;
-  }
-
-  /* HEADER */
-  header {
-    position: relative; z-index:10;
-    padding: 48px 40px 32px;
+  /* ─── HEADER ─── */
+  .header {
+    background: linear-gradient(135deg, #0D1117 0%, #131920 50%, #0D1117 100%);
     border-bottom: 1px solid var(--border);
-    background: linear-gradient(135deg, rgba(0,212,255,0.05), rgba(124,58,237,0.05));
-  }
-  .header-badge {
-    display:inline-flex; align-items:center; gap:8px;
-    background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3);
-    color: var(--accent1); padding: 4px 14px; border-radius:50px;
-    font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
-    margin-bottom:16px;
-  }
-  header h1 {
-    font-size: clamp(24px, 4vw, 42px);
-    font-weight:800; line-height:1.1;
-    background: linear-gradient(135deg, #fff 30%, var(--accent1));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    margin-bottom:8px;
-  }
-  header p { color: var(--muted); font-size:14px; max-width:600px; }
-
-  /* CONTROLS */
-  .controls {
-    position:relative; z-index:10;
-    display:flex; gap:12px; padding:20px 40px;
-    flex-wrap:wrap; align-items:center;
-    border-bottom: 1px solid var(--border);
-  }
-  .btn {
-    padding: 8px 18px; border-radius:8px; border:none; cursor:pointer;
-    font-family:'Sora', sans-serif; font-size:12px; font-weight:600;
-    transition: all .2s;
-  }
-  .btn-primary { background:var(--accent1); color:#000; }
-  .btn-primary:hover { filter:brightness(1.2); transform:translateY(-1px); }
-  .btn-secondary { background: rgba(255,255,255,0.07); color:var(--text); border:1px solid var(--border); }
-  .btn-secondary:hover { background: rgba(255,255,255,0.12); }
-  .legend { display:flex; gap:16px; margin-left:auto; flex-wrap:wrap; }
-  .legend-item { display:flex; align-items:center; gap:6px; font-size:11px; color:var(--muted); }
-  .legend-dot { width:10px; height:10px; border-radius:50%; }
-
-  /* CANVAS AREA */
-  #canvas-wrap {
-    position: relative; z-index:5;
-    width:100%; overflow:auto;
-    cursor:grab;
-  }
-  #canvas-wrap:active { cursor:grabbing; }
-  #canvas {
-    position:relative;
-    width: 3200px;
-    min-height: 2400px;
-    padding: 100px;
+    padding: 28px 32px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(20px);
   }
 
-  /* SVG CONNECTIONS */
-  #connections {
-    position:absolute; top:0; left:0;
-    width:100%; height:100%;
-    pointer-events:none;
+  .header-top {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
   }
 
-  /* NODES */
-  .node {
-    position: absolute;
-    border-radius: 14px;
-    cursor: pointer;
-    transition: transform .25s, box-shadow .25s;
-    user-select:none;
-  }
-  .node:hover { transform: scale(1.04); z-index:100; }
-  .node.expanded { z-index: 50; }
-
-  .node-inner {
-    padding: 14px 20px;
-    border-radius: 14px;
-    border: 1px solid;
-    backdrop-filter: blur(12px);
-    position: relative;
-    overflow: hidden;
-  }
-  .node-inner::before {
-    content:'';
-    position:absolute; inset:0;
-    background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.05), transparent 60%);
-    pointer-events:none;
-  }
-
-  .node-title {
-    font-size: 13px; font-weight:700;
-    display:flex; align-items:center; gap:8px;
-    line-height:1.3;
-  }
-  .node-icon { font-size:18px; flex-shrink:0; }
-  .node-chevron {
-    margin-left:auto; font-size:10px; opacity:.6;
-    transition: transform .3s;
-    flex-shrink:0;
-  }
-  .node.expanded .node-chevron { transform: rotate(180deg); }
-  .node-sub { font-size:10px; opacity:.6; margin-top:3px; font-weight:400; }
-
-  /* NODE COLORS */
-  .node-root .node-inner {
-    background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(124,58,237,0.15));
-    border-color: var(--accent1);
-    box-shadow: 0 0 40px rgba(0,212,255,0.2), 0 8px 32px rgba(0,0,0,0.5);
-  }
-  .node-root .node-title { font-size:16px; color:#fff; }
-
-  .node-cat1 .node-inner { background:rgba(0,212,255,0.08); border-color:rgba(0,212,255,0.4); }
-  .node-cat1 .node-title { color:var(--accent1); }
-  .node-cat2 .node-inner { background:rgba(124,58,237,0.08); border-color:rgba(124,58,237,0.4); }
-  .node-cat2 .node-title { color:#a78bfa; }
-  .node-cat3 .node-inner { background:rgba(245,158,11,0.08); border-color:rgba(245,158,11,0.4); }
-  .node-cat3 .node-title { color:var(--accent3); }
-  .node-cat4 .node-inner { background:rgba(16,185,129,0.08); border-color:rgba(16,185,129,0.4); }
-  .node-cat4 .node-title { color:var(--accent4); }
-  .node-cat5 .node-inner { background:rgba(239,68,68,0.08); border-color:rgba(239,68,68,0.4); }
-  .node-cat5 .node-title { color:var(--accent5); }
-  .node-cat6 .node-inner { background:rgba(236,72,153,0.08); border-color:rgba(236,72,153,0.4); }
-  .node-cat6 .node-title { color:var(--accent6); }
-
-  .node-leaf .node-inner {
-    background: rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.1);
-    padding:10px 14px;
-  }
-  .node-leaf .node-title { font-size:11px; color:var(--text); }
-
-  /* DETAIL PANEL */
-  .detail-panel {
-    display:none;
-    position:fixed; right:0; top:0; bottom:0;
-    width: min(480px, 100vw);
-    background: #0b1220;
-    border-left: 1px solid var(--border);
-    z-index: 1000;
-    overflow-y: auto;
-    transform: translateX(100%);
-    transition: transform .35s cubic-bezier(.4,0,.2,1);
-    box-shadow: -20px 0 60px rgba(0,0,0,0.5);
-  }
-  .detail-panel.open {
-    display:block;
-    transform: translateX(0);
-  }
-  .panel-header {
-    padding: 28px 28px 20px;
-    border-bottom: 1px solid var(--border);
-    position: sticky; top:0;
-    background: #0b1220; z-index:1;
-  }
-  .panel-close {
-    position:absolute; top:20px; right:20px;
-    background:rgba(255,255,255,0.07); border:none; color:var(--text);
-    width:32px; height:32px; border-radius:8px; cursor:pointer;
-    font-size:16px; display:flex; align-items:center; justify-content:center;
-    transition:.2s;
-  }
-  .panel-close:hover { background:rgba(255,255,255,0.15); }
-  .panel-icon { font-size:32px; margin-bottom:10px; }
-  .panel-title { font-size:18px; font-weight:800; margin-bottom:4px; }
-  .panel-subtitle { font-size:12px; color:var(--muted); }
-  .panel-body { padding:24px 28px; }
-
-  .info-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border);
+  .logo-badge {
+    width: 48px; height: 48px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
     border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    box-shadow: 0 4px 20px rgba(200,168,90,0.4);
+    flex-shrink: 0;
   }
-  .info-card-label {
-    font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
-    color:var(--muted); margin-bottom:8px; display:flex; align-items:center; gap:6px;
-  }
-  .info-card-label span { font-size:14px; }
-  .info-card p { font-size:13px; line-height:1.6; color:#cbd5e1; }
 
-  .tag-wrap { display:flex; flex-wrap:wrap; gap:6px; }
-  .tag {
-    padding:4px 10px; border-radius:50px;
-    font-size:10px; font-weight:600;
-    background:rgba(255,255,255,0.07); color:var(--text);
+  .header-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+
+  .header-text p {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-top: 2px;
   }
 
   .progress-bar {
-    height:4px; border-radius:2px;
-    background: rgba(255,255,255,0.07);
-    overflow:hidden; margin-top:8px;
+    height: 3px;
+    background: var(--surface2);
+    border-radius: 2px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    display: none;
   }
+
   .progress-fill {
-    height:100%; border-radius:2px;
-    background: linear-gradient(90deg, var(--accent1), var(--accent2));
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    border-radius: 2px;
+    transition: width 0.4s ease;
+    width: 0%;
   }
 
-  .article-ref {
-    font-family: 'JetBrains Mono', monospace;
-    font-size:11px; color:var(--accent1);
-    background: rgba(0,212,255,0.08); border:1px solid rgba(0,212,255,0.2);
-    padding:2px 8px; border-radius:4px; display:inline-block; margin-bottom:4px;
+  /* ─── TABS NAV ─── */
+  .tabs-wrapper {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 0;
+  }
+  .tabs-wrapper::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 16px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    white-space: nowrap;
+    position: relative;
+    transition: color 0.25s;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
   }
 
-  /* OVERLAY */
-  #overlay {
-    display:none; position:fixed; inset:0;
-    background:rgba(0,0,0,0.4); z-index:999;
+  .tab-btn .t-icon {
+    font-size: 14px;
+    opacity: 0.7;
   }
-  #overlay.show { display:block; }
 
-  /* MINI MAP */
-  #minimap {
-    position:fixed; bottom:20px; left:20px;
-    width:160px; height:100px;
-    background: rgba(0,0,0,0.7);
-    border:1px solid var(--border);
-    border-radius:8px; z-index:100;
-    overflow:hidden;
-  }
-  #minimap canvas { width:100%; height:100%; }
+  .tab-btn:hover { color: var(--text); }
 
-  /* SEARCH */
-  .search-wrap {
-    display:flex; align-items:center;
-    background:rgba(255,255,255,0.05); border:1px solid var(--border);
-    border-radius:8px; padding:6px 14px; gap:8px;
+  .tab-btn.active {
+    color: var(--gold);
+    border-bottom: 2px solid var(--gold);
   }
-  .search-wrap input {
-    background:none; border:none; outline:none;
-    color:var(--text); font-family:'Sora',sans-serif; font-size:12px;
-    width:200px;
-  }
-  .search-wrap input::placeholder { color:var(--muted); }
 
-  @keyframes pulse-ring {
-    0% { box-shadow: 0 0 0 0 rgba(0,212,255,0.4); }
-    100% { box-shadow: 0 0 0 20px rgba(0,212,255,0); }
+  .tab-group-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    padding: 10px 16px 12px;
+    white-space: nowrap;
+    text-transform: uppercase;
+    opacity: 0.5;
+    display: flex;
+    align-items: center;
   }
-  .node-root .node-inner { animation: pulse-ring 3s infinite; }
 
-  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
-  .node { animation: fadeIn .4s both; }
-
-  /* TOOLTIP */
-  .tooltip {
-    position:absolute; z-index:200;
-    background:#1e293b; border:1px solid var(--border);
-    border-radius:8px; padding:10px 14px;
-    font-size:11px; pointer-events:none;
-    max-width:220px; line-height:1.5;
-    box-shadow:0 8px 24px rgba(0,0,0,0.5);
-    opacity:0; transition:opacity .2s;
+  /* ─── CONTENT ─── */
+  .content {
+    padding: 32px;
+    max-width: 1100px;
+    margin: 0 auto;
   }
-  .tooltip.show { opacity:1; }
+
+  .tab-panel { display: none; }
+  .tab-panel.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── PANEL HEADER ─── */
+  .panel-hero {
+    background: linear-gradient(135deg, var(--surface2) 0%, var(--surface) 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .panel-hero::before {
+    content: '';
+    position: absolute;
+    right: -20px; top: -20px;
+    width: 140px; height: 140px;
+    background: radial-gradient(circle, rgba(200,168,90,0.12), transparent 70%);
+    border-radius: 50%;
+  }
+
+  .panel-hero .tag {
+    display: inline-block;
+    background: var(--gold-dim);
+    color: var(--gold);
+    border: 1px solid rgba(200,168,90,0.3);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .panel-hero h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  .panel-hero p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    max-width: 650px;
+  }
+
+  /* ─── META ROW ─── */
+  .meta-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .meta-card {
+    background: var(--surface2);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: var(--radius);
+    padding: 16px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .meta-card:hover {
+    border-color: var(--border);
+    transform: translateY(-1px);
+  }
+
+  .meta-card .m-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .meta-card .m-value {
+    font-size: 0.85rem;
+    color: var(--text);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* ─── SECTIONS ─── */
+  .section {
+    background: var(--surface);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+
+  .section-header {
+    padding: 16px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.2s;
+    user-select: none;
+  }
+
+  .section-header:hover { background: var(--surface2); }
+
+  .section-header .sh-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-header .sh-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .section-header h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .section-header .sh-sub {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 1px;
+  }
+
+  .chevron {
+    color: var(--text-muted);
+    font-size: 12px;
+    transition: transform 0.3s;
+  }
+
+  .section.open .chevron { transform: rotate(180deg); }
+
+  .section-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s;
+    padding: 0 20px;
+  }
+
+  .section.open .section-body {
+    max-height: 3000px;
+    padding: 4px 20px 20px;
+  }
+
+  /* ─── CONTENT ELEMENTS ─── */
+  .info-block {
+    background: var(--surface2);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px;
+    margin: 12px 0;
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  .info-block strong { color: var(--text); }
+
+  .pill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0;
+  }
+
+  .pill {
+    background: var(--surface3);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .pill.gold { background: var(--gold-dim); border-color: rgba(200,168,90,0.3); color: var(--gold); }
+  .pill.blue { background: rgba(74,158,255,0.1); border-color: rgba(74,158,255,0.25); color: var(--accent-blue); }
+  .pill.green { background: rgba(61,214,140,0.1); border-color: rgba(61,214,140,0.25); color: var(--accent-green); }
+  .pill.red { background: rgba(255,107,107,0.1); border-color: rgba(255,107,107,0.25); color: var(--accent-red); }
+  .pill.purple { background: rgba(176,110,243,0.1); border-color: rgba(176,110,243,0.25); color: var(--accent-purple); }
+
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 12px 0;
+  }
+
+  @media (max-width: 600px) { .grid2 { grid-template-columns: 1fr; } }
+
+  .mini-card {
+    background: var(--surface3);
+    border-radius: 8px;
+    padding: 14px;
+  }
+
+  .mini-card .mc-title {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .mini-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .mini-card ul li {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    padding: 3px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    line-height: 1.4;
+  }
+
+  .mini-card ul li:last-child { border-bottom: none; }
+  .mini-card ul li::before { content: '› '; color: var(--gold); }
+
+  .highlight-box {
+    background: linear-gradient(135deg, rgba(200,168,90,0.08), rgba(200,168,90,0.03));
+    border: 1px solid rgba(200,168,90,0.2);
+    border-radius: 10px;
+    padding: 16px;
+    margin: 12px 0;
+  }
+
+  .highlight-box .hb-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .highlight-box p {
+    font-size: 0.84rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .step-list {
+    counter-reset: steps;
+    margin: 12px 0;
+  }
+
+  .step-item {
+    counter-increment: steps;
+    display: flex;
+    gap: 12px;
+    margin-bottom: 10px;
+    align-items: flex-start;
+  }
+
+  .step-item::before {
+    content: counter(steps);
+    min-width: 26px; height: 26px;
+    background: var(--gold-dim);
+    color: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .step-item p {
+    font-size: 0.84rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    padding-top: 3px;
+  }
+
+  .step-item p strong { color: var(--text); }
+
+  .table-wrap {
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+  }
+
+  th {
+    background: var(--surface3);
+    color: var(--gold);
+    font-weight: 600;
+    padding: 10px 12px;
+    text-align: left;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  td {
+    padding: 9px 12px;
+    color: var(--text-muted);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    line-height: 1.4;
+  }
+
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  code {
+    font-family: 'DM Mono', monospace;
+    background: var(--surface3);
+    color: var(--accent-green);
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+  }
+
+  .divider {
+    height: 1px;
+    background: rgba(255,255,255,0.05);
+    margin: 14px 0;
+  }
+
+  .norm-ref {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(74,158,255,0.1);
+    border: 1px solid rgba(74,158,255,0.2);
+    color: var(--accent-blue);
+    border-radius: 5px;
+    padding: 2px 8px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    margin: 2px;
+  }
+
+  .feynman-box {
+    background: linear-gradient(135deg, rgba(61,214,140,0.08), rgba(61,214,140,0.03));
+    border: 1px solid rgba(61,214,140,0.2);
+    border-radius: 10px;
+    padding: 16px;
+    margin: 12px 0;
+  }
+
+  .feynman-box .fb-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-green);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .feynman-box p {
+    font-size: 0.84rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ─── SCQA BOXES ─── */
+  .scqa {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 12px 0;
+  }
+
+  @media (max-width: 600px) { .scqa { grid-template-columns: 1fr; } }
+
+  .scqa-item {
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .scqa-item.s { background: rgba(74,158,255,0.08); border: 1px solid rgba(74,158,255,0.2); }
+  .scqa-item.c { background: rgba(255,107,107,0.08); border: 1px solid rgba(255,107,107,0.2); }
+  .scqa-item.q { background: rgba(176,110,243,0.08); border: 1px solid rgba(176,110,243,0.2); }
+  .scqa-item.a { background: rgba(61,214,140,0.08); border: 1px solid rgba(61,214,140,0.2); }
+
+  .scqa-item .sci-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+  .scqa-item.s .sci-label { color: var(--accent-blue); }
+  .scqa-item.c .sci-label { color: var(--accent-red); }
+  .scqa-item.q .sci-label { color: var(--accent-purple); }
+  .scqa-item.a .sci-label { color: var(--accent-green); }
+
+  .scqa-item p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+
+  /* ─── SCROLL TO TOP ─── */
+  #scrollTop {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 40px; height: 40px;
+    background: var(--gold);
+    color: var(--ink);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(200,168,90,0.4);
+    z-index: 200;
+    transition: transform 0.2s;
+  }
+  #scrollTop:hover { transform: scale(1.1); }
+
 </style>
 </head>
 <body>
 
-<header>
-  <div class="header-badge">⚡ MAPA MENTAL INTERACTIVO</div>
-  <h1>Contraloría General de la República<br>Concurso 2024 – 2026</h1>
-  <p>Haz clic en cualquier nodo para expandir y conocer: qué es, para qué sirve, dónde y cuándo se aplica, por qué existe y cómo funciona.</p>
-</header>
-
-<div class="controls">
-  <button class="btn btn-primary" onclick="expandAll()">Expandir Todo</button>
-  <button class="btn btn-secondary" onclick="collapseAll()">Colapsar</button>
-  <button class="btn btn-secondary" onclick="resetView()">↺ Centrar</button>
-  <div class="search-wrap">
-    <span style="color:var(--muted);font-size:14px">🔍</span>
-    <input type="text" placeholder="Buscar ley o tema..." id="search-input" oninput="handleSearch(this.value)">
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div class="logo-badge">⚖️</div>
+    <div class="header-text">
+      <h1>Contraloría General de la República</h1>
+      <p>Guía de Estudio — Concurso Abierto de Méritos 2024-2026 &nbsp;·&nbsp; Universidad de Antioquia</p>
+    </div>
   </div>
-  <div class="legend">
-    <div class="legend-item"><div class="legend-dot" style="background:var(--accent1)"></div>Constitución</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#a78bfa"></div>CGR Estructura</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--accent3)"></div>Disciplinario</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--accent4)"></div>Documental</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--accent5)"></div>TICs/Específicas</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--accent6)"></div>Comportamental</div>
-  </div>
-</div>
 
-<div id="canvas-wrap">
-  <div id="canvas">
-    <svg id="connections"></svg>
+  <div class="tabs-wrapper" id="tabsNav">
+    <span class="tab-group-label">◈ BÁSICAS</span>
+    <button class="tab-btn active" data-tab="constitucion"><span class="t-icon">📜</span>Constitución Política</button>
+    <button class="tab-btn" data-tab="cgr"><span class="t-icon">🏛️</span>Estructura CGR</button>
+    <button class="tab-btn" data-tab="documental"><span class="t-icon">📁</span>Gestión Documental</button>
+    <button class="tab-btn" data-tab="disciplinario"><span class="t-icon">⚖️</span>C. Disciplinario</button>
+    <button class="tab-btn" data-tab="ofimatica"><span class="t-icon">💻</span>Ofimática</button>
+    <button class="tab-btn" data-tab="tics"><span class="t-icon">🌐</span>TICS</button>
+    <span class="tab-group-label">◈ ESPECÍFICAS</span>
+    <button class="tab-btn" data-tab="ciber"><span class="t-icon">🔒</span>Ciberseguridad</button>
+    <button class="tab-btn" data-tab="redes"><span class="t-icon">📡</span>Redes</button>
+    <button class="tab-btn" data-tab="sql"><span class="t-icon">🗄️</span>SQL / Bases de Datos</button>
+    <button class="tab-btn" data-tab="hardware"><span class="t-icon">🖥️</span>Hardware & Software</button>
+    <span class="tab-group-label">◈ COMPORTAMENTAL</span>
+    <button class="tab-btn" data-tab="comportamental"><span class="t-icon">🤝</span>Competencias Instit.</button>
   </div>
 </div>
 
-<div id="overlay" onclick="closePanel()"></div>
+<!-- ════════════════════════════════════════════════
+     PANELS
+════════════════════════════════════════════════ -->
+<div class="content">
 
-<div class="detail-panel" id="detail-panel">
-  <div class="panel-header">
-    <button class="panel-close" onclick="closePanel()">✕</button>
-    <div class="panel-icon" id="p-icon"></div>
-    <div class="panel-title" id="p-title"></div>
-    <div class="panel-subtitle" id="p-sub"></div>
+<!-- ── 1. CONSTITUCIÓN POLÍTICA ── -->
+<div class="tab-panel active" id="panel-constitucion">
+  <div class="panel-hero">
+    <div class="tag">Eje Temático 1 · Competencias Básicas</div>
+    <h2>Constitución Política de Colombia</h2>
+    <p>La Constitución de 1991 es la norma de normas. Define los principios, valores, derechos fundamentales y los mecanismos para hacerlos efectivos. Todo servidor público debe conocerla a profundidad.</p>
   </div>
-  <div class="panel-body" id="p-body"></div>
+
+  <div class="meta-row">
+    <div class="meta-card"><div class="m-label">📌 ¿Qué es?</div><div class="m-value">Norma fundamental del Estado colombiano (1991)</div></div>
+    <div class="meta-card"><div class="m-label">📅 ¿Cuándo se usa?</div><div class="m-value">Siempre — regula toda actuación del Estado</div></div>
+    <div class="meta-card"><div class="m-label">🎯 ¿Para qué?</div><div class="m-value">Limitar el poder y proteger derechos ciudadanos</div></div>
+    <div class="meta-card"><div class="m-label">📖 Norma</div><div class="m-value"><span class="norm-ref">Art. 1–95 C.P.</span></div></div>
+  </div>
+
+  <!-- PRINCIPIOS FUNDAMENTALES -->
+  <div class="section open">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(200,168,90,0.15)">🏛️</div>
+        <div><h3>Principios Fundamentales</h3><div class="sh-sub">Arts. 1–10 C.P. — La base axiológica del Estado</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="feynman-box">
+        <div class="fb-title">🧒 Explicación Feynman</div>
+        <p>Imagina que el país es un gran edificio. Los principios fundamentales son los cimientos: sin ellos, todo se derrumba. Le dicen a la gente cómo es el país, cómo funciona y qué valores lo guían.</p>
+      </div>
+      <div class="grid2">
+        <div class="mini-card">
+          <div class="mc-title">Principios del Art. 1</div>
+          <ul>
+            <li>Estado Social de Derecho</li>
+            <li>Forma de república unitaria</li>
+            <li>Descentralización</li>
+            <li>Autonomía de entidades territoriales</li>
+            <li>Democrática, participativa y pluralista</li>
+            <li>Fundada en el trabajo y la dignidad humana</li>
+          </ul>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">Valores supremos (Preámbulo)</div>
+          <ul>
+            <li>Justicia</li>
+            <li>Libertad</li>
+            <li>Paz</li>
+            <li>Igualdad</li>
+            <li>Conocimiento</li>
+            <li>Fraternidad</li>
+          </ul>
+        </div>
+      </div>
+      <div class="info-block">
+        <strong>Estado Social de Derecho</strong> — significa que el Estado no solo garantiza derechos, sino que también tiene obligaciones activas de asegurar condiciones mínimas de vida digna. El control fiscal de la CGR protege exactamente estos recursos que el Estado necesita para cumplir ese deber.
+      </div>
+      <div class="scqa">
+        <div class="scqa-item s"><div class="sci-label">📌 Situación</div><p>Colombia necesita organizar cómo se ejerce el poder para evitar abusos.</p></div>
+        <div class="scqa-item c"><div class="sci-label">⚡ Complicación</div><p>Sin principios claros, cada gobierno puede actuar de forma arbitraria.</p></div>
+        <div class="scqa-item q"><div class="sci-label">❓ Pregunta</div><p>¿Cómo garantizar que el poder sirva a la gente y no se abuse de él?</p></div>
+        <div class="scqa-item a"><div class="sci-label">✅ Respuesta</div><p>La Constitución fija principios, derechos y controles que vinculan a todos.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DERECHOS FUNDAMENTALES -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(74,158,255,0.15)">🛡️</div>
+        <div><h3>Derechos Fundamentales</h3><div class="sh-sub">Arts. 11–41 C.P. — Derechos inherentes a toda persona</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="feynman-box">
+        <div class="fb-title">🧒 Explicación Feynman</div>
+        <p>Son como "superpoderes" que tienes solo por ser persona. Nadie te los puede quitar, ni el Estado. Existir, pensar, hablar, votar, creer… todo eso es tuyo desde que naces.</p>
+      </div>
+      <div class="pill-list">
+        <span class="pill gold">Vida (Art.11)</span>
+        <span class="pill blue">Igualdad (Art.13)</span>
+        <span class="pill blue">Intimidad (Art.15)</span>
+        <span class="pill blue">Libre desarrollo (Art.16)</span>
+        <span class="pill blue">Libertad de expresión (Art.20)</span>
+        <span class="pill blue">Trabajo (Art.25)</span>
+        <span class="pill blue">Educación (Art.67)</span>
+        <span class="pill green">Debido proceso (Art.29)</span>
+        <span class="pill green">Habeas Corpus (Art.30)</span>
+        <span class="pill purple">Petición (Art.23)</span>
+      </div>
+      <div class="info-block">
+        <strong>Clasificación de derechos:</strong><br>
+        • <strong>1ª generación</strong>: Civiles y políticos (vida, libertad, propiedad).<br>
+        • <strong>2ª generación</strong>: Económicos, sociales y culturales (trabajo, educación, salud).<br>
+        • <strong>3ª generación</strong>: Colectivos y del ambiente (paz, salubridad pública, espacio público).
+      </div>
+      <div class="highlight-box">
+        <div class="hb-title">⚡ Clave para el examen</div>
+        <p>Los derechos fundamentales son de aplicación inmediata (Art. 85 C.P.). Solo ciertos derechos pueden suspenderse durante estados de excepción (Art. 214 C.P.). La vida, la dignidad y el habeas corpus son intangibles — jamás se suspenden.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MECANISMOS DE PROTECCIÓN -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(61,214,140,0.15)">🔧</div>
+        <div><h3>Mecanismos de Protección</h3><div class="sh-sub">Arts. 86–89 C.P. — Herramientas para defender los derechos</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="table-wrap">
+        <table>
+          <tr><th>Mecanismo</th><th>Artículo</th><th>¿Para qué sirve?</th><th>¿Quién lo usa?</th><th>Término</th></tr>
+          <tr><td><strong>Tutela</strong></td><td>Art. 86</td><td>Proteger derechos fundamentales cuando son vulnerados o amenazados por la acción u omisión de una autoridad pública o particular.</td><td>Cualquier persona</td><td>10 días calendario</td></tr>
+          <tr><td><strong>Acción de Cumplimiento</strong></td><td>Art. 87</td><td>Hacer efectiva una ley o acto administrativo cuando la autoridad es renuente a cumplirlo.</td><td>Cualquier persona</td><td>20 días hábiles</td></tr>
+          <tr><td><strong>Acción Popular</strong></td><td>Art. 88</td><td>Proteger derechos e intereses colectivos (espacio público, medio ambiente, salubridad).</td><td>Cualquier persona</td><td>—</td></tr>
+          <tr><td><strong>Acción de Grupo</strong></td><td>Art. 88</td><td>Obtener reparación por daño a un número plural de personas con condiciones uniformes.</td><td>Grupo de 20+ personas</td><td>2 años</td></tr>
+          <tr><td><strong>Habeas Corpus</strong></td><td>Art. 30</td><td>Libertad cuando hay captura ilegal o arbitraria.</td><td>El detenido o cualquiera</td><td>36 horas</td></tr>
+          <tr><td><strong>Habeas Data</strong></td><td>Art. 15</td><td>Conocer, actualizar y rectificar datos personales en bases de datos.</td><td>El titular</td><td>Variable</td></tr>
+          <tr><td><strong>Derecho de Petición</strong></td><td>Art. 23</td><td>Presentar peticiones a autoridades y obtener respuesta.</td><td>Cualquier persona</td><td>15 días hábiles</td></tr>
+        </table>
+      </div>
+      <div class="feynman-box">
+        <div class="fb-title">🧒 Analogía central</div>
+        <p>Los mecanismos son como distintos botones de emergencia: la tutela es la alarma de incendio (rápida, para cualquier emergencia de derechos fundamentales), la acción popular es la alarma del vecindario (para problemas que afectan a todos), y el habeas corpus es el botón de desbloqueo (si te tienen retenido injustamente).</p>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="tooltip" id="tooltip"></div>
+<!-- ── 2. ESTRUCTURA CGR ── -->
+<div class="tab-panel" id="panel-cgr">
+  <div class="panel-hero">
+    <div class="tag">Eje Temático 2 · Competencias Básicas</div>
+    <h2>Estructura y Funcionamiento de la CGR</h2>
+    <p>La Contraloría General de la República es el máximo órgano de control fiscal en Colombia. Vigila que el dinero público se use bien. Su estructura combina una cabeza estratégica en Bogotá con presencia en todo el territorio nacional.</p>
+  </div>
+
+  <div class="meta-row">
+    <div class="meta-card"><div class="m-label">📌 Base constitucional</div><div class="m-value"><span class="norm-ref">Art. 119 C.P.</span> <span class="norm-ref">Art. 268 C.P.</span></div></div>
+    <div class="meta-card"><div class="m-label">📋 Ley orgánica</div><div class="m-value"><span class="norm-ref">Ley 42/1993</span> <span class="norm-ref">D.L. 267/2000</span></div></div>
+    <div class="meta-card"><div class="m-label">🔬 Modernización</div><div class="m-value"><span class="norm-ref">D.L. 2037/2019</span> <span class="norm-ref">D.L. 405/2020</span></div></div>
+    <div class="meta-card"><div class="m-label">🎯 Misión</div><div class="m-value">Vigilar la gestión fiscal del Estado</div></div>
+  </div>
+
+  <div class="section open">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(200,168,90,0.15)">🏛️</div>
+        <div><h3>¿Qué es la CGR y por qué existe?</h3><div class="sh-sub">SCQA + Feynman + Analogía</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="scqa">
+        <div class="scqa-item s"><div class="sci-label">📌 Situación</div><p>El Estado colombiano maneja billones de pesos al año en recursos públicos (impuestos, regalías, transferencias).</p></div>
+        <div class="scqa-item c"><div class="sci-label">⚡ Complicación</div><p>Sin un ente externo que vigile, el dinero puede despilfarrarse, usarse para fines distintos o ser apropiado indebidamente.</p></div>
+        <div class="scqa-item q"><div class="sci-label">❓ Pregunta</div><p>¿Quién audita y sanciona cuando el Estado mismo gasta mal o roba su propio erario?</p></div>
+        <div class="scqa-item a"><div class="sci-label">✅ Respuesta</div><p>La CGR — un órgano autónomo, técnico e independiente que audita, sanciona y recupera el patrimonio público.</p></div>
+      </div>
+      <div class="feynman-box">
+        <div class="fb-title">🧒 Explicación Feynman</div>
+        <p>Imagina que el Estado es una empresa enorme y los ciudadanos son los dueños. El dinero público es la caja registradora de esa empresa. La CGR es el "auditor externo jefe": revisa los libros, verifica que nadie se haya robado nada y, si encuentra un fraude, calcula el daño y le cobra al responsable. No trabaja para el gobierno — trabaja para los ciudadanos.</p>
+      </div>
+      <div class="highlight-box">
+        <div class="hb-title">💡 Analogía central</div>
+        <p><strong>La CGR = el "bug tracker" del Estado.</strong> Cuando un programador sube código que rompe producción, el sistema detecta el bug, lo registra, identifica al responsable y obliga a un rollback + RCA (análisis de causa raíz). La CGR hace lo mismo: detecta el "daño fiscal" (bug), lo documenta en una auditoría, identifica al servidor responsable y ejecuta el cobro coactivo (rollback del dinero).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section open">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(74,158,255,0.15)">🗂️</div>
+        <div><h3>Estructura Orgánica</h3><div class="sh-sub">Nivel central y desconcentrado — D.L. 267/2000 + D.L. 405/2020</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="grid2">
+        <div class="mini-card">
+          <div class="mc-title">🏙️ Nivel Central (Bogotá)</div>
+          <ul>
+            <li>Contralor General de la República</li>
+            <li>Despacho del Vicecontralor</li>
+            <li>Oficina Jurídica</li>
+            <li>Oficina de Planeación</li>
+            <li>Oficina de Control Interno</li>
+            <li>Contralorías Delegadas Sectoriales</li>
+            <li>DIARI — Analítica de datos</li>
+            <li>Áreas de Resp. Fiscal y Sancionatoria</li>
+            <li>Secretaría General / Apoyo</li>
+          </ul>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">🗺️ Nivel Desconcentrado</div>
+          <ul>
+            <li>Gerencias Departamentales (32+)</li>
+            <li>Gerencias Nacionales Sectoriales</li>
+            <li>Presencia en todos los dpts. del país</li>
+            <li>Auditan entidades territoriales</li>
+            <li>Ejecutan procesos de resp. fiscal</li>
+            <li>Articulan control ciudadano</li>
+            <li>Aplican metodología del nivel central</li>
+          </ul>
+        </div>
+      </div>
+      <div class="info-block">
+        <strong>Regla mnemotécnica:</strong> <br>
+        <em>Constitución = "qué hace la CGR" / Decretos Ley 267+2037+405 = "cómo se organiza para hacerlo"</em><br><br>
+        <strong>Nivel central</strong>: fija metodologías, emite lineamientos, dirige estratégicamente.<br>
+        <strong>Nivel desconcentrado</strong>: ejecuta en campo, audita entidades territoriales, es los "ojos y oídos" en regiones.
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(61,214,140,0.15)">⚙️</div>
+        <div><h3>Funciones Esenciales de la CGR</h3><div class="sh-sub">¿Qué hace? ¿Cómo lo hace? ¿Cuándo actúa?</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="table-wrap">
+        <table>
+          <tr><th>Función</th><th>¿Para qué?</th><th>¿Cómo se aplica?</th><th>Norma</th></tr>
+          <tr><td><strong>Control fiscal posterior y selectivo</strong></td><td>Auditar eficiencia, economía, equidad y resultados</td><td>Auditorías financieras, de gestión y de resultados</td><td>Art. 267 C.P.</td></tr>
+          <tr><td><strong>Proceso de responsabilidad fiscal</strong></td><td>Identificar y cobrar daño al patrimonio público</td><td>Indagación → proceso → fallo → jurisdicción coactiva</td><td>Ley 610/2000</td></tr>
+          <tr><td><strong>Potestad sancionatoria</strong></td><td>Sancionar a quienes no rindan cuentas</td><td>Multas y sanciones a servidores morosos</td><td>D.L. 267/2000</td></tr>
+          <tr><td><strong>Dictamen presupuestal</strong></td><td>Informar al Congreso sobre ejecución del presupuesto</td><td>Informe anual al Congreso</td><td>Art. 268 C.P.</td></tr>
+          <tr><td><strong>Control ciudadano</strong></td><td>Recibir denuncias y promover veedurías</td><td>Líneas de atención, participación ciudadana</td><td>Art. 270 C.P.</td></tr>
+          <tr><td><strong>DIARI</strong></td><td>Prevenir corrupción en tiempo real</td><td>Analítica de datos, cruces, alertas tempranas</td><td>D.L. 2037/2019</td></tr>
+        </table>
+      </div>
+      <div class="highlight-box">
+        <div class="hb-title">📝 Principios del Control Fiscal (Art. 267 C.P.)</div>
+        <p><strong>Eficiencia</strong>: usar los recursos bien para obtener el máximo resultado. <strong>Economía</strong>: adquirir al menor costo posible. <strong>Equidad</strong>: beneficios bien distribuidos. <strong>Valoración de costos ambientales</strong>: considerar el impacto ambiental. <strong>Efectividad</strong>: lograr los objetivos propuestos.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(176,110,243,0.15)">🔍</div>
+        <div><h3>Proceso de Responsabilidad Fiscal</h3><div class="sh-sub">Ley 610 de 2000 — De la detección al cobro</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="step-list">
+        <div class="step-item"><p><strong>Indagación Preliminar:</strong> La CGR recibe denuncia o detecta posible daño fiscal. Se investiga si existe mérito para abrir proceso.</p></div>
+        <div class="step-item"><p><strong>Auto de Apertura:</strong> Si hay mérito, se abre formalmente el proceso de responsabilidad fiscal e imputa cargos al presunto responsable.</p></div>
+        <div class="step-item"><p><strong>Traslado de cargos:</strong> El implicado conoce los cargos y puede presentar descargos y pruebas en su defensa.</p></div>
+        <div class="step-item"><p><strong>Fallo de primera instancia:</strong> La CGR profiere fallo con o sin responsabilidad fiscal. Si hay responsabilidad, cuantifica el daño y ordena el pago.</p></div>
+        <div class="step-item"><p><strong>Recursos:</strong> El implicado puede interponer recurso de reposición y en subsidio apelación.</p></div>
+        <div class="step-item"><p><strong>Jurisdicción coactiva:</strong> Si el fallo queda en firme y no se paga, la CGR ejerce cobro coactivo para recuperar el dinero.</p></div>
+      </div>
+      <div class="feynman-box">
+        <div class="fb-title">🧒 Analogía: Bug en producción</div>
+        <p>El proceso de responsabilidad fiscal es como el flujo de gestión de incidentes en TI: <strong>Detección</strong> (monitoreo detecta anomalía) → <strong>Triage</strong> (indagación preliminar) → <strong>Asignación de responsable</strong> (imputación) → <strong>Root Cause Analysis</strong> (proceso) → <strong>Fix + Rollback</strong> (fallo + cobro coactivo). La diferencia es que aquí lo que se recupera no es código: es dinero público.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 3. GESTIÓN DOCUMENTAL ── -->
+<div class="tab-panel" id="panel-documental">
+  <div class="panel-hero">
+    <div class="tag">Eje Temático 3 · Competencias Básicas</div>
+    <h2>Conocimientos Básicos de Gestión Documental</h2>
+    <p>La gestión documental es el conjunto de normas, técnicas y prácticas para el manejo de documentos públicos, desde su producción hasta su disposición final. En Colombia la rige el Archivo General de la Nación (AGN).</p>
+  </div>
+
+  <div class="meta-row">
+    <div class="meta-card"><div class="m-label">📋 Ley marco</div><div class="m-value"><span class="norm-ref">Ley 594/2000</span> (Ley General de Archivos)</div></div>
+    <div class="meta-card"><div class="m-label">🏛️ Órgano rector</div><div class="m-value">Archivo General de la Nación (AGN)</div></div>
+    <div class="meta-card"><div class="m-label">📌 Aplica a</div><div class="m-value">Toda entidad pública y privada con función pública</div></div>
+    <div class="meta-card"><div class="m-label">🎯 Objetivo</div><div class="m-value">Organizar, preservar y garantizar acceso a info pública</div></div>
+  </div>
+
+  <div class="section open">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(200,168,90,0.15)">📄</div>
+        <div><h3>Manejo y Control de Expedientes y Comunicaciones</h3><div class="sh-sub">Ciclo vital, tablas de retención y gestión de correspondencia</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="feynman-box">
+        <div class="fb-title">🧒 Explicación Feynman</div>
+        <p>Un expediente es como una carpeta de historia clínica: guarda todos los papeles de un asunto (un contrato, un proceso, una petición) en orden y con registro de quién los tocó. Gestionarlo bien es saber dónde está cada documento, que nadie lo pierda y cuándo se puede botar (o conservar para siempre).</p>
+      </div>
+      <div class="info-block">
+        <strong>Ciclo Vital del Documento:</strong><br>
+        <strong>1. Producción:</strong> Se crea el documento (oficio, resolución, contrato).<br>
+        <strong>2. Gestión y Trámite:</strong> El documento circula, se responde, se archiva temporalmente.<br>
+        <strong>3. Organización:</strong> Se clasifica en el archivo de gestión.<br>
+        <strong>4. Consulta:</strong> Se accede al documento cuando se necesita.<br>
+        <strong>5. Transferencia:</strong> Del archivo de gestión → archivo central → archivo histórico.<br>
+        <strong>6. Disposición final:</strong> Conservación total, digitalización, selección o eliminación.
+      </div>
+      <div class="grid2">
+        <div class="mini-card">
+          <div class="mc-title">📬 Gestión de Comunicaciones</div>
+          <ul>
+            <li>Radicación y registro de entrada/salida</li>
+            <li>Distribución interna y externa</li>
+            <li>Control de términos de respuesta</li>
+            <li>Número único de radicado</li>
+            <li>Trazabilidad del documento</li>
+            <li>Sistema de gestión documental (SGDEA)</li>
+          </ul>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">📂 Tipos de Archivo</div>
+          <ul>
+            <li><strong>Archivo de Gestión:</strong> Oficina que produce el doc. (1–2 años)</li>
+            <li><strong>Archivo Central:</strong> Entidad — uso frecuente (2–20 años)</li>
+            <li><strong>Archivo Histórico:</strong> Conservación permanente</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(74,158,255,0.15)">🗂️</div>
+        <div><h3>Clasificación y Organización de Archivos</h3><div class="sh-sub">TRD, TVD, Cuadro de Clasificación Documental</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="table-wrap">
+        <table>
+          <tr><th>Instrumento</th><th>Sigla</th><th>¿Para qué sirve?</th></tr>
+          <tr><td><strong>Tabla de Retención Documental</strong></td><td>TRD</td><td>Define cuánto tiempo se conserva cada tipo de documento en cada etapa del ciclo vital. Obligatoria para todas las entidades públicas.</td></tr>
+          <tr><td><strong>Tabla de Valoración Documental</strong></td><td>TVD</td><td>Para fondos acumulados (documentos anteriores a la TRD). Define su valor histórico, legal, administrativo o fiscal.</td></tr>
+          <tr><td><strong>Cuadro de Clasificación Documental</strong></td><td>CCD</td><td>Esquema que refleja la estructura de la entidad y cómo se agrupan los documentos en series, subseries y tipos documentales.</td></tr>
+          <tr><td><strong>Inventario Documental</strong></td><td>FUID</td><td>Instrumento de control que describe la documentación en cada archivo. Formato Único de Inventario Documental.</td></tr>
+          <tr><td><strong>Programa de Gestión Documental</strong></td><td>PGD</td><td>Plan estratégico que guía todas las actividades archivísticas de la entidad por al menos 5 años.</td></tr>
+        </table>
+      </div>
+      <div class="highlight-box">
+        <div class="hb-title">⚡ Principios archivísticos clave</div>
+        <p><strong>Principio de procedencia:</strong> cada documento debe conservarse en el fondo de la entidad que lo produjo — no se mezclan fondos de entidades distintas. <strong>Principio de orden original:</strong> dentro de cada fondo, los documentos se conservan en el orden en que fueron producidos y tramitados.</p>
+      </div>
+      <div class="pill-list">
+        <span class="pill gold">Fondo documental</span>
+        <span class="pill blue">Sección</span>
+        <span class="pill blue">Subsección</span>
+        <span class="pill green">Serie documental</span>
+        <span class="pill green">Subserie</span>
+        <span class="pill purple">Tipo documental</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 4. CÓDIGO DISCIPLINARIO ── -->
+<div class="tab-panel" id="panel-disciplinario">
+  <div class="panel-hero">
+    <div class="tag">Eje Temático 4 · Competencias Básicas</div>
+    <h2>Código General Disciplinario</h2>
+    <p>La Ley 1952 de 2019 (Código General Disciplinario) regula el comportamiento de los servidores públicos. Define sus deberes, derechos, prohibiciones, incompatibilidades, impedimentos, conflictos de interés y establece el régimen de faltas y sanciones.</p>
+  </div>
+
+  <div class="meta-row">
+    <div class="meta-card"><div class="m-label">📋 Norma</div><div class="m-value"><span class="norm-ref">Ley 1952/2019</span> (derogó Ley 734/2002)</div></div>
+    <div class="meta-card"><div class="m-label">🎯 Aplica a</div><div class="m-value">Servidores públicos y particulares que ejercen función pública</div></div>
+    <div class="meta-card"><div class="m-label">🏛️ Órgano rector</div><div class="m-value">Procuraduría General de la Nación</div></div>
+    <div class="meta-card"><div class="m-label">📅 Vigencia</div><div class="m-value">Vigente — con modificaciones de la Ley 2094/2021</div></div>
+  </div>
+
+  <div class="section open">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(200,168,90,0.15)">✅</div>
+        <div><h3>Deberes, Derechos y Prohibiciones</h3><div class="sh-sub">Arts. 34–35–39 Ley 1952 — Lo que debes, puedes y no puedes hacer</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="feynman-box">
+        <div class="fb-title">🧒 Explicación Feynman</div>
+        <p>Ser servidor público es como ser árbitro en un partido: tienes reglas claras de lo que debes hacer (pitar falta cuando la hay), derechos (que te respeten), y prohibiciones (no puedes apostar en el partido que estás arbitrando). Si rompes las reglas, te sancionan.</p>
+      </div>
+      <div class="grid2">
+        <div class="mini-card">
+          <div class="mc-title">✅ Deberes (Art. 34)</div>
+          <ul>
+            <li>Cumplir la C.P. y leyes</li>
+            <li>Desempeñar el cargo con diligencia</li>
+            <li>Responder por sus actuaciones</li>
+            <li>Tratar con respeto a los ciudadanos</li>
+            <li>Guardar reserva de la información</li>
+            <li>Denunciar actos de corrupción</li>
+            <li>Cumplir el horario de trabajo</li>
+          </ul>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">🚫 Prohibiciones (Art. 35)</div>
+          <ul>
+            <li>Incumplir deberes funcionales</li>
+            <li>Extralimitarse en funciones</li>
+            <li>Usar cargo para fines personales</li>
+            <li>Omitir o retardar trámites</li>
+            <li>Recibir dadivas o regalos</li>
+            <li>Amenazar ciudadanos</li>
+            <li>Causar daño a bienes del Estado</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(255,107,107,0.15)">⛔</div>
+        <div><h3>Incompatibilidades, Impedimentos y Conflictos de Interés</h3><div class="sh-sub">Situaciones que impiden actuar con imparcialidad</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="table-wrap">
+        <table>
+          <tr><th>Figura</th><th>¿Qué es?</th><th>Ejemplo</th><th>Consecuencia</th></tr>
+          <tr><td><strong>Incompatibilidad</strong></td><td>Actividad que no puede realizarse mientras se ejerza el cargo, por ser contraria al correcto desempeño.</td><td>Un alcalde que es socio de una empresa contratista del municipio.</td><td>Desinvestidura o sanción disciplinaria.</td></tr>
+          <tr><td><strong>Impedimento</strong></td><td>Circunstancia personal que obliga al servidor a apartarse del asunto (parentesco, interés económico, amistad).</td><td>Un auditor que debe auditar a su cónyuge.</td><td>Debe declararse impedido o recusarse.</td></tr>
+          <tr><td><strong>Conflicto de Interés</strong></td><td>Situación donde el interés personal del servidor puede afectar su imparcialidad en una decisión.</td><td>Un funcionario que vota en un proceso donde él tiene interés económico.</td><td>Declarar el conflicto y abstenerse. Si no lo hace: falta gravísima.</td></tr>
+          <tr><td><strong>Inhabilidad</strong></td><td>Condición que impide a una persona ser elegida o ejercer un cargo público.</td><td>Haber sido condenado por delito doloso en los últimos 5 años.</td><td>Nulidad del nombramiento.</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(176,110,243,0.15)">⚖️</div>
+        <div><h3>Tipos de Faltas y Sanciones</h3><div class="sh-sub">Gravísimas, graves y leves — Destitución, suspensión, multa</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="table-wrap">
+        <table>
+          <tr><th>Tipo de Falta</th><th>Características</th><th>Sanciones aplicables</th><th>Ejemplos</th></tr>
+          <tr><td><strong>Gravísima</strong></td><td>Taxativamente señaladas en el Art. 48. Siempre dolosas o gravemente culposas.</td><td>Destitución e inhabilidad general (10–20 años) / Suspensión e inhabilidad especial.</td><td>Violación de DDHH, peculado, incurrir en causal de mala conducta constitucional.</td></tr>
+          <tr><td><strong>Grave</strong></td><td>Las que no son gravísimas pero tienen alto impacto en el servicio. Dolo o culpa grave.</td><td>Suspensión e inhabilidad especial (1 mes a 1 año) / Multa (1–90 días de salario).</td><td>Ausentarse del puesto sin permiso, omitir rendición de cuentas.</td></tr>
+          <tr><td><strong>Leve</strong></td><td>Culpa leve. Menor impacto en el servicio.</td><td>Amonestación escrita / Multa (hasta 1 mes de salario).</td><td>Llegar tarde, incumplir el horario esporádicamente.</td></tr>
+        </table>
+      </div>
+      <div class="info-block">
+        <strong>Proceso disciplinario básico:</strong> Queja o informe → Indagación preliminar (6 meses) → Investigación disciplinaria → Cargos → Descargos → Pruebas → Fallo → Recursos (apelación/queja) → Ejecutoria. <br>La prescripción es de <strong>5 años</strong> para faltas graves y gravísimas, <strong>2 años</strong> para leves.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 5. OFIMÁTICA ── -->
+<div class="tab-panel" id="panel-ofimatica">
+  <div class="panel-hero">
+    <div class="tag">Eje Temático 5 · Competencias Básicas</div>
+    <h2>Conocimientos en Ofimática</h2>
+    <p>Herramientas ofimáticas para la gestión administrativa: Microsoft Word, Excel, PowerPoint y Correo Electrónico. Fundamentales para el desempeño eficiente de cualquier cargo en la CGR.</p>
+  </div>
+
+  <div class="section open">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(74,158,255,0.15)">📝</div>
+        <div><h3>Microsoft Word — Procesador de textos</h3><div class="sh-sub">Elaboración y edición de documentos oficiales</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="grid2">
+        <div class="mini-card">
+          <div class="mc-title">Funciones clave</div>
+          <ul>
+            <li>Formatos y estilos de texto</li>
+            <li>Tablas e imágenes</li>
+            <li>Tabla de contenido automática</li>
+            <li>Combinación de correspondencia</li>
+            <li>Control de cambios y comentarios</li>
+            <li>Macros y plantillas</li>
+            <li>Encabezados, pies de página, numeración</li>
+          </ul>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">Atajos esenciales</div>
+          <ul>
+            <li><code>Ctrl+B</code> Negrita</li>
+            <li><code>Ctrl+K</code> Cursiva</li>
+            <li><code>Ctrl+Z</code> Deshacer</li>
+            <li><code>Ctrl+F</code> Buscar</li>
+            <li><code>Ctrl+H</code> Reemplazar</li>
+            <li><code>F7</code> Revisar ortografía</li>
+            <li><code>Ctrl+Enter</code> Salto de página</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(61,214,140,0.15)">📊</div>
+        <div><h3>Microsoft Excel — Hoja de cálculo</h3><div class="sh-sub">Análisis de datos, fórmulas, tablas dinámicas</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="grid2">
+        <div class="mini-card">
+          <div class="mc-title">Fórmulas esenciales</div>
+          <ul>
+            <li><code>=SUMA()</code> Sumar rangos</li>
+            <li><code>=PROMEDIO()</code> Media aritmética</li>
+            <li><code>=CONTAR.SI()</code> Contar con criterio</li>
+            <li><code>=BUSCARV()</code> Buscar en tabla</li>
+            <li><code>=SI()</code> Condicional lógico</li>
+            <li><code>=CONCATENAR()</code> Unir textos</li>
+            <li><code>=TEXTO()</code> Formatear valores</li>
+          </ul>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">Herramientas de análisis</div>
+          <ul>
+            <li>Tablas dinámicas (Pivot Tables)</li>
+            <li>Filtros automáticos y avanzados</li>
+            <li>Gráficas estadísticas</li>
+            <li>Formato condicional</li>
+            <li>Validación de datos</li>
+            <li>Protección de hojas</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(255,107,107,0.15)">📽️</div>
+        <div><h3>PowerPoint y Correo Electrónico</h3><div class="sh-sub">Presentaciones efectivas y comunicación formal</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="grid2">
+        <div class="mini-card">
+          <div class="mc-title">PowerPoint</div>
+          <ul>
+            <li>Diseño de diapositivas con patrones</li>
+            <li>Animaciones y transiciones</li>
+            <li>SmartArt y gráficas</li>
+            <li>Insertar video y audio</li>
+            <li>Presentación con narración</li>
+            <li>Exportar a PDF o video</li>
+          </ul>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">Correo Electrónico institucional</div>
+          <ul>
+            <li>Protocolo de comunicación oficial</li>
+            <li>Asunto claro y preciso</li>
+            <li>CC y CCO correctamente usados</li>
+            <li>Adjuntos con nombre descriptivo</li>
+            <li>Firma corporativa</li>
+            <li>Reglas de clasificación de mensajes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 6. TICS ── -->
+<div class="tab-panel" id="panel-tics">
+  <div class="panel-hero">
+    <div class="tag">Eje Temático 6 · Competencias Básicas</div>
+    <h2>Conocimientos Básicos en TICS</h2>
+    <p>Tecnologías de la Información y las Comunicaciones aplicadas al entorno laboral público: principios de Web, plataformas virtuales, redes, telecomunicaciones y aplicaciones multimedia.</p>
+  </div>
+
+  <div class="section open">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(200,168,90,0.15)">🌐</div>
+        <div><h3>Conceptos Fundamentales de la Web</h3><div class="sh-sub">Internet, protocolos, navegadores y servicios web</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="table-wrap">
+        <table>
+          <tr><th>Concepto</th><th>Descripción</th></tr>
+          <tr><td><code>HTTP/HTTPS</code></td><td>Protocolo de transferencia de hipertexto. HTTPS agrega cifrado TLS/SSL para seguridad.</td></tr>
+          <tr><td><code>URL</code></td><td>Dirección única de un recurso en Internet (Uniform Resource Locator).</td></tr>
+          <tr><td><code>DNS</code></td><td>Sistema de nombres de dominio: traduce nombres (google.com) en direcciones IP.</td></tr>
+          <tr><td><code>IP</code></td><td>Dirección numérica única de cada dispositivo en una red. IPv4 (32 bits) / IPv6 (128 bits).</td></tr>
+          <tr><td><code>Cloud / Nube</code></td><td>Computación en la nube: acceso a recursos (servidores, almacenamiento, software) por Internet sin infraestructura propia. Modelos: IaaS, PaaS, SaaS.</td></tr>
+          <tr><td><code>Big Data</code></td><td>Grandes volúmenes de datos que requieren herramientas especiales para su análisis (base de la DIARI en la CGR).</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(61,214,140,0.15)">📡</div>
+        <div><h3>Telecomunicaciones y Plataformas Virtuales</h3><div class="sh-sub">Redes, medios de transmisión y plataformas de trabajo colaborativo</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="grid2">
+        <div class="mini-card">
+          <div class="mc-title">Tipos de red por alcance</div>
+          <ul>
+            <li><strong>LAN:</strong> Red de área local (oficina)</li>
+            <li><strong>MAN:</strong> Red de área metropolitana (ciudad)</li>
+            <li><strong>WAN:</strong> Red de área amplia (país/mundo)</li>
+            <li><strong>WLAN:</strong> Red local inalámbrica (Wi-Fi)</li>
+            <li><strong>VPN:</strong> Red privada virtual (acceso remoto seguro)</li>
+          </ul>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">Plataformas colaborativas</div>
+          <ul>
+            <li>Microsoft Teams / Zoom</li>
+            <li>Google Workspace</li>
+            <li>SharePoint / OneDrive</li>
+            <li>Moodle (LMS)</li>
+            <li>Trello / Asana (gestión proyectos)</li>
+            <li>SECOP II (contratación pública)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 7. CIBERSEGURIDAD ── -->
+<div class="tab-panel" id="panel-ciber">
+  <div class="panel-hero">
+    <div class="tag">Competencia Específica 1</div>
+    <h2>Ciberseguridad y Protección de Datos</h2>
+    <p>Conceptos, normas y buenas prácticas para proteger los sistemas de información, datos personales e infraestructura crítica del Estado frente a amenazas cibernéticas.</p>
+  </div>
+
+  <div class="meta-row">
+    <div class="meta-card"><div class="m-label">📋 Ley de datos</div><div class="m-value"><span class="norm-ref">Ley 1581/2012</span> Hábeas Data</div></div>
+    <div class="meta-card"><div class="m-label">🔒 Seguridad TI</div><div class="m-value"><span class="norm-ref">CONPES 3854/2016</span> Política Ciber.</div></div>
+    <div class="meta-card"><div class="m-label">🏛️ Entidad</div><div class="m-value">ColCERT — CSIRT Gobierno</div></div>
+    <div class="meta-card"><div class="m-label">🌐 Marco int.</div><div class="m-value">ISO 27001 / NIST Framework</div></div>
+  </div>
+
+  <div class="section open">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(255,107,107,0.15)">🔐</div>
+        <div><h3>Conceptos Generales de Ciberseguridad</h3><div class="sh-sub">CIA Triad, amenazas, vectores de ataque</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="highlight-box">
+        <div class="hb-title">🔑 La Triada CIA — Pilares de la Seguridad</div>
+        <p><strong>Confidencialidad:</strong> Solo personas autorizadas acceden a la información. <strong>Integridad:</strong> La información no ha sido alterada sin autorización. <strong>Disponibilidad:</strong> La información y sistemas están accesibles cuando se necesitan.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Amenaza</th><th>¿Qué es?</th><th>Cómo prevenirla</th></tr>
+          <tr><td><strong>Phishing</strong></td><td>Correos o mensajes falsos que engañan para robar credenciales.</td><td>Verificar remitente, no hacer clic en links sospechosos.</td></tr>
+          <tr><td><strong>Malware</strong></td><td>Software malicioso (virus, troyanos, ransomware).</td><td>Antivirus actualizado, no descargar archivos desconocidos.</td></tr>
+          <tr><td><strong>Ransomware</strong></td><td>Secuestra datos y pide rescate para liberarlos.</td><td>Copias de seguridad, no pagar el rescate.</td></tr>
+          <tr><td><strong>DDoS</strong></td><td>Ataque de denegación de servicio: satura servidores.</td><td>Firewalls, CDN, balanceo de carga.</td></tr>
+          <tr><td><strong>Ingeniería social</strong></td><td>Manipulación psicológica para obtener información.</td><td>Capacitación en seguridad, verificar identidad.</td></tr>
+          <tr><td><strong>Brecha de datos</strong></td><td>Acceso no autorizado a datos sensibles.</td><td>Cifrado, control de acceso, auditorías.</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(74,158,255,0.15)">🏛️</div>
+        <div><h3>Normatividad: Protección de Datos en Colombia</h3><div class="sh-sub">Ley 1581/2012 y Decreto 1377/2013</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="feynman-box">
+        <div class="fb-title">🧒 Explicación Feynman</div>
+        <p>Tus datos personales (nombre, cedula, correo, fotos) son tuyos. Nadie puede usarlos sin pedirte permiso. Si una empresa o entidad los tiene, debe cuidarlos como si fueran un objeto prestado y devolvértelos o borrarlos cuando pidas.</p>
+      </div>
+      <div class="grid2">
+        <div class="mini-card">
+          <div class="mc-title">Derechos del titular (ARCO)</div>
+          <ul>
+            <li><strong>A</strong>cceder a sus datos</li>
+            <li><strong>R</strong>ectificar datos incorrectos</li>
+            <li><strong>C</strong>ancelar/suprimir datos</li>
+            <li><strong>O</strong>ponerse al tratamiento</li>
+          </ul>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">Principios (Art. 4 Ley 1581)</div>
+          <ul>
+            <li>Legalidad</li>
+            <li>Finalidad</li>
+            <li>Libertad (autorización previa)</li>
+            <li>Veracidad / Calidad</li>
+            <li>Transparencia</li>
+            <li>Acceso y circulación restringida</li>
+            <li>Seguridad</li>
+            <li>Confidencialidad</li>
+          </ul>
+        </div>
+      </div>
+      <div class="info-block">
+        <strong>Autoridad de control:</strong> La Superintendencia de Industria y Comercio (SIC) es la entidad que vigila el cumplimiento de la Ley 1581/2012 en Colombia. Puede imponer multas de hasta 2.000 SMMLV por incumplimiento.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 8. REDES ── -->
+<div class="tab-panel" id="panel-redes">
+  <div class="panel-hero">
+    <div class="tag">Competencia Específica 2</div>
+    <h2>Administración de Redes y Protocolos de Comunicación</h2>
+    <p>Fundamentos de redes de computadores, protocolos de comunicación, modelo OSI/TCP-IP y computación en la nube. Esencial para gestionar la infraestructura tecnológica de entidades públicas.</p>
+  </div>
+
+  <div class="section open">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(200,168,90,0.15)">📶</div>
+        <div><h3>Modelo OSI y TCP/IP</h3><div class="sh-sub">La arquitectura de las comunicaciones en red</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="feynman-box">
+        <div class="fb-title">🧒 Analogía: enviar una carta</div>
+        <p>Enviar datos por red es como enviar una carta: escribes el mensaje (capa de aplicación), lo metes en un sobre (transporte), le pones la dirección (red), lo llevas al correo (enlace de datos) y el cartero lo entrega físicamente (capa física).</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>#</th><th>Capa OSI</th><th>Función</th><th>Protocolo ejemplo</th></tr>
+          <tr><td>7</td><td><strong>Aplicación</strong></td><td>Interfaz con el usuario</td><td>HTTP, FTP, SMTP, DNS</td></tr>
+          <tr><td>6</td><td><strong>Presentación</strong></td><td>Formato, cifrado, compresión</td><td>SSL/TLS, JPEG</td></tr>
+          <tr><td>5</td><td><strong>Sesión</strong></td><td>Control de sesiones</td><td>NetBIOS, RPC</td></tr>
+          <tr><td>4</td><td><strong>Transporte</strong></td><td>Entrega confiable (puertos)</td><td>TCP, UDP</td></tr>
+          <tr><td>3</td><td><strong>Red</strong></td><td>Enrutamiento IP</td><td>IP, ICMP, OSPF</td></tr>
+          <tr><td>2</td><td><strong>Enlace de datos</strong></td><td>Acceso al medio físico (MAC)</td><td>Ethernet, Wi-Fi, ARP</td></tr>
+          <tr><td>1</td><td><strong>Física</strong></td><td>Transmisión de bits</td><td>Cable, fibra óptica, radio</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(61,214,140,0.15)">☁️</div>
+        <div><h3>Computación en la Nube</h3><div class="sh-sub">IaaS, PaaS, SaaS y modelos de despliegue</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="table-wrap">
+        <table>
+          <tr><th>Modelo</th><th>Nombre</th><th>¿Qué ofrece?</th><th>Ejemplo</th></tr>
+          <tr><td><strong>IaaS</strong></td><td>Infraestructura como Servicio</td><td>Servidores, almacenamiento, redes virtuales.</td><td>AWS EC2, Azure VMs, Google Compute</td></tr>
+          <tr><td><strong>PaaS</strong></td><td>Plataforma como Servicio</td><td>Entorno de desarrollo y despliegue sin gestionar infraestructura.</td><td>Google App Engine, Heroku</td></tr>
+          <tr><td><strong>SaaS</strong></td><td>Software como Servicio</td><td>Aplicaciones listas para usar por Internet.</td><td>Gmail, Office 365, SECOP II</td></tr>
+        </table>
+      </div>
+      <div class="grid2">
+        <div class="mini-card">
+          <div class="mc-title">Modelos de despliegue</div>
+          <ul>
+            <li><strong>Pública:</strong> Recursos compartidos (AWS, Azure)</li>
+            <li><strong>Privada:</strong> Solo para una organización</li>
+            <li><strong>Híbrida:</strong> Combina pública y privada</li>
+            <li><strong>Comunitaria:</strong> Compartida por sector (ej: Nube Gov)</li>
+          </ul>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">Metodologías ágiles en TI</div>
+          <ul>
+            <li><strong>SCRUM:</strong> Sprints, roles (PO, SM, Dev)</li>
+            <li><strong>Kanban:</strong> Flujo visual de tareas</li>
+            <li><strong>SAFe:</strong> Escalado a grandes organizaciones</li>
+            <li><strong>DevOps:</strong> Integración continua CI/CD</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 9. SQL ── -->
+<div class="tab-panel" id="panel-sql">
+  <div class="panel-hero">
+    <div class="tag">Competencia Específica 3</div>
+    <h2>Gestión de Bases de Datos — SQL</h2>
+    <p>SQL (Structured Query Language) es el lenguaje estándar para administrar y consultar bases de datos relacionales. Fundamental para la analítica de datos de la DIARI y el manejo de información fiscal.</p>
+  </div>
+
+  <div class="section open">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(61,214,140,0.15)">🗄️</div>
+        <div><h3>Conceptos Fundamentales de Bases de Datos</h3><div class="sh-sub">Modelos, tipos y principios ACID</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="feynman-box">
+        <div class="fb-title">🧒 Explicación Feynman</div>
+        <p>Una base de datos es como un archivero digital super organizado. Las tablas son las gavetas (filas = registros, columnas = campos). SQL es el idioma que usas para decirle: "dame todos los contratos del 2024 mayores a 100 millones" — y él te los trae en segundos.</p>
+      </div>
+      <div class="grid2">
+        <div class="mini-card">
+          <div class="mc-title">Tipos de bases de datos</div>
+          <ul>
+            <li><strong>Relacionales:</strong> MySQL, PostgreSQL, Oracle, SQL Server</li>
+            <li><strong>NoSQL:</strong> MongoDB, Cassandra, Redis</li>
+            <li><strong>En la nube:</strong> BigQuery, Redshift</li>
+            <li><strong>Data Warehouse:</strong> Para análisis masivo</li>
+          </ul>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">Principios ACID</div>
+          <ul>
+            <li><strong>A</strong>tomicidad: Todo o nada</li>
+            <li><strong>C</strong>onsistencia: Estado válido siempre</li>
+            <li><strong>I</strong>solamiento: Transacciones independientes</li>
+            <li><strong>D</strong>urabilidad: Persistencia confirmada</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(74,158,255,0.15)">💻</div>
+        <div><h3>Comandos SQL Esenciales</h3><div class="sh-sub">DDL, DML, DCL y consultas complejas</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="table-wrap">
+        <table>
+          <tr><th>Categoría</th><th>Comando</th><th>Función</th></tr>
+          <tr><td rowspan="3"><strong>DDL</strong> (Definición)</td><td><code>CREATE TABLE</code></td><td>Crear una nueva tabla</td></tr>
+          <tr><td><code>ALTER TABLE</code></td><td>Modificar estructura de tabla</td></tr>
+          <tr><td><code>DROP TABLE</code></td><td>Eliminar tabla completamente</td></tr>
+          <tr><td rowspan="4"><strong>DML</strong> (Manipulación)</td><td><code>SELECT</code></td><td>Consultar/leer datos</td></tr>
+          <tr><td><code>INSERT INTO</code></td><td>Insertar nuevos registros</td></tr>
+          <tr><td><code>UPDATE</code></td><td>Actualizar registros existentes</td></tr>
+          <tr><td><code>DELETE</code></td><td>Eliminar registros</td></tr>
+          <tr><td rowspan="2"><strong>DCL</strong> (Control)</td><td><code>GRANT</code></td><td>Otorgar permisos</td></tr>
+          <tr><td><code>REVOKE</code></td><td>Revocar permisos</td></tr>
+        </table>
+      </div>
+      <div class="info-block">
+        <strong>Consulta SELECT completa:</strong><br>
+        <code>SELECT columnas FROM tabla WHERE condición GROUP BY col HAVING condición ORDER BY col LIMIT n;</code><br><br>
+        <strong>JOINs:</strong> INNER JOIN (coincidencias), LEFT JOIN (todos de izquierda), RIGHT JOIN (todos de derecha), FULL JOIN (todos).<br>
+        <strong>Funciones de agregación:</strong> <code>COUNT()</code>, <code>SUM()</code>, <code>AVG()</code>, <code>MAX()</code>, <code>MIN()</code>.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 10. HARDWARE ── -->
+<div class="tab-panel" id="panel-hardware">
+  <div class="panel-hero">
+    <div class="tag">Competencia Específica 4</div>
+    <h2>Mantenimiento de Hardware y Software</h2>
+    <p>Configuración, mantenimiento y resolución de problemas en sistemas operativos, equipos de cómputo y software institucional. Base para el soporte técnico en entidades públicas.</p>
+  </div>
+
+  <div class="section open">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(200,168,90,0.15)">🖥️</div>
+        <div><h3>Sistemas Operativos — Configuración</h3><div class="sh-sub">Windows, Linux y gestión de recursos del sistema</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="grid2">
+        <div class="mini-card">
+          <div class="mc-title">Windows — Configuraciones clave</div>
+          <ul>
+            <li>Gestión de usuarios y grupos locales</li>
+            <li>Políticas de grupo (GPO)</li>
+            <li>Administrador de tareas</li>
+            <li>Visor de eventos (Event Viewer)</li>
+            <li>Panel de control / Configuración</li>
+            <li>Registro del sistema (regedit)</li>
+            <li>Firewall de Windows Defender</li>
+          </ul>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">Linux — Comandos esenciales</div>
+          <ul>
+            <li><code>ls / cd / pwd</code> Navegar</li>
+            <li><code>chmod / chown</code> Permisos</li>
+            <li><code>ps aux / top</code> Procesos</li>
+            <li><code>df -h / du -sh</code> Disco</li>
+            <li><code>sudo apt update</code> Actualizar</li>
+            <li><code>systemctl</code> Servicios</li>
+          </ul>
+        </div>
+      </div>
+      <div class="info-block">
+        <strong>Mantenimiento preventivo vs correctivo:</strong><br>
+        <strong>Preventivo:</strong> limpieza de polvo, actualización de drivers, desfragmentación, respaldos periódicos, revisión de temperatura.<br>
+        <strong>Correctivo:</strong> diagnóstico de fallas, reemplazo de componentes dañados (RAM, HDD, fuente de poder), reinstalación del SO.
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(74,158,255,0.15)">🔧</div>
+        <div><h3>Componentes de Hardware</h3><div class="sh-sub">Procesador, RAM, almacenamiento y periféricos</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="table-wrap">
+        <table>
+          <tr><th>Componente</th><th>Función</th><th>Indicadores de falla</th></tr>
+          <tr><td><strong>CPU (Procesador)</strong></td><td>Cerebro del equipo: ejecuta instrucciones.</td><td>Sobrecalentamiento, lentitud extrema, BSOD.</td></tr>
+          <tr><td><strong>RAM</strong></td><td>Memoria de trabajo temporal: almacena procesos activos.</td><td>Pantallas azules, errores aleatorios, reinicios.</td></tr>
+          <tr><td><strong>HDD / SSD</strong></td><td>Almacenamiento permanente de datos y SO.</td><td>Ruidos (HDD), lentitud, archivos corruptos.</td></tr>
+          <tr><td><strong>Tarjeta madre (Motherboard)</strong></td><td>Conecta todos los componentes.</td><td>No enciende, pitidos al inicio, periféricos no detectados.</td></tr>
+          <tr><td><strong>Fuente de poder (PSU)</strong></td><td>Suministra energía eléctrica al sistema.</td><td>Apagados repentinos, inestabilidad de voltaje.</td></tr>
+          <tr><td><strong>GPU</strong></td><td>Procesamiento gráfico.</td><td>Artefactos en pantalla, drivers caídos.</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 11. COMPORTAMENTAL ── -->
+<div class="tab-panel" id="panel-comportamental">
+  <div class="panel-hero">
+    <div class="tag">Competencias Comportamentales · Institucionales</div>
+    <h2>Competencias Institucionales de la CGR</h2>
+    <p>Las competencias comportamentales miden actitudes, valores y habilidades interpersonales del servidor público. Para la CGR, el perfil institucional se centra en 5 competencias clave.</p>
+  </div>
+
+  <div class="meta-row">
+    <div class="meta-card"><div class="m-label">📋 Referente</div><div class="m-value">CNSC — Manual de Funciones y Competencias</div></div>
+    <div class="meta-card"><div class="m-label">🎯 Evaluación</div><div class="m-value">Pruebas situacionales y de análisis de comportamiento</div></div>
+    <div class="meta-card"><div class="m-label">📌 Competencias</div><div class="m-value">5 institucionales aplicables a todos los cargos</div></div>
+    <div class="meta-card"><div class="m-label">⚡ Ponderación</div><div class="m-value">Parte del puntaje total del concurso</div></div>
+  </div>
+
+  <div class="section open">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(200,168,90,0.15)">🌟</div>
+        <div><h3>Las 5 Competencias Institucionales</h3><div class="sh-sub">Definición, conductas asociadas y cómo se evalúan</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="table-wrap">
+        <table>
+          <tr><th>Competencia</th><th>¿Qué mide?</th><th>Conductas asociadas</th><th>Cómo se evalúa</th></tr>
+          <tr><td><strong>🏛️ Integridad Institucional</strong></td><td>Actuar siempre con ética, transparencia y apego a la ley, incluso bajo presión.</td><td>Denuncia irregularidades. No acepta dádivas. Actúa igual si lo observan o no. Cumple normas aunque nadie lo controle.</td><td>Preguntas de dilemas éticos y situaciones donde la integridad es tentada.</td></tr>
+          <tr><td><strong>🤝 Orientación al Servicio</strong></td><td>Satisfacer las necesidades del ciudadano y del Estado con calidad.</td><td>Escucha activa. Responde oportunamente. Soluciona problemas. Trato digno y respetuoso.</td><td>Casos donde el servidor debe priorizar el servicio vs comodidad personal.</td></tr>
+          <tr><td><strong>🎯 Orientación al Logro</strong></td><td>Compromiso con resultados, cumplimiento de metas y mejora continua.</td><td>Fija metas claras. Supera obstáculos. Propone mejoras. Evalúa sus resultados.</td><td>Situaciones donde hay presión por resultados o recursos limitados.</td></tr>
+          <tr><td><strong>👥 Conciencia de Equipo</strong></td><td>Trabajar colaborativamente, valorar la diversidad y contribuir a los objetivos colectivos.</td><td>Comparte información. Apoya compañeros. Reconoce aportes. Gestiona conflictos constructivamente.</td><td>Dilemas entre el beneficio personal vs el equipo.</td></tr>
+          <tr><td><strong>📚 Aprendizaje Continuo</strong></td><td>Disposición para aprender, adaptarse y mejorar constantemente.</td><td>Se actualiza en su área. Aplica conocimiento nuevo. Acepta retroalimentación. Comparte lo aprendido.</td><td>Casos de cambio organizacional o nuevas tecnologías.</td></tr>
+        </table>
+      </div>
+      <div class="feynman-box">
+        <div class="fb-title">🧒 Clave de estudio para competencias comportamentales</div>
+        <p>Las preguntas de competencias comportamentales siempre presentan una situación y varias opciones de respuesta. La clave es: siempre elige la respuesta que <strong>resuelve el problema, es proactiva, ética y está orientada al bien del servicio</strong>. Nunca la que evade, delega hacia abajo sin razón, ignora el problema o beneficia al individuo sobre la institución.</p>
+      </div>
+      <div class="highlight-box">
+        <div class="hb-title">📝 Estrategia para responder casos comportamentales</div>
+        <p><strong>Paso 1:</strong> Identifica qué competencia está evaluando el caso. <strong>Paso 2:</strong> Descarta respuestas pasivas, evasivas o que violen la ética. <strong>Paso 3:</strong> Entre las restantes, elige la que sea más proactiva, colaborativa y orientada a resultados. <strong>Paso 4:</strong> Verifica que la respuesta no genere consecuencias negativas para el servicio o la institución.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="sh-left">
+        <div class="sh-icon" style="background:rgba(61,214,140,0.15)">🔄</div>
+        <div><h3>Resumen Final: Todo el Examen en Una Vista</h3><div class="sh-sub">Estructura del concurso CGR 2024-2026</div></div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="table-wrap">
+        <table>
+          <tr><th>Tipo de Prueba</th><th>Eje Temático</th><th>Sub-temas</th></tr>
+          <tr><td rowspan="6">Funcionales<br>BÁSICAS</td><td>Constitución Política</td><td>Principios, Derechos, Mecanismos de protección</td></tr>
+          <tr><td>Estructura CGR</td><td>Organización y funcionamiento de la CGR</td></tr>
+          <tr><td>Gestión Documental</td><td>Expedientes, comunicaciones, archivos</td></tr>
+          <tr><td>Código Disciplinario</td><td>Deberes, prohibiciones, conflictos de interés, faltas y sanciones</td></tr>
+          <tr><td>Ofimática</td><td>Word, Excel, PowerPoint, Correo</td></tr>
+          <tr><td>TICS</td><td>Web, plataformas, redes, telecomunicaciones</td></tr>
+          <tr><td rowspan="4">Funcionales<br>ESPECÍFICAS</td><td>Ciberseguridad</td><td>Normatividad, amenazas, protección de datos</td></tr>
+          <tr><td>Redes</td><td>OSI, TCP/IP, protocolos, nube</td></tr>
+          <tr><td>Bases de datos SQL</td><td>Metodologías ágiles, gestión de datos</td></tr>
+          <tr><td>Hardware y Software</td><td>Configuración de sistemas operativos</td></tr>
+          <tr><td>Comportamentales</td><td>Competencias Institucionales</td><td>Integridad, Servicio, Logro, Equipo, Aprendizaje</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
-// ===================== DATA =====================
-const nodes = [
-  // ROOT
-  {
-    id:'root', type:'root', x:1500, y:1100, w:280, h:70,
-    icon:'⚖️', title:'CGR – Concurso 2024-2026',
-    sub:'Contraloría General de la República',
-    detail:{
-      subtitle:'Órgano de Control Fiscal de Colombia',
-      que:'La Contraloría General de la República (CGR) es el máximo órgano de control fiscal del Estado colombiano, responsable de vigilar la gestión y el uso de los recursos públicos.',
-      paraQue:'Garantizar que el dinero público sea manejado con eficiencia, economía, equidad y valoración de costos ambientales; prevenir y sancionar la corrupción.',
-      donde:'A nivel nacional, en todas las entidades que manejen fondos o bienes de la Nación; y territorial mediante sus gerencias departamentales.',
-      cuando:'De forma permanente, con auditorías posteriores y selectivas, y mediante alertas tempranas gracias a la DIARI.',
-      como:'A través de auditorías financieras, de gestión y de resultados; procesos de responsabilidad fiscal; y jurisdicción coactiva para recuperar recursos.',
-      base:'Artículo 119 y 268 Constitución Política. Ley 42/1993. Decreto Ley 267/2000.',
-      tags:['Control Fiscal','Auditoría','Responsabilidad Fiscal','Patrimonio Público']
-    }
-  },
+  // ── Tab switching
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.tab-panel');
 
-  // CAT 1: CONSTITUCIÓN POLÍTICA
-  {
-    id:'cp', type:'cat1', x:300, y:200, w:250, h:60,
-    icon:'📜', title:'Constitución Política', sub:'1991 · Principios, Derechos, Mecanismos',
-    detail:{
-      subtitle:'Norma de normas – Art. 4 C.P.',
-      que:'La Constitución Política de 1991 es la norma fundamental de Colombia, que establece la organización del Estado, los derechos y deberes de los ciudadanos y los mecanismos para su protección.',
-      paraQue:'Sirve como base de todo el ordenamiento jurídico; ninguna ley puede contrariarla. Es la fuente de legitimidad del poder público.',
-      donde:'Se aplica en todo el territorio nacional y en los actos de los nacionales colombianos en el exterior.',
-      cuando:'Siempre que se ejerce el poder público, se defiendan derechos o se resuelva un conflicto jurídico.',
-      como:'Directamente (aplicación inmediata de derechos fundamentales), por bloque de constitucionalidad, y a través del control constitucional de la Corte Constitucional.',
-      base:'Constitución Política de Colombia 1991, Preámbulo y Arts. 1-380.',
-      tags:['Norma Suprema','Derechos Fundamentales','Estado Social de Derecho']
-    }
-  },
-  {id:'cp1', type:'leaf', x:50, y:80, w:200, h:50, icon:'🏛️', title:'Principios Fundamentales', sub:'Arts. 1-10',
-    detail:{subtitle:'Base axiológica del Estado',que:'Los principios que definen a Colombia: Estado Social de Derecho, democracia participativa, pluralismo, soberanía popular, separación de poderes.',paraQue:'Orientan la interpretación de todas las normas y obligan a las autoridades a actuar conforme a ellos.',donde:'En toda actuación del Estado, entidades públicas y servidores públicos.',cuando:'Siempre; son de aplicación permanente e irrenunciable.',como:'Como criterios hermenéuticos obligatorios; acción de tutela para exigir su respeto.',base:'Arts. 1 al 10 C.P.',tags:['Dignidad Humana','Soberanía','Pluralismo','Estado Social']}},
-  {id:'cp2', type:'leaf', x:50, y:200, w:200, h:50, icon:'🛡️', title:'Derechos Fundamentales', sub:'Arts. 11-41 + Bloque',
-    detail:{subtitle:'Derechos de primera generación',que:'Derechos inherentes a la persona humana: vida, igualdad, libertad, debido proceso, libre desarrollo de la personalidad, entre otros.',paraQue:'Proteger a los ciudadanos frente al poder del Estado y garantizar su dignidad.',donde:'Aplicables en toda relación Estado-ciudadano y en relaciones privadas con poder de afectación.',cuando:'En todo momento; son imprescriptibles e inalienables.',como:'Mediante acción de tutela (Art. 86 C.P.) como mecanismo principal de protección judicial.',base:'Arts. 11-41 C.P. y bloque de constitucionalidad.',tags:['Tutela','Imprescriptibles','Dignidad','Debido Proceso']}},
-  {id:'cp3', type:'leaf', x:50, y:320, w:200, h:50, icon:'⚙️', title:'Mecanismos de Protección', sub:'Tutela · Habeas Corpus · Acción Popular',
-    detail:{subtitle:'Herramientas constitucionales de defensa',que:'Instrumentos jurídicos para proteger derechos: Tutela (Art.86), Acción de Cumplimiento (Art.87), Acciones Populares (Art.88), Habeas Corpus, Habeas Data.',paraQue:'Garantizar la eficacia de los derechos constitucionales ante su amenaza o vulneración.',donde:'Ante cualquier juez de la República para la tutela; jueces administrativos para acciones populares.',cuando:'Cuando el derecho sea violado o amenazado; la tutela tiene términos perentorios de 10 días.',como:'Presentando la acción directamente o por escrito; sin necesidad de abogado para la tutela.',base:'Arts. 86, 87, 88, 89 C.P. Decreto 2591/1991 (tutela).',tags:['Tutela','Habeas Corpus','Acción Popular','Habeas Data']}},
-
-  // CAT 2: CGR ESTRUCTURA
-  {
-    id:'cgr', type:'cat2', x:350, y:650, w:260, h:60,
-    icon:'🏢', title:'Estructura y Funcionamiento CGR', sub:'Decreto 267/2000 · DL 2037/2019',
-    detail:{
-      subtitle:'Organización interna del órgano de control',
-      que:'Conjunto de dependencias y niveles jerárquicos que permiten a la CGR ejercer el control fiscal en Colombia, dividido en nivel central (Bogotá) y nivel desconcentrado (todo el país).',
-      paraQue:'Garantizar cobertura nacional en la vigilancia fiscal y especialización por sectores.',
-      donde:'Nivel central en Bogotá; nivel desconcentrado en gerencias departamentales y sectoriales.',
-      cuando:'Permanentemente; la función de control fiscal es continua.',
-      como:'Mediante auditorías, indagaciones preliminares, procesos de responsabilidad fiscal y coordinación con el Sistema Nacional de Control Fiscal.',
-      base:'Decreto Ley 267/2000. Decreto Ley 2037/2019. Decreto Ley 405/2020. Art. 119 y 268 C.P.',
-      tags:['Control Fiscal','DIARI','Responsabilidad Fiscal','Jurisdicción Coactiva']
-    }
-  },
-  {id:'cgr1', type:'leaf', x:100, y:560, w:210, h:50, icon:'👑', title:'Contralor General', sub:'Art. 268 C.P.',
-    detail:{subtitle:'Máxima autoridad de la CGR',que:'El Contralor General es elegido por el Congreso en pleno para períodos de 4 años, es el representante legal y director de la entidad.',paraQue:'Dirigir estratégicamente la CGR, presentar el dictamen sobre la cuenta general del presupuesto y establecer métodos de control fiscal.',donde:'En el despacho del Contralor, Bogotá, con alcance nacional.',cuando:'Durante todo su período de 4 años; en particular ante el Congreso para el dictamen anual.',como:'Mediante resoluciones, circulares, directrices técnicas y representación institucional.',base:'Art. 267-268 C.P. Arts. 13-14 Decreto 267/2000.',tags:['Elección Congreso','4 años','Dictamen Fiscal','Control Fiscal']}},
-  {id:'cgr2', type:'leaf', x:100, y:670, w:210, h:50, icon:'🔍', title:'DIARI', sub:'Decreto Ley 2037/2019',
-    detail:{subtitle:'Dirección de Información, Análisis y Reacción Inmediata',que:'Dependencia creada en 2019 que usa analítica de datos masivos, inteligencia artificial y cruces de información para detectar riesgos de corrupción en tiempo real.',paraQue:'Orientar la selección de sujetos de control, identificar focos de corrupción y emitir alertas tempranas antes de que el daño se consolide.',donde:'A nivel central, con impacto en todo el país mediante los datos de las entidades públicas.',cuando:'De forma continua y preventiva; orienta la planeación de auditorías del siguiente periodo.',como:'Cruzando bases de datos de SECOP, SIIF, RUES, y otras fuentes de información del Estado.',base:'Decreto Ley 2037/2019, Arts. que crean la DIARI.',tags:['Big Data','Alertas Tempranas','Anticorrupción','Analítica']}},
-  {id:'cgr3', type:'leaf', x:100, y:780, w:210, h:50, icon:'⚖️', title:'Responsabilidad Fiscal', sub:'Ley 610/2000',
-    detail:{subtitle:'Proceso para recuperar el patrimonio público',que:'Proceso de naturaleza administrativa mediante el cual la CGR investiga, determina responsables y cuantifica el daño causado al patrimonio del Estado, profiriendo fallo con responsabilidad fiscal.',paraQue:'Recuperar los dineros públicos perdidos o dañados e imponer responsabilidad patrimonial a los gestores fiscales.',donde:'En las dependencias de responsabilidad fiscal del nivel central y en las gerencias departamentales.',cuando:'Cuando una auditoría o denuncia detecta posible daño al patrimonio del Estado.',como:'Indagación preliminar → proceso de responsabilidad fiscal → fallo → jurisdicción coactiva para cobro.',base:'Ley 610/2000. Art. 26 Ley 42/1993. Arts. 26-71 Decreto 267/2000.',tags:['Daño Fiscal','Fallo','Coactiva','Gestor Fiscal']}},
-  {id:'cgr4', type:'leaf', x:100, y:890, w:210, h:50, icon:'🗺️', title:'Gerencias Departamentales', sub:'Nivel Desconcentrado',
-    detail:{subtitle:'Presencia territorial de la CGR',que:'Oficinas de la CGR ubicadas en cada departamento del país que ejercen control fiscal sobre entidades territoriales y programas nacionales ejecutados regionalmente.',paraQue:'Garantizar cobertura nacional y auditar entes públicos que la CGR central no puede vigilar directamente.',donde:'En las capitales de departamento de todo el territorio nacional.',cuando:'De forma continua; aplican el plan de vigilancia fiscal definido por el nivel central.',como:'Auditando alcaldías, gobernaciones, ESE, empresas industriales y comerciales del Estado de la región.',base:'Arts. 59-70 Decreto 267/2000. Decreto 405/2020.',tags:['Territorial','Regional','Auditorías','Entidades Locales']}},
-
-  // CAT 3: CÓDIGO DISCIPLINARIO
-  {
-    id:'cd', type:'cat3', x:1850, y:200, w:260, h:60,
-    icon:'📋', title:'Código General Disciplinario', sub:'Ley 1952/2019',
-    detail:{
-      subtitle:'Estatuto del Servidor Público',
-      que:'La Ley 1952 de 2019 (vigente desde el 1 de julio de 2021) regula el régimen disciplinario de los servidores públicos y los particulares que ejercen funciones públicas, actualizando el anterior Código Único Disciplinario (Ley 734 de 2002).',
-      paraQue:'Garantizar que los servidores públicos cumplan sus deberes, respeten prohibiciones y actúen con ética en el ejercicio de la función pública.',
-      donde:'Se aplica a todos los servidores públicos (empleados de carrera, de libre nombramiento, de período fijo, contratistas) y particulares que ejerzan función pública.',
-      cuando:'Cuando un servidor comete una falta disciplinaria: acción u omisión que viole el régimen disciplinario.',
-      como:'A través de procesos disciplinarios ordinarios o verbales, con garantía del debido proceso y derecho de defensa.',
-      base:'Ley 1952/2019. Ley 734/2002 (complementaria). Art. 124 C.P.',
-      tags:['Faltas','Sanciones','Deberes','Prohibiciones','Debido Proceso']
-    }
-  },
-  {id:'cd1', type:'leaf', x:2050, y:80, w:210, h:50, icon:'✅', title:'Deberes del Servidor', sub:'Art. 34 Ley 1952',
-    detail:{subtitle:'Obligaciones del funcionario público',que:'Los deberes son las obligaciones que debe cumplir todo servidor público en ejercicio de su cargo: cumplir la Constitución, actuar con diligencia, tratar con respeto a los ciudadanos, guardar reserva de la información, entre otros.',paraQue:'Garantizar el buen funcionamiento del Estado y la prestación eficiente del servicio público.',donde:'En todo acto del servidor público, dentro y fuera de la entidad cuando haya afectación del cargo.',cuando:'Durante toda la vigencia del vínculo laboral o contractual con el Estado.',como:'Su incumplimiento genera falta disciplinaria; se evalúan en el proceso de calificación de servicios.',base:'Art. 34 Ley 1952/2019.',tags:['Diligencia','Probidad','Reserva','Eficiencia']}},
-  {id:'cd2', type:'leaf', x:2050, y:190, w:210, h:50, icon:'🚫', title:'Prohibiciones', sub:'Art. 35 Ley 1952',
-    detail:{subtitle:'Lo que el servidor NO puede hacer',que:'Conductas vedadas: recibir dádivas, participar en política, celebrar contratos con conflicto de interés, ejecutar actos de discriminación, entre otras prohibiciones para preservar la imparcialidad.',paraQue:'Prevenir el abuso del poder, la corrupción y el uso indebido de la función pública.',donde:'En todas las actuaciones del servidor, incluso fuera de la jornada laboral si afectan el cargo.',cuando:'Durante todo el ejercicio del cargo y aun con posterioridad si la prohibición así lo establece.',como:'Su violación activa el proceso disciplinario; algunas constituyen también delitos penales.',base:'Art. 35 Ley 1952/2019. Arts. 326-434 C. Penal (correlación penal).',tags:['Dádivas','Política','Conflicto de Interés','Discriminación']}},
-  {id:'cd3', type:'leaf', x:2050, y:300, w:210, h:50, icon:'🔗', title:'Incompatibilidades e Impedimentos', sub:'Arts. 36-40 Ley 1952',
-    detail:{subtitle:'Circunstancias que impiden el ejercicio del cargo',que:'Incompatibilidades: situaciones que impiden ejercer simultáneamente otro cargo o actividad (ej. no puede ser servidor y contratista del mismo Estado). Impedimentos: causas que obligan al funcionario a declararse impedido en un asunto concreto por tener interés personal.',paraQue:'Proteger la imparcialidad, transparencia y el interés general sobre el particular.',donde:'En todo proceso de toma de decisiones donde el servidor tenga interés directo o indirecto.',cuando:'Al momento de conocer un asunto; el servidor debe declararse impedido inmediatamente.',como:'Declaración formal de impedimento → traslado del caso a otro funcionario competente.',base:'Arts. 36-40 Ley 1952/2019. Ley 2003/2019 (partidos y movimientos).',tags:['Transparencia','Imparcialidad','Recusación','Interés Particular']}},
-  {id:'cd4', type:'leaf', x:2050, y:410, w:210, h:50, icon:'⚠️', title:'Tipos de Faltas y Sanciones', sub:'Arts. 46-55 Ley 1952',
-    detail:{subtitle:'Clasificación del régimen sancionatorio',que:'Faltas gravísimas (destitución + inhabilidad general), graves (suspensión o multa) y leves (amonestación). Las sanciones son proporcionales a la gravedad, el daño y los antecedentes del servidor.',paraQue:'Establecer consecuencias proporcionales que disuadan el incumplimiento y corrijan conductas.',donde:'En el proceso disciplinario, sea ordinario o verbal.',cuando:'Al finalizar el proceso con fallo sancionatorio en firme.',como:'Proceso disciplinario con garantías de defensa → fallo → recursos (apelación, queja) → ejecutoria → ejecución de la sanción.',base:'Arts. 46-55, 183-224 Ley 1952/2019.',tags:['Destitución','Suspensión','Multa','Amonestación','Inhabilidad']}},
-
-  // CAT 4: GESTIÓN DOCUMENTAL
-  {
-    id:'gd', type:'cat4', x:1050, y:150, w:260, h:60,
-    icon:'📁', title:'Gestión Documental', sub:'Ley 594/2000 · AGN',
-    detail:{
-      subtitle:'Archivo General de la Nación y normativa archivística',
-      que:'Conjunto de actividades administrativas y técnicas para la planeación, manejo y organización de la documentación producida y recibida por las entidades, desde su origen hasta su disposición final.',
-      paraQue:'Garantizar la eficiencia administrativa, la transparencia y la memoria institucional del Estado colombiano.',
-      donde:'En todas las entidades públicas y privadas que cumplan funciones públicas.',
-      cuando:'Desde el momento en que se produce un documento hasta su eliminación o conservación permanente.',
-      como:'Aplicando las tablas de retención documental (TRD), el programa de gestión documental (PGD) y los estándares del AGN.',
-      base:'Ley 594/2000 (Ley General de Archivos). Decreto 1080/2015 (sector cultura). Acuerdos AGN.',
-      tags:['TRD','PGD','AGN','Conservación','Expedientes']
-    }
-  },
-  {id:'gd1', type:'leaf', x:850, y:80, w:200, h:50, icon:'📂', title:'Manejo de Expedientes', sub:'Acuerdo AGN 060/2001',
-    detail:{subtitle:'Control de la documentación oficial',que:'El expediente es la unidad documental compleja que reúne todos los documentos relativos a un trámite o asunto. Su manejo incluye foliación, hoja de control, índice y unidad de conservación.',paraQue:'Garantizar la integridad, autenticidad y accesibilidad de los documentos para la gestión y el control posterior.',donde:'En todas las oficinas productoras de documentos de las entidades públicas.',cuando:'Desde la apertura del expediente hasta su transferencia al archivo central.',como:'Foliando en el orden original, respetando el principio de procedencia y orden original, usando unidades de conservación adecuadas.',base:'Acuerdo AGN 060/2001. Ley 594/2000, Arts. 24-27.',tags:['Foliación','Principio de Procedencia','Unidad Documental','Transferencia']}},
-  {id:'gd2', type:'leaf', x:850, y:200, w:200, h:50, icon:'🗄️', title:'Clasificación y Organización de Archivos', sub:'Ley 594/2000',
-    detail:{subtitle:'Ciclo vital del documento',que:'Los archivos se clasifican en: gestión (documentos activos), central (documentos semi-activos) e histórico (valor permanente). La organización sigue los principios de procedencia y orden original.',paraQue:'Permitir la recuperación oportuna de la información, garantizar la transparencia y preservar la memoria institucional.',donde:'En cada entidad pública, con niveles diferenciados según el ciclo vital del documento.',cuando:'De forma permanente; las transferencias se realizan según los plazos de las TRD.',como:'Aplicando las TRD aprobadas por el AGN, identificando fondos, secciones y series documentales.',base:'Ley 594/2000. Decreto 2578/2012. Acuerdos AGN 003/2013 y 004/2013.',tags:['Ciclo Vital','TRD','Archivo Histórico','Procedencia','Orden Original']}},
-
-  // CAT 5: TICs Y COMPETENCIAS ESPECÍFICAS
-  {
-    id:'tic', type:'cat5', x:1850, y:700, w:260, h:60,
-    icon:'💻', title:'TICs y Competencias Específicas', sub:'Sistemas · Redes · Ciberseguridad',
-    detail:{
-      subtitle:'Tecnologías de la Información aplicadas al Estado',
-      que:'Conjunto de conocimientos tecnológicos requeridos para el concurso de la CGR: ofimática, redes, ciberseguridad, bases de datos, sistemas operativos y metodologías ágiles.',
-      paraQue:'Garantizar que los servidores puedan gestionar la información institucional, proteger los datos y operar herramientas tecnológicas del Estado.',
-      donde:'En las dependencias de la CGR que gestionan sistemas de información, auditorías tecnológicas y servicios digitales.',
-      cuando:'En el ejercicio diario del cargo y en proyectos de modernización tecnológica de la entidad.',
-      como:'Aplicando normas ISO 27001, marcos de referencia como COBIT, metodologías ágiles (Scrum/Kanban) y gestión de bases de datos con SQL.',
-      base:'Ley 1273/2009 (delitos informáticos). Ley 1581/2012 (habeas data). CONPES 3995/2020 (ciberseguridad).',
-      tags:['ISO 27001','SQL','Scrum','Redes','Protección de Datos']
-    }
-  },
-  {id:'tic1', type:'leaf', x:2090, y:580, w:210, h:50, icon:'🔐', title:'Ciberseguridad y Protección de Datos', sub:'Ley 1273/2009 · Ley 1581/2012',
-    detail:{subtitle:'Seguridad de la información del Estado',que:'Ley 1273/2009 tipifica delitos informáticos (acceso abusivo, interceptación, daño informático). Ley 1581/2012 regula el tratamiento de datos personales (habeas data), exigiendo consentimiento, finalidad y seguridad en el manejo.',paraQue:'Proteger la infraestructura tecnológica del Estado y los derechos de los ciudadanos frente al uso indebido de sus datos.',donde:'En todas las entidades del Estado que traten datos personales o gestionen sistemas de información críticos.',cuando:'De forma permanente; cualquier tratamiento de datos activa las obligaciones de la Ley 1581.',como:'Implementando políticas de privacidad, controles de acceso, cifrado, auditorías de seguridad y reportando incidentes a la SIC.',base:'Ley 1273/2009. Ley 1581/2012. Decreto 1377/2013. CONPES 3995/2020.',tags:['Datos Personales','SIC','Cifrado','Incidentes','Responsable del Tratamiento']}},
-  {id:'tic2', type:'leaf', x:2090, y:690, w:210, h:50, icon:'🌐', title:'Redes y Protocolos TCP/IP', sub:'Administración de Redes',
-    detail:{subtitle:'Infraestructura de comunicaciones',que:'Conceptos de redes LAN/WAN/MAN, modelo OSI y TCP/IP, protocolos HTTP/HTTPS, DNS, DHCP, FTP, y gestión de seguridad en redes: firewalls, VPN, IDS/IPS.',paraQue:'Garantizar la conectividad, disponibilidad y seguridad de los sistemas de información de la CGR.',donde:'En el área de tecnología de la CGR y en auditorías de sistemas a entidades vigiladas.',cuando:'En el diseño, mantenimiento y auditoría de infraestructura tecnológica.',como:'Mediante herramientas de monitoreo (Nagios, Zabbix), configuración de switches/routers y protocolos de seguridad.',base:'ISO/IEC 27001. NIST Cybersecurity Framework. RFC estándares de Internet.',tags:['TCP/IP','OSI','Firewall','VPN','LAN/WAN']}},
-  {id:'tic3', type:'leaf', x:2090, y:800, w:210, h:50, icon:'☁️', title:'Nube y Virtualización', sub:'Cloud Computing',
-    detail:{subtitle:'Computación en la nube',que:'Modelos de servicio IaaS, PaaS, SaaS y modelos de despliegue (pública, privada, híbrida). Conceptos de virtualización con hipervisores (VMware, Hyper-V), contenedores (Docker) y orquestación (Kubernetes).',paraQue:'Optimizar recursos tecnológicos del Estado, mejorar la escalabilidad y reducir costos de infraestructura.',donde:'En el Centro de Datos del Estado y en sistemas de información de entidades públicas.',cuando:'Al migrar o modernizar infraestructura tecnológica institucional.',como:'Mediante contratos de servicios cloud con proveedores certificados, aplicando políticas de seguridad en la nube.',base:'CONPES 3920/2018 (política de explotación de datos). Lineamientos MinTIC.',tags:['IaaS','PaaS','SaaS','Docker','Escalabilidad']}},
-  {id:'tic4', type:'leaf', x:2090, y:910, w:210, h:50, icon:'🗃️', title:'Bases de Datos SQL', sub:'Gestión de Datos',
-    detail:{subtitle:'Gestión y consulta de bases de datos relacionales',que:'SQL (Structured Query Language) para crear, consultar y administrar bases de datos relacionales. DDL (CREATE, ALTER, DROP), DML (SELECT, INSERT, UPDATE, DELETE), DCL y control de transacciones (ACID).',paraQue:'Gestionar la información institucional de forma estructurada, permitir consultas complejas y garantizar la integridad de los datos.',donde:'En los sistemas de información de la CGR: SIRECI, SINECOF, y en auditorías de sistemas a entidades vigiladas.',cuando:'En el diseño de sistemas, extracción de datos para auditorías y mantenimiento de aplicaciones.',como:'Mediante SGBD como PostgreSQL, MySQL, SQL Server, Oracle; usando sentencias SQL optimizadas.',base:'ISO/IEC 9075 (estándar SQL). Mejores prácticas de modelado relacional (normalización).',tags:['SELECT','JOIN','Normalización','ACID','SGBD']}},
-  {id:'tic5', type:'leaf', x:2090, y:1020, w:210, h:50, icon:'⚡', title:'Metodologías Ágiles', sub:'Scrum · Kanban',
-    detail:{subtitle:'Gestión de proyectos tecnológicos',que:'Marcos de trabajo para el desarrollo iterativo de software: Scrum (sprints, backlog, roles), Kanban (flujo visual, WIP limits), y el Manifiesto Ágil (individuos sobre procesos, software funcionando, colaboración, respuesta al cambio).',paraQue:'Entregar valor de forma incremental, reducir riesgos en proyectos TI y mejorar la adaptabilidad ante cambios.',donde:'En proyectos de desarrollo o modernización de sistemas de información en la CGR y el Estado.',cuando:'En el ciclo de vida del desarrollo de software y en proyectos de transformación digital.',como:'Usando herramientas como Jira, Trello, Azure DevOps; con ceremonias ágiles (daily, sprint review, retrospectiva).',base:'Manifesto Ágil (2001). Guía Scrum (Schwaber & Sutherland). Framework PMBOK 7a ed.',tags:['Scrum','Kanban','Sprint','Backlog','DevOps']}},
-  {id:'tic6', type:'leaf', x:2090, y:1130, w:210, h:50, icon:'🖥️', title:'Mantenimiento y Sistemas Operativos', sub:'Hardware · Software',
-    detail:{subtitle:'Soporte tecnológico institucional',que:'Configuración y administración de sistemas operativos (Windows Server, Linux/Ubuntu), mantenimiento preventivo y correctivo de hardware, gestión de licencias y actualizaciones de seguridad.',paraQue:'Garantizar la disponibilidad, rendimiento y seguridad de los equipos y sistemas de la CGR.',donde:'En el área de soporte técnico y tecnología de la entidad.',cuando:'De forma preventiva (calendario de mantenimiento) y correctiva (ante fallas).',como:'Mediante scripts de automatización (PowerShell, Bash), herramientas de inventario (SCCM, GLPI) y procedimientos ITIL.',base:'ITIL v4 (gestión de servicios TI). ISO/IEC 20000 (servicios TI). Estándares de fabricantes.',tags:['Windows Server','Linux','ITIL','Preventivo','Licencias']}},
-
-  // CAT 6: COMPORTAMENTAL
-  {
-    id:'comp', type:'cat6', x:1050, y:1700, w:260, h:60,
-    icon:'🌟', title:'Competencias Comportamentales', sub:'Institucionales · Carrera Administrativa',
-    detail:{
-      subtitle:'Perfil de competencias del servidor CGR',
-      que:'Las competencias comportamentales son el conjunto de actitudes, valores y habilidades que debe demostrar el servidor de la CGR para el ejercicio ético y efectivo de su cargo.',
-      paraQue:'Garantizar que los servidores no solo tengan conocimientos técnicos sino también los valores y habilidades interpersonales para servir al interés público.',
-      donde:'Se evalúan en el proceso de selección (concurso), en la inducción y en la evaluación del desempeño.',
-      cuando:'Durante todo el vínculo laboral; son de cumplimiento permanente.',
-      como:'A través de entrevistas por competencias, evaluación de desempeño 360° y programas de formación.',
-      base:'Decreto 815/2018 (competencias laborales). Ley 909/2004 (carrera administrativa).',
-      tags:['Valores','Actitudes','Evaluación','Servidor Público','Ética']
-    }
-  },
-  {id:'comp1', type:'leaf', x:800, y:1640, w:200, h:50, icon:'🎖️', title:'Integridad Institucional', sub:'Ética y Probidad',
-    detail:{subtitle:'Actuar con honestidad y ética',que:'Capacidad de actuar conforme a los principios éticos y los valores institucionales de la CGR, manteniendo coherencia entre el discurso y la acción, rechazando la corrupción y promoviendo la transparencia.',paraQue:'Garantizar la confianza ciudadana en la CGR y en el Estado; es el valor fundacional de un órgano de control.',donde:'En todas las actuaciones del servidor, dentro y fuera de la entidad.',cuando:'En todo momento; es una competencia de cumplimiento permanente.',como:'Declarando conflictos de interés, reportando irregularidades, actuando con imparcialidad y honrando compromisos.',base:'Código de Ética de la CGR. Arts. 34-35 Ley 1952/2019.',tags:['Ética','Transparencia','Anticorrupción','Coherencia']}},
-  {id:'comp2', type:'leaf', x:800, y:1750, w:200, h:50, icon:'🤝', title:'Orientación al Servicio', sub:'Vocación de Servicio Público',
-    detail:{subtitle:'Servir con excelencia al ciudadano',que:'Disposición para comprender y satisfacer las necesidades de los ciudadanos y las entidades vigiladas, brindando atención oportuna, cordial y efectiva.',paraQue:'Mejorar la percepción ciudadana sobre el Estado y garantizar que el control fiscal se ejerza con enfoque en resultados reales para la sociedad.',donde:'En la atención de quejas, denuncias, auditorías y toda interacción con ciudadanos y sujetos de control.',cuando:'En cada interacción con el usuario interno o externo.',como:'Aplicando protocolos de atención al ciudadano, canales PQRD y seguimiento a compromisos.',base:'Ley 1437/2011 (CPACA). Política de servicio al ciudadano del DAFP.',tags:['PQRD','Ciudadano','Atención','Calidad']}},
-  {id:'comp3', type:'leaf', x:800, y:1860, w:200, h:50, icon:'🎯', title:'Orientación al Logro', sub:'Eficiencia y Resultados',
-    detail:{subtitle:'Alcanzar metas con calidad',que:'Capacidad de fijar metas retadoras y alcanzarlas con eficiencia, administrando bien el tiempo y los recursos, superando obstáculos y tomando iniciativa para mejorar procesos.',paraQue:'Garantizar que la CGR cumpla su misión de control fiscal con calidad y oportunidad.',donde:'En el cumplimiento de planes de auditoría, procesos de responsabilidad fiscal y proyectos institucionales.',cuando:'En la planeación y ejecución de actividades y en la evaluación de desempeño.',como:'Mediante indicadores de gestión, tableros de control y seguimiento periódico al cumplimiento de metas.',base:'Decreto 815/2018. Sistema de gestión de calidad ISO 9001:2015.',tags:['KPIs','Indicadores','Eficiencia','Iniciativa','Metas']}},
-  {id:'comp4', type:'leaf', x:800, y:1970, w:200, h:50, icon:'👥', title:'Conciencia de Equipo', sub:'Trabajo Colaborativo',
-    detail:{subtitle:'Sinergia y colaboración institucional',que:'Habilidad para trabajar de forma colaborativa, aportar al grupo, valorar las diferencias, escuchar activamente y contribuir al logro de objetivos comunes por encima de los individuales.',paraQue:'Fortalecer la capacidad institucional de la CGR mediante la sinergia entre dependencias y servidores.',donde:'En equipos de auditoría, procesos interdisciplinarios y proyectos transversales.',cuando:'En toda actividad que requiera coordinación con otros servidores.',como:'Mediante reuniones de trabajo efectivas, herramientas colaborativas, roles definidos y comunicación asertiva.',base:'Teoría del trabajo en equipo. Modelos DISC y Tuckman.',tags:['Colaboración','Sinergia','Comunicación','Diversidad']}},
-  {id:'comp5', type:'leaf', x:800, y:2080, w:200, h:50, icon:'📚', title:'Aprendizaje Continuo', sub:'Actualización y Formación',
-    detail:{subtitle:'Mejora permanente del conocimiento',que:'Disposición para actualizar constantemente los conocimientos, reflexionar sobre la propia práctica, incorporar retroalimentación y adaptarse a los cambios normativos, tecnológicos y organizacionales.',paraQue:'Mantener la idoneidad técnica del servidor ante un entorno normativo y tecnológico en constante cambio.',donde:'En programas de capacitación de la CGR, autoestudio y participación en comunidades de práctica.',cuando:'De forma permanente a lo largo de toda la carrera del servidor.',como:'Participando en cursos, seminarios, leyendo actualizaciones normativas y aplicando aprendizajes en el trabajo.',base:'Ley 909/2004 (plan institucional de capacitación). Decreto 1567/1998.',tags:['Capacitación','Innovación','Adaptabilidad','Autogestión']}},
-
-  // LEY 42 / 1993
-  {
-    id:'l42', type:'cat4', x:600, y:1100, w:240, h:60,
-    icon:'📊', title:'Ley 42 de 1993', sub:'Sistema de Control Fiscal',
-    detail:{
-      subtitle:'Organización del sistema de control fiscal financiero',
-      que:'Desarrolla el artículo 267 de la Constitución Política; establece los sujetos de control fiscal, los principios (eficiencia, economía, equidad, valoración de costos ambientales), los sistemas de control (financiero, de legalidad, de gestión, de resultados, de revisión de cuentas) y las formas de ejercerlo.',
-      paraQue:'Definir el marco técnico y jurídico para que la CGR y las contralorías territoriales ejerzan el control fiscal de forma ordenada y uniforme.',
-      donde:'En todos los órganos, entidades y personas que administren bienes o fondos de la Nación.',
-      cuando:'De forma posterior y selectiva; opera sobre la gestión ya realizada (no previa).',
-      como:'Mediante auditorías según los sistemas y principios definidos; con rendición de cuentas y emisión de fenecimiento.',
-      base:'Ley 42/1993. Arts. 267-268 C.P.',
-      tags:['Control Fiscal','Fenecimiento','Eficiencia','Economía','Equidad']
-    }
-  },
-
-  // DECRETO 267/2000
-  {
-    id:'d267', type:'cat2', x:600, y:1300, w:240, h:60,
-    icon:'🏗️', title:'Decreto Ley 267 de 2000', sub:'Estructura Orgánica CGR',
-    detail:{
-      subtitle:'Ley de organización y funcionamiento de la CGR',
-      que:'Decreto con fuerza de ley expedido en el marco del estado de emergencia económica, que fija la estructura orgánica de la CGR, define sus dependencias, funciones específicas, el régimen del personal y la organización de sus recursos.',
-      paraQue:'Modernizar y reorganizar la CGR para hacerla más eficiente en el ejercicio del control fiscal posterior y selectivo.',
-      donde:'Al interior de la CGR y en sus relaciones con sujetos de control y otras entidades del Estado.',
-      cuando:'Rige desde su expedición; ha sido modificado por los Decretos Ley 2037/2019 y 405/2020.',
-      como:'Establece el organigrama, funciones de cada dependencia, régimen de carrera especial y recursos de la entidad.',
-      base:'Decreto Ley 267/2000 y sus modificaciones.',
-      tags:['Organigrama','Estructura','Funciones','Carrera Especial']
-    }
-  },
-
-  // OFIMÁTICA
-  {
-    id:'ofi', type:'cat1', x:1050, y:900, w:240, h:60,
-    icon:'📝', title:'Conocimientos en Ofimática', sub:'Office Suite · Correo',
-    detail:{
-      subtitle:'Herramientas de productividad digital',
-      que:'Dominio de las principales herramientas de la suite de productividad: Microsoft Word (procesamiento de texto), Excel (hojas de cálculo y análisis de datos), PowerPoint (presentaciones) y clientes de correo electrónico institucional.',
-      paraQue:'Gestionar eficientemente la documentación, la información y las comunicaciones institucionales de la CGR.',
-      donde:'En todas las dependencias de la CGR en el ejercicio diario del cargo.',
-      cuando:'De forma cotidiana; son herramientas de uso permanente en el trabajo administrativo.',
-      como:'Usando funciones avanzadas: Word (estilos, tablas de contenido, control de cambios), Excel (tablas dinámicas, VLOOKUP, gráficas), PowerPoint (diseño de presentaciones ejecutivas).',
-      base:'Estándares Microsoft Office. NTCGP 1000:2009 (gestión de calidad en entidades públicas).',
-      tags:['Word','Excel','PowerPoint','Correo','Macros']
-    }
-  },
-];
-
-// EDGES (connections)
-const edges = [
-  // root → categories
-  {from:'root', to:'cp'},
-  {from:'root', to:'cgr'},
-  {from:'root', to:'cd'},
-  {from:'root', to:'gd'},
-  {from:'root', to:'tic'},
-  {from:'root', to:'comp'},
-  {from:'root', to:'l42'},
-  {from:'root', to:'d267'},
-  {from:'root', to:'ofi'},
-  // cp → leaves
-  {from:'cp', to:'cp1'},
-  {from:'cp', to:'cp2'},
-  {from:'cp', to:'cp3'},
-  // cgr → leaves
-  {from:'cgr', to:'cgr1'},
-  {from:'cgr', to:'cgr2'},
-  {from:'cgr', to:'cgr3'},
-  {from:'cgr', to:'cgr4'},
-  // cd → leaves
-  {from:'cd', to:'cd1'},
-  {from:'cd', to:'cd2'},
-  {from:'cd', to:'cd3'},
-  {from:'cd', to:'cd4'},
-  // gd → leaves
-  {from:'gd', to:'gd1'},
-  {from:'gd', to:'gd2'},
-  // tic → leaves
-  {from:'tic', to:'tic1'},
-  {from:'tic', to:'tic2'},
-  {from:'tic', to:'tic3'},
-  {from:'tic', to:'tic4'},
-  {from:'tic', to:'tic5'},
-  {from:'tic', to:'tic6'},
-  // comp → leaves
-  {from:'comp', to:'comp1'},
-  {from:'comp', to:'comp2'},
-  {from:'comp', to:'comp3'},
-  {from:'comp', to:'comp4'},
-  {from:'comp', to:'comp5'},
-  // cross links
-  {from:'l42', to:'cgr3'},
-  {from:'d267', to:'cgr4'},
-];
-
-// =================== RENDER ===================
-const canvas = document.getElementById('canvas');
-const svgEl = document.getElementById('connections');
-const nodeMap = {};
-const nodeEls = {};
-
-function getColor(type) {
-  return {
-    cat1:'#00d4ff', cat2:'#a78bfa', cat3:'#f59e0b',
-    cat4:'#10b981', cat5:'#ef4444', cat6:'#ec4899',
-    root:'#00d4ff', leaf:'rgba(255,255,255,0.3)'
-  }[type] || '#fff';
-}
-
-nodes.forEach((n, i) => {
-  nodeMap[n.id] = n;
-  const el = document.createElement('div');
-  el.className = `node node-${n.type}`;
-  el.id = 'node-' + n.id;
-  el.style.left = n.x + 'px';
-  el.style.top = n.y + 'px';
-  el.style.width = n.w + 'px';
-  el.style.animationDelay = (i * 0.05) + 's';
-
-  const hasChildren = edges.some(e => e.from === n.id);
-  el.innerHTML = `
-    <div class="node-inner">
-      <div class="node-title">
-        <span class="node-icon">${n.icon}</span>
-        <span>${n.title}</span>
-        ${hasChildren ? '<span class="node-chevron">▼</span>' : ''}
-      </div>
-      ${n.sub ? `<div class="node-sub">${n.sub}</div>` : ''}
-    </div>`;
-
-  el.addEventListener('click', (e) => {
-    e.stopPropagation();
-    openPanel(n);
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      tabBtns.forEach(b => b.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('panel-' + target).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // scroll tab into view
+      btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    });
   });
 
-  canvas.appendChild(el);
-  nodeEls[n.id] = el;
-});
-
-// Draw SVG connections
-function drawConnections() {
-  svgEl.innerHTML = '';
-  edges.forEach(edge => {
-    const fromN = nodeMap[edge.from];
-    const toN = nodeMap[edge.to];
-    if (!fromN || !toN) return;
-
-    const x1 = fromN.x + fromN.w / 2;
-    const y1 = fromN.y + fromN.h / 2;
-    const x2 = toN.x + toN.w / 2;
-    const y2 = toN.y + toN.h / 2;
-
-    const cx1 = x1 + (x2 - x1) * 0.5;
-    const cy1 = y1;
-    const cx2 = x1 + (x2 - x1) * 0.5;
-    const cy2 = y2;
-
-    const color = getColor(fromN.type);
-    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    path.setAttribute('d', `M ${x1} ${y1} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${x2} ${y2}`);
-    path.setAttribute('fill', 'none');
-    path.setAttribute('stroke', color);
-    path.setAttribute('stroke-width', fromN.type === 'root' ? '2' : '1.5');
-    path.setAttribute('stroke-opacity', fromN.type === 'root' ? '0.6' : '0.3');
-    path.setAttribute('stroke-dasharray', edge.from === 'l42' || edge.from === 'd267' ? '6,4' : 'none');
-    svgEl.appendChild(path);
-
-    // Animate
-    const len = path.getTotalLength();
-    path.style.strokeDasharray = len;
-    path.style.strokeDashoffset = len;
-    path.style.animation = `drawLine 1s ${Math.random()*0.5}s forwards ease-out`;
-  });
-}
-
-// CSS for line animation
-const style = document.createElement('style');
-style.textContent = `@keyframes drawLine { to { stroke-dashoffset: 0; } }`;
-document.head.appendChild(style);
-
-drawConnections();
-
-// =============== PANEL ===============
-function openPanel(n) {
-  const d = n.detail;
-  document.getElementById('p-icon').textContent = n.icon;
-  document.getElementById('p-title').textContent = n.title;
-  document.getElementById('p-sub').textContent = d.subtitle || '';
-
-  let html = '';
-  if (d.base) html += `<div style="margin-bottom:16px"><span class="article-ref">${d.base}</span></div>`;
-  if (d.que) html += card('🔎','¿QUÉ ES?', d.que);
-  if (d.paraQue) html += card('🎯','¿PARA QUÉ SIRVE?', d.paraQue);
-  if (d.donde) html += card('📍','¿DÓNDE SE USA?', d.donde);
-  if (d.cuando) html += card('⏱️','¿CUÁNDO SE USA?', d.cuando);
-  if (d.como) html += card('⚙️','¿CÓMO SE APLICA?', d.como);
-  if (d.tags?.length) {
-    html += `<div class="info-card"><div class="info-card-label"><span>🏷️</span>PALABRAS CLAVE</div><div class="tag-wrap">${d.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`;
+  // ── Accordion toggle
+  function toggleSection(header) {
+    const section = header.parentElement;
+    section.classList.toggle('open');
   }
 
-  document.getElementById('p-body').innerHTML = html;
-  document.getElementById('detail-panel').classList.add('open');
-  document.getElementById('overlay').classList.add('show');
-}
-
-function card(emoji, label, text) {
-  return `<div class="info-card"><div class="info-card-label"><span>${emoji}</span>${label}</div><p>${text}</p></div>`;
-}
-
-function closePanel() {
-  document.getElementById('detail-panel').classList.remove('open');
-  document.getElementById('overlay').classList.remove('show');
-}
-
-// =============== DRAG / PAN ===============
-const wrap = document.getElementById('canvas-wrap');
-let dragging = false, lastX, lastY;
-wrap.style.height = (window.innerHeight - 160) + 'px';
-wrap.addEventListener('mousedown', e => {
-  if (e.target.closest('.node')) return;
-  dragging = true; lastX = e.clientX; lastY = e.clientY;
-});
-window.addEventListener('mousemove', e => {
-  if (!dragging) return;
-  wrap.scrollLeft -= e.clientX - lastX;
-  wrap.scrollTop -= e.clientY - lastY;
-  lastX = e.clientX; lastY = e.clientY;
-});
-window.addEventListener('mouseup', () => dragging = false);
-
-// =============== CONTROLS ===============
-function expandAll() {
-  nodes.forEach(n => {
-    const el = nodeEls[n.id];
-    if (el) el.classList.add('expanded');
+  // ── Scroll top button
+  const scrollBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    scrollBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
   });
-}
-function collapseAll() {
-  nodes.forEach(n => {
-    const el = nodeEls[n.id];
-    if (el) el.classList.remove('expanded');
-  });
-}
-function resetView() {
-  const rootN = nodeMap['root'];
-  if (rootN) {
-    wrap.scrollLeft = rootN.x - wrap.clientWidth/2 + rootN.w/2;
-    wrap.scrollTop = rootN.y - wrap.clientHeight/2 + rootN.h/2;
-  }
-}
 
-// =============== SEARCH ===============
-function handleSearch(q) {
-  q = q.toLowerCase().trim();
-  nodes.forEach(n => {
-    const el = nodeEls[n.id];
-    if (!q) { el.style.opacity = '1'; return; }
-    const match = n.title.toLowerCase().includes(q) ||
-      (n.sub||'').toLowerCase().includes(q) ||
-      (n.detail.que||'').toLowerCase().includes(q) ||
-      (n.detail.tags||[]).join(' ').toLowerCase().includes(q);
-    el.style.opacity = match ? '1' : '0.15';
+  // ── Open first section of each panel on tab switch
+  document.querySelectorAll('.tab-panel').forEach(panel => {
+    const firstSection = panel.querySelector('.section');
+    if (firstSection) firstSection.classList.add('open');
   });
-}
-
-// Auto center on load
-window.addEventListener('load', () => {
-  setTimeout(resetView, 300);
-});
 </script>
 </body>
 </html>
