@@ -23,59 +23,25 @@
     --accent-purple: #B06EF3;
     --border: rgba(200,168,90,0.2);
     --radius: 12px;
-    --shadow-soft: 0 24px 60px rgba(0,0,0,0.28);
-    --shell-width: 1380px;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     font-family: 'DM Sans', sans-serif;
-    background:
-      radial-gradient(circle at top left, rgba(74,158,255,0.12), transparent 26%),
-      radial-gradient(circle at top right, rgba(200,168,90,0.16), transparent 28%),
-      linear-gradient(180deg, #0b1016 0%, #101721 45%, #0d1117 100%);
+    background: var(--ink);
     color: var(--text);
     min-height: 100vh;
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
-    position: relative;
-  }
-
-  body::before,
-  body::after {
-    content: '';
-    position: fixed;
-    inset: auto;
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  body::before {
-    top: 96px;
-    left: -120px;
-    width: 320px;
-    height: 320px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(61,214,140,0.08), transparent 70%);
-  }
-
-  body::after {
-    right: -90px;
-    bottom: 10%;
-    width: 280px;
-    height: 280px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(176,110,243,0.08), transparent 70%);
   }
 
   /* ─── TOP BAR ─── */
   .topbar {
-    background: rgba(13,17,23,0.88);
-    backdrop-filter: blur(14px);
+    background: var(--ink);
     border-bottom: 1px solid rgba(200,168,90,0.12);
-    padding: 0 28px;
+    padding: 0 24px;
     height: 58px;
     display: flex;
     align-items: center;
@@ -142,71 +108,28 @@
     display: flex;
     flex: 1;
     min-height: calc(100vh - 58px);
-    width: min(var(--shell-width), calc(100% - 32px));
-    margin: 0 auto;
-    padding: 24px 0 40px;
-    gap: 24px;
-    align-items: flex-start;
   }
 
   /* ─── SIDEBAR ─── */
   .sidebar {
-    width: 256px;
+    width: 220px;
     flex-shrink: 0;
-    background: linear-gradient(180deg, rgba(26,35,50,0.94), rgba(19,25,32,0.96));
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 22px;
-    box-shadow: var(--shadow-soft);
+    background: var(--surface);
+    border-right: 1px solid rgba(255,255,255,0.05);
     position: sticky;
-    top: 82px;
-    height: calc(100vh - 106px);
+    top: 58px;
+    height: calc(100vh - 58px);
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--surface3) transparent;
-    padding: 18px 14px 24px;
+    padding: 12px 10px 32px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
   }
 
   .sidebar::-webkit-scrollbar { width: 3px; }
   .sidebar::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 2px; }
-
-  .sidebar-intro {
-    padding: 6px 8px 14px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    margin-bottom: 6px;
-  }
-
-  .sidebar-intro h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    color: var(--text);
-    margin-bottom: 6px;
-  }
-
-  .sidebar-intro p {
-    font-size: 0.78rem;
-    line-height: 1.55;
-    color: var(--text-muted);
-  }
-
-  .sidebar-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 12px;
-  }
-
-  .sidebar-meta span {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.06);
-    color: var(--text-muted);
-    border-radius: 999px;
-    padding: 4px 9px;
-    font-size: 0.68rem;
-    letter-spacing: 0.03em;
-  }
 
   .nav-group-label {
     font-size: 0.58rem;
@@ -214,11 +137,11 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--text-muted);
-    padding: 16px 8px 8px;
+    padding: 14px 8px 6px;
     display: flex;
     align-items: center;
     gap: 6px;
-    opacity: 0.68;
+    opacity: 0.5;
   }
 
   .nav-group-label:first-child { padding-top: 4px; }
@@ -249,15 +172,14 @@
     align-items: center;
     gap: 10px;
     width: 100%;
-    padding: 10px 12px;
-    border-radius: 12px;
-    transition: background 0.18s, border-color 0.18s, transform 0.18s;
-    border: 1px solid transparent;
+    padding: 8px 10px;
+    border-radius: 9px;
+    transition: background 0.18s;
   }
 
   .tab-btn .t-icon {
-    width: 34px; height: 34px;
-    border-radius: 10px;
+    width: 32px; height: 32px;
+    border-radius: 7px;
     background: var(--surface2);
     display: flex;
     align-items: center;
@@ -268,25 +190,18 @@
   }
 
   .tab-btn .t-label {
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     font-weight: 500;
     color: var(--text-muted);
     line-height: 1.3;
     transition: color 0.18s;
   }
 
-  .tab-btn:hover .tab-btn-inner {
-    background: rgba(255,255,255,0.03);
-    border-color: rgba(255,255,255,0.06);
-    transform: translateX(2px);
-  }
+  .tab-btn:hover .tab-btn-inner { background: var(--surface2); }
   .tab-btn:hover .t-label { color: var(--text); }
   .tab-btn:hover .t-icon { transform: scale(1.07); }
 
-  .tab-btn.active .tab-btn-inner {
-    background: rgba(200,168,90,0.1);
-    border-color: rgba(200,168,90,0.12);
-  }
+  .tab-btn.active .tab-btn-inner { background: rgba(200,168,90,0.1); }
   .tab-btn.active .t-icon {
     background: linear-gradient(135deg, rgba(200,168,90,0.28), rgba(200,168,90,0.12));
     box-shadow: 0 0 0 1px rgba(200,168,90,0.25);
@@ -305,190 +220,37 @@
   /* ─── MAIN CONTENT ─── */
   .content {
     flex: 1;
+    padding: 28px 32px;
     min-width: 0;
-    width: min(100%, 1080px);
-    padding: 0 0 8px;
-  }
-
-  .content-intro {
-    display: grid;
-    grid-template-columns: minmax(0, 1.7fr) minmax(280px, 0.9fr);
-    gap: 18px;
-    margin-bottom: 22px;
-  }
-
-  .content-lead,
-  .content-aside {
-    border-radius: 24px;
-    border: 1px solid rgba(255,255,255,0.06);
-    background: linear-gradient(180deg, rgba(26,35,50,0.88), rgba(19,25,32,0.92));
-    box-shadow: var(--shadow-soft);
-  }
-
-  .content-lead {
-    padding: 24px 28px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .content-lead::after {
-    content: '';
-    position: absolute;
-    right: -32px;
-    top: -24px;
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(200,168,90,0.14), transparent 72%);
-  }
-
-  .content-lead h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.6rem, 2vw, 2.1rem);
-    line-height: 1.1;
-    margin-bottom: 10px;
-    max-width: 14ch;
-  }
-
-  .content-lead p {
-    color: var(--text-muted);
-    font-size: 0.94rem;
-    line-height: 1.7;
-    max-width: 62ch;
-  }
-
-  .intro-chip-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 18px;
-  }
-
-  .intro-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    padding: 8px 12px;
-    border-radius: 999px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.06);
-    font-size: 0.76rem;
-    color: var(--text-muted);
-  }
-
-  .content-aside {
-    padding: 20px 22px;
-    display: grid;
-    gap: 14px;
-    align-content: start;
-  }
-
-  .content-aside h3 {
-    font-size: 0.76rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--gold);
-  }
-
-  .content-aside p {
-    font-size: 0.83rem;
-    color: var(--text-muted);
-    line-height: 1.6;
-  }
-
-  .aside-stat {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding-top: 12px;
-    border-top: 1px solid rgba(255,255,255,0.06);
-  }
-
-  .aside-stat strong {
-    font-size: 1.5rem;
-    font-family: 'Playfair Display', serif;
-    color: var(--text);
-  }
-
-  .aside-stat span {
-    font-size: 0.72rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-
-  .sidebar-backdrop {
-    display: none;
+    max-width: 920px;
   }
 
   /* ─── MOBILE ─── */
-  @media (max-width: 1100px) {
-    .app-shell {
-      width: min(var(--shell-width), calc(100% - 20px));
-      gap: 18px;
-    }
-
-    .sidebar {
-      width: 236px;
-    }
-
-    .content-intro {
-      grid-template-columns: 1fr;
-    }
-  }
-
   @media (max-width: 768px) {
     .menu-toggle { display: flex; }
     .topbar-badge { display: none; }
-    .topbar {
-      padding: 0 16px;
-    }
-    .app-shell {
-      width: 100%;
-      padding: 18px 14px 28px;
-      gap: 0;
-    }
     .sidebar {
       position: fixed;
-      left: -280px;
+      left: -240px;
       top: 58px;
       z-index: 150;
-      width: min(260px, calc(100vw - 44px));
-      height: calc(100vh - 58px);
+      width: 220px;
       transition: left 0.3s ease;
-      box-shadow: 20px 0 40px rgba(0,0,0,0.45);
-      border-radius: 0 22px 22px 0;
+      box-shadow: 4px 0 30px rgba(0,0,0,0.5);
     }
     .sidebar.open { left: 0; }
-    .sidebar-backdrop {
-      position: fixed;
-      inset: 58px 0 0;
-      background: rgba(7,10,14,0.58);
-      backdrop-filter: blur(4px);
-      z-index: 140;
-    }
-    .sidebar-backdrop.visible {
-      display: block;
-    }
-    .content {
-      width: 100%;
-    }
-    .content-intro {
-      gap: 14px;
-      margin-bottom: 18px;
-    }
-    .content-lead,
-    .content-aside {
-      border-radius: 20px;
-    }
-    .content-lead {
-      padding: 22px 20px;
-    }
+    .content { padding: 20px 16px; }
   }
 
 
 
   /* ─── CONTENT ─── */
+  .content {
+    padding: 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
   .tab-panel { display: none; }
   .tab-panel.active {
     display: block;
@@ -504,12 +266,11 @@
   .panel-hero {
     background: linear-gradient(135deg, var(--surface2) 0%, var(--surface) 100%);
     border: 1px solid var(--border);
-    border-radius: 24px;
-    padding: 30px 34px;
+    border-radius: var(--radius);
+    padding: 28px 32px;
     margin-bottom: 24px;
     position: relative;
     overflow: hidden;
-    box-shadow: var(--shadow-soft);
   }
 
   .panel-hero::before {
@@ -939,6 +700,91 @@
   }
   #scrollTop:hover { transform: scale(1.1); }
 
+
+  /* ─── DEFINITION LIST ITEMS ─── */
+  .def-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 6px;
+  }
+
+  .def-item {
+    border-radius: 7px;
+    background: var(--surface);
+    border: 1px solid rgba(255,255,255,0.05);
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .def-item:hover {
+    border-color: rgba(200,168,90,0.2);
+  }
+
+  .def-item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 10px;
+    cursor: pointer;
+    user-select: none;
+    gap: 8px;
+  }
+
+  .def-item-header .di-term {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .def-item-header .di-term::before {
+    content: '';
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .def-item-header .di-arrow {
+    font-size: 10px;
+    color: var(--text-muted);
+    transition: transform 0.25s;
+    flex-shrink: 0;
+  }
+
+  .def-item.open .di-arrow {
+    transform: rotate(180deg);
+  }
+
+  .def-item-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: 0 10px;
+  }
+
+  .def-item.open .def-item-body {
+    max-height: 200px;
+    padding: 0 10px 9px;
+  }
+
+  .def-item-body p {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 7px;
+  }
+
+  .def-item-body p strong {
+    color: var(--accent-blue);
+  }
+
 </style>
 </head>
 <body>
@@ -951,7 +797,7 @@
     <p>Guía de Estudio · Concurso Abierto de Méritos 2024-2026</p>
   </div>
   <div class="topbar-badge">CGR · U. Antioquia</div>
-  <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú de temas" aria-expanded="false">☰</button>
+  <button class="menu-toggle" id="menuToggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
 </div>
 
 <!-- APP SHELL -->
@@ -959,16 +805,6 @@
 
 <!-- SIDEBAR -->
 <nav class="sidebar" id="sidebar">
-
-  <div class="sidebar-intro">
-    <h2>Mapa de estudio</h2>
-    <p>Navega por los ejes temáticos y usa cada panel como una ficha de repaso rápida, visual y ordenada.</p>
-    <div class="sidebar-meta">
-      <span>11 temas</span>
-      <span>Repaso modular</span>
-      <span>Uso móvil</span>
-    </div>
-  </div>
 
   <div class="nav-group-label">Básicas</div>
   <button class="tab-btn active" data-tab="constitucion">
@@ -1011,28 +847,8 @@
 
 </nav>
 
-<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
-
 <!-- PANELS -->
 <div class="content">
-
-<section class="content-intro" aria-label="Resumen de navegación">
-  <div class="content-lead">
-    <h2>Guía visual para estudiar sin perder el hilo</h2>
-    <p>La interfaz quedó reorganizada para separar mejor la navegación, el contexto general y los bloques de contenido. Cada tema conserva su información, pero ahora la lectura es más estable y la estructura se entiende más rápido.</p>
-    <div class="intro-chip-row">
-      <span class="intro-chip">⚖️ Base normativa clara</span>
-      <span class="intro-chip">🧭 Navegación lateral fija</span>
-      <span class="intro-chip">📚 Paneles con mejor jerarquía</span>
-    </div>
-  </div>
-  <aside class="content-aside">
-    <h3>Cómo recorrerla</h3>
-    <p>Empieza por las competencias básicas, luego pasa a las específicas y termina en la parte comportamental. En móvil, el menú lateral se abre y se cierra sin dejar elementos flotando encima del contenido.</p>
-    <div class="aside-stat"><strong>3</strong><span>bloques de navegación</span></div>
-    <div class="aside-stat"><strong>11</strong><span>temas activos</span></div>
-  </aside>
-</section>
 
 <!-- ── 1. CONSTITUCIÓN POLÍTICA ── -->
 <div class="tab-panel active" id="panel-constitucion">
@@ -1066,24 +882,96 @@
       <div class="grid2">
         <div class="mini-card">
           <div class="mc-title">Principios del Art. 1</div>
-          <ul>
-            <li>Estado Social de Derecho</li>
-            <li>Forma de república unitaria</li>
-            <li>Descentralización</li>
-            <li>Autonomía de entidades territoriales</li>
-            <li>Democrática, participativa y pluralista</li>
-            <li>Fundada en el trabajo y la dignidad humana</li>
+          <ul class="def-list">
+            <li class="def-item">
+              <div class="def-item-header" onclick="toggleDef(this)">
+                <span class="di-term">Estado Social de Derecho</span>
+                <span class="di-arrow">▼</span>
+              </div>
+              <div class="def-item-body"><p>El Estado no solo respeta los derechos, sino que actúa activamente para garantizar condiciones mínimas de vida digna. Va más allá del simple cumplimiento de la ley: incluye justicia social.</p></div>
+            </li>
+            <li class="def-item">
+              <div class="def-item-header" onclick="toggleDef(this)">
+                <span class="di-term">Forma de república unitaria</span>
+                <span class="di-arrow">▼</span>
+              </div>
+              <div class="def-item-body"><p>Hay un solo centro de poder político (el gobierno nacional). Aunque existen departamentos y municipios, la Constitución y las leyes nacionales tienen primacía sobre todos ellos.</p></div>
+            </li>
+            <li class="def-item">
+              <div class="def-item-header" onclick="toggleDef(this)">
+                <span class="di-term">Descentralización</span>
+                <span class="di-arrow">▼</span>
+              </div>
+              <div class="def-item-body"><p>Transferencia de funciones, recursos y competencias del gobierno central hacia entidades territoriales (departamentos, municipios), para acercar la gestión pública a los ciudadanos.</p></div>
+            </li>
+            <li class="def-item">
+              <div class="def-item-header" onclick="toggleDef(this)">
+                <span class="di-term">Autonomía de entidades territoriales</span>
+                <span class="di-arrow">▼</span>
+              </div>
+              <div class="def-item-body"><p>Departamentos y municipios tienen capacidad de gobernarse, administrar sus recursos y ejercer competencias propias, dentro de los límites fijados por la Constitución.</p></div>
+            </li>
+            <li class="def-item">
+              <div class="def-item-header" onclick="toggleDef(this)">
+                <span class="di-term">Democrática, participativa y pluralista</span>
+                <span class="di-arrow">▼</span>
+              </div>
+              <div class="def-item-body"><p><strong>Democrática:</strong> el poder emana del pueblo. <strong>Participativa:</strong> los ciudadanos intervienen en las decisiones (voto, consultas, veedurías). <strong>Pluralista:</strong> respeta la diversidad de ideas, culturas y credos.</p></div>
+            </li>
+            <li class="def-item">
+              <div class="def-item-header" onclick="toggleDef(this)">
+                <span class="di-term">Fundada en el trabajo y la dignidad humana</span>
+                <span class="di-arrow">▼</span>
+              </div>
+              <div class="def-item-body"><p>El trabajo es el eje del orden económico y social. La dignidad humana es el valor supremo: ninguna persona puede ser tratada como medio, siempre como fin en sí misma.</p></div>
+            </li>
           </ul>
         </div>
         <div class="mini-card">
           <div class="mc-title">Valores supremos (Preámbulo)</div>
-          <ul>
-            <li>Justicia</li>
-            <li>Libertad</li>
-            <li>Paz</li>
-            <li>Igualdad</li>
-            <li>Conocimiento</li>
-            <li>Fraternidad</li>
+          <ul class="def-list">
+            <li class="def-item">
+              <div class="def-item-header" onclick="toggleDef(this)">
+                <span class="di-term">Justicia</span>
+                <span class="di-arrow">▼</span>
+              </div>
+              <div class="def-item-body"><p>Dar a cada quien lo que le corresponde según la ley y la equidad. El Estado debe garantizar que sus decisiones y normas sean justas y razonables.</p></div>
+            </li>
+            <li class="def-item">
+              <div class="def-item-header" onclick="toggleDef(this)">
+                <span class="di-term">Libertad</span>
+                <span class="di-arrow">▼</span>
+              </div>
+              <div class="def-item-body"><p>Facultad de las personas para actuar y decidir sin interferencias arbitrarias. El Estado la protege pero también puede limitarla cuando afecta derechos de otros.</p></div>
+            </li>
+            <li class="def-item">
+              <div class="def-item-header" onclick="toggleDef(this)">
+                <span class="di-term">Paz</span>
+                <span class="di-arrow">▼</span>
+              </div>
+              <div class="def-item-body"><p>Derecho y deber de convivir sin violencia. La Constitución del 91 nació del deseo de superar el conflicto armado. Es un derecho fundamental (Art. 22) y un fin del Estado.</p></div>
+            </li>
+            <li class="def-item">
+              <div class="def-item-header" onclick="toggleDef(this)">
+                <span class="di-term">Igualdad</span>
+                <span class="di-arrow">▼</span>
+              </div>
+              <div class="def-item-body"><p>Todas las personas son iguales ante la ley (Art. 13). Implica no discriminar por sexo, raza, religión, origen. Incluye igualdad formal (misma ley) y material (acciones afirmativas para los más vulnerables).</p></div>
+            </li>
+            <li class="def-item">
+              <div class="def-item-header" onclick="toggleDef(this)">
+                <span class="di-term">Conocimiento</span>
+                <span class="di-arrow">▼</span>
+              </div>
+              <div class="def-item-body"><p>El acceso a la educación y al saber es un valor fundacional del Estado. El conocimiento es la base del desarrollo, la democracia y la autonomía ciudadana.</p></div>
+            </li>
+            <li class="def-item">
+              <div class="def-item-header" onclick="toggleDef(this)">
+                <span class="di-term">Fraternidad</span>
+                <span class="di-arrow">▼</span>
+              </div>
+              <div class="def-item-body"><p>Solidaridad entre los miembros de la sociedad. Principio que fundamenta la cooperación, el respeto mutuo y la responsabilidad social de los ciudadanos y del Estado.</p></div>
+            </li>
           </ul>
         </div>
       </div>
@@ -1113,23 +1001,23 @@
         <div class="fb-title">🧒 Explicación Feynman</div>
         <p>Son como "superpoderes" que tienes solo por ser persona. Nadie te los puede quitar, ni el Estado. Existir, pensar, hablar, votar, creer… todo eso es tuyo desde que naces.</p>
       </div>
-      <div class="pill-list">
-        <span class="pill gold">Vida (Art.11)</span>
-        <span class="pill blue">Igualdad (Art.13)</span>
-        <span class="pill blue">Intimidad (Art.15)</span>
-        <span class="pill blue">Libre desarrollo (Art.16)</span>
-        <span class="pill blue">Libertad de expresión (Art.20)</span>
-        <span class="pill blue">Trabajo (Art.25)</span>
-        <span class="pill blue">Educación (Art.67)</span>
-        <span class="pill green">Debido proceso (Art.29)</span>
-        <span class="pill green">Habeas Corpus (Art.30)</span>
-        <span class="pill purple">Petición (Art.23)</span>
-      </div>
       <div class="info-block">
-        <strong>Clasificación de derechos:</strong><br>
-        • <strong>1ª generación</strong>: Civiles y políticos (vida, libertad, propiedad).<br>
-        • <strong>2ª generación</strong>: Económicos, sociales y culturales (trabajo, educación, salud).<br>
-        • <strong>3ª generación</strong>: Colectivos y del ambiente (paz, salubridad pública, espacio público).
+        <strong>Clasificación de derechos — con su significado:</strong><br><br>
+        <strong>1ª generación (Civiles y Políticos):</strong> surgieron para proteger al individuo del abuso del Estado. Son de aplicación inmediata.<br>
+        • <strong>Vida (Art. 11):</strong> nadie puede ser privado de la vida; incluye la prohibición de la pena de muerte en Colombia.<br>
+        • <strong>Igualdad (Art. 13):</strong> todas las personas nacen libres e iguales; el Estado debe promover condiciones reales de igualdad para los grupos marginados.<br>
+        • <strong>Intimidad y habeas data (Art. 15):</strong> derecho a la privacidad personal, familiar y de comunicaciones; y a controlar la información personal en bases de datos.<br>
+        • <strong>Libre desarrollo de la personalidad (Art. 16):</strong> cada quien puede vivir como desee sin más límites que los derechos ajenos y el orden jurídico.<br>
+        • <strong>Libertad de expresión (Art. 20):</strong> opinar, informar y recibir información libremente; no existe censura previa.<br>
+        • <strong>Petición (Art. 23):</strong> presentar solicitudes respetuosas a las autoridades y recibir respuesta oportuna (máximo 15 días hábiles).<br>
+        • <strong>Debido proceso (Art. 29):</strong> nadie puede ser juzgado sino conforme a leyes preexistentes, ante juez competente y con todas las garantías (derecho a defensa, presunción de inocencia, publicidad).<br>
+        • <strong>Habeas corpus (Art. 30):</strong> si alguien es capturado ilegalmente puede pedir su libertad inmediata; el juez debe resolverlo en 36 horas.<br><br>
+        <strong>2ª generación (Económicos, Sociales y Culturales):</strong> obligan al Estado a actuar para garantizar bienestar.<br>
+        • <strong>Trabajo (Art. 25):</strong> derecho a una ocupación digna; el Estado debe crear condiciones para el empleo y proteger al trabajador.<br>
+        • <strong>Educación (Art. 67):</strong> la educación es un derecho y un servicio público; es obligatoria entre los 5 y los 15 años y gratuita en instituciones del Estado.<br><br>
+        <strong>3ª generación (Colectivos y del Ambiente):</strong> pertenecen a la comunidad en su conjunto.<br>
+        • <strong>Paz (Art. 22):</strong> derecho y deber de todos; sin ella no pueden ejercerse los demás derechos.<br>
+        • <strong>Salubridad pública, espacio público, medio ambiente:</strong> protegidos mediante acciones populares (Art. 88).
       </div>
       <div class="highlight-box">
         <div class="hb-title">⚡ Clave para el examen</div>
@@ -1220,29 +1108,28 @@
     <div class="section-body">
       <div class="grid2">
         <div class="mini-card">
-          <div class="mc-title">🏙️ Nivel Central (Bogotá)</div>
+          <div class="mc-title">🏙️ Nivel Central — Quién es y qué hace</div>
           <ul>
-            <li>Contralor General de la República</li>
-            <li>Despacho del Vicecontralor</li>
-            <li>Oficina Jurídica</li>
-            <li>Oficina de Planeación</li>
-            <li>Oficina de Control Interno</li>
-            <li>Contralorías Delegadas Sectoriales</li>
-            <li>DIARI — Analítica de datos</li>
-            <li>Áreas de Resp. Fiscal y Sancionatoria</li>
-            <li>Secretaría General / Apoyo</li>
+            <li><strong>Contralor General:</strong> máxima autoridad de la CGR; elegido por el Congreso para un periodo de 4 años. Dirige, representa y toma las decisiones estratégicas de la entidad.</li>
+            <li><strong>Vicecontralor:</strong> apoya al Contralor y lo reemplaza en su ausencia; coordina las dependencias misionales del nivel central.</li>
+            <li><strong>Oficina Jurídica:</strong> asesora en interpretación de normas, conceptúa sobre legalidad de actuaciones y representa a la CGR en procesos judiciales.</li>
+            <li><strong>Oficina de Planeación:</strong> formula el plan estratégico institucional, define metas, indicadores y gestiona el presupuesto interno de la CGR.</li>
+            <li><strong>Oficina de Control Interno:</strong> audita internamente a la propia CGR; verifica que sus procesos sean eficientes, transparentes y cumplan la normatividad.</li>
+            <li><strong>Contralorías Delegadas Sectoriales:</strong> unidades especializadas por sector (salud, infraestructura, ambiente, regalías, etc.) que realizan auditorías a ministerios y entidades nacionales.</li>
+            <li><strong>DIARI:</strong> Dirección de Información, Análisis y Reacción Inmediata; usa Big Data y analítica para detectar riesgos de corrupción en tiempo real antes de que se consoliden.</li>
+            <li><strong>Áreas de Resp. Fiscal y Sancionatoria:</strong> adelantan los procesos formales cuando se detecta daño al patrimonio público; profieren fallos y ejecutan el cobro coactivo.</li>
+            <li><strong>Secretaría General / Apoyo:</strong> gestiona talento humano, tecnología, logística y finanzas internas que permiten operar a toda la entidad.</li>
           </ul>
         </div>
         <div class="mini-card">
-          <div class="mc-title">🗺️ Nivel Desconcentrado</div>
+          <div class="mc-title">🗺️ Nivel Desconcentrado — Quién es y qué hace</div>
           <ul>
-            <li>Gerencias Departamentales (32+)</li>
-            <li>Gerencias Nacionales Sectoriales</li>
-            <li>Presencia en todos los dpts. del país</li>
-            <li>Auditan entidades territoriales</li>
-            <li>Ejecutan procesos de resp. fiscal</li>
-            <li>Articulan control ciudadano</li>
-            <li>Aplican metodología del nivel central</li>
+            <li><strong>Gerencias Departamentales (32+):</strong> oficinas de la CGR en cada departamento del país; son los "ojos" de la Contraloría en el territorio; auditan gobernaciones, alcaldías y entidades regionales.</li>
+            <li><strong>Gerencias Nacionales Sectoriales:</strong> se especializan en sectores estratégicos con presencia en todo el país (ej. regalías, agropecuario), sin importar la ubicación geográfica de los sujetos de control.</li>
+            <li><strong>Auditorías territoriales:</strong> revisan cómo gobernaciones y alcaldías gastan los recursos del SGP (Sistema General de Participaciones) y el SGR (Sistema General de Regalías).</li>
+            <li><strong>Procesos de responsabilidad fiscal:</strong> las gerencias departamentales pueden abrir y fallar procesos de responsabilidad fiscal contra servidores locales que causen daño patrimonial.</li>
+            <li><strong>Control ciudadano local:</strong> articulan con veedurías ciudadanas regionales y reciben denuncias de la ciudadanía en cada territorio.</li>
+            <li><strong>Aplicación de metodología central:</strong> no inventan sus propias formas de auditar; siguen los lineamientos técnicos, manuales y guías que define el nivel central en Bogotá.</li>
           </ul>
         </div>
       </div>
@@ -1346,22 +1233,22 @@
       </div>
       <div class="grid2">
         <div class="mini-card">
-          <div class="mc-title">📬 Gestión de Comunicaciones</div>
+          <div class="mc-title">📬 Gestión de Comunicaciones — Con su significado</div>
           <ul>
-            <li>Radicación y registro de entrada/salida</li>
-            <li>Distribución interna y externa</li>
-            <li>Control de términos de respuesta</li>
-            <li>Número único de radicado</li>
-            <li>Trazabilidad del documento</li>
-            <li>Sistema de gestión documental (SGDEA)</li>
+            <li><strong>Radicación y registro de entrada/salida:</strong> todo documento que ingresa o sale de la entidad recibe un número único (radicado) con fecha y hora exacta; esto garantiza que ningún documento "desaparezca" sin trazabilidad.</li>
+            <li><strong>Distribución interna y externa:</strong> proceso por el cual el documento radicado llega físicamente o digitalmente al funcionario o área responsable de tramitarlo.</li>
+            <li><strong>Control de términos de respuesta:</strong> vigilar que los documentos se respondan dentro de los plazos legales (ej. peticiones: 15 días hábiles). Los incumplimientos generan responsabilidad disciplinaria.</li>
+            <li><strong>Número único de radicado:</strong> código irrepetible que identifica a cada documento dentro del sistema; permite buscarlo, consultarlo y hacer seguimiento en cualquier momento.</li>
+            <li><strong>Trazabilidad del documento:</strong> capacidad de saber en qué estado está cada documento: quién lo tiene, qué se ha hecho con él y cuándo se actuó. Es clave para la transparencia.</li>
+            <li><strong>SGDEA (Sistema de Gestión de Documentos Electrónicos de Archivo):</strong> plataforma tecnológica que gestiona, almacena y controla documentos electrónicos con valor legal; reemplaza el papel físico y garantiza autenticidad e integridad.</li>
           </ul>
         </div>
         <div class="mini-card">
-          <div class="mc-title">📂 Tipos de Archivo</div>
+          <div class="mc-title">📂 Tipos de Archivo — Con su significado</div>
           <ul>
-            <li><strong>Archivo de Gestión:</strong> Oficina que produce el doc. (1–2 años)</li>
-            <li><strong>Archivo Central:</strong> Entidad — uso frecuente (2–20 años)</li>
-            <li><strong>Archivo Histórico:</strong> Conservación permanente</li>
+            <li><strong>Archivo de Gestión (1–2 años):</strong> es la "bandeja activa" de la oficina que produce el documento. Aquí están los expedientes del trámite en curso o recién terminado. Cada área de la entidad tiene el suyo.</li>
+            <li><strong>Archivo Central (2–20 años):</strong> cuando el trámite termina, los documentos se transfieren aquí. Son menos consultados pero aún vigentes para consultas legales, auditorías o referencias. Es el almacén institucional de la entidad.</li>
+            <li><strong>Archivo Histórico (permanente):</strong> documentos que por su valor histórico, cultural, científico o legal se conservan para siempre. Nadie los puede eliminar. Aquí llegan los fondos de mayor relevancia para la memoria del Estado.</li>
           </ul>
         </div>
       </div>
@@ -1391,13 +1278,14 @@
         <div class="hb-title">⚡ Principios archivísticos clave</div>
         <p><strong>Principio de procedencia:</strong> cada documento debe conservarse en el fondo de la entidad que lo produjo — no se mezclan fondos de entidades distintas. <strong>Principio de orden original:</strong> dentro de cada fondo, los documentos se conservan en el orden en que fueron producidos y tramitados.</p>
       </div>
-      <div class="pill-list">
-        <span class="pill gold">Fondo documental</span>
-        <span class="pill blue">Sección</span>
-        <span class="pill blue">Subsección</span>
-        <span class="pill green">Serie documental</span>
-        <span class="pill green">Subserie</span>
-        <span class="pill purple">Tipo documental</span>
+      <div class="info-block">
+        <strong>Jerarquía archivística — de mayor a menor:</strong><br><br>
+        <strong>Fondo documental:</strong> conjunto total de documentos producidos por una entidad a lo largo de su existencia. Ej: el Fondo de la Contraloría General de la República.<br>
+        <strong>Sección:</strong> división del fondo que corresponde a una dependencia o unidad administrativa mayor de la entidad. Ej: Despacho del Contralor, Secretaría General.<br>
+        <strong>Subsección:</strong> subdivisión de la sección; corresponde a una unidad menor o grupo de trabajo. Ej: Grupo de Gestión Humana dentro de la Secretaría General.<br>
+        <strong>Serie documental:</strong> conjunto de documentos del mismo tipo producidos en el ejercicio de una misma función. Ej: "Contratos de prestación de servicios", "Resoluciones", "Actas de comité".<br>
+        <strong>Subserie:</strong> subdivide la serie cuando hay variaciones relevantes. Ej: dentro de "Contratos" puede haber subseries de "Contratos de obra", "Contratos de consultoría".<br>
+        <strong>Tipo documental:</strong> la unidad más pequeña; el documento individual con características propias. Ej: una resolución específica, una carta, un acta determinada.
       </div>
     </div>
   </div>
@@ -1434,26 +1322,26 @@
       <div class="grid2">
         <div class="mini-card">
           <div class="mc-title">✅ Deberes (Art. 34)</div>
-          <ul>
-            <li>Cumplir la C.P. y leyes</li>
-            <li>Desempeñar el cargo con diligencia</li>
-            <li>Responder por sus actuaciones</li>
-            <li>Tratar con respeto a los ciudadanos</li>
-            <li>Guardar reserva de la información</li>
-            <li>Denunciar actos de corrupción</li>
-            <li>Cumplir el horario de trabajo</li>
+          <ul class="def-list">
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Cumplir la C.P. y leyes</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Todo servidor debe actuar dentro del marco legal. Sus actos deben tener fundamento constitucional y legal. Actuar sin competencia o contra la ley es una falta disciplinaria.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Desempeñar el cargo con diligencia</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Ejercer las funciones con cuidado, esmero y oportunidad. No basta con hacer el trabajo — debe hacerse bien y a tiempo.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Responder por sus actuaciones</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>El servidor es responsable de las consecuencias de sus decisiones. No puede escudarse en órdenes superiores para evadir responsabilidad por actos ilegales.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Tratar con respeto a los ciudadanos</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>La atención al ciudadano debe ser digna, cortés y oportuna. Maltratar o discriminar a un ciudadano constituye falta disciplinaria.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Guardar reserva de la información</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>La información que se conoce en ejercicio del cargo es confidencial. Revelarla sin autorización viola el deber funcional y puede constituir delito.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Denunciar actos de corrupción</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Al conocer actos que puedan constituir corrupción, el servidor tiene el deber legal de reportarlos ante las autoridades competentes. Callar también es una falta.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Cumplir el horario de trabajo</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Asistir puntualmente y durante la jornada completa. Las ausencias sin justificación o el abandono del puesto son faltas disciplinarias.</p></div></li>
           </ul>
         </div>
         <div class="mini-card">
           <div class="mc-title">🚫 Prohibiciones (Art. 35)</div>
-          <ul>
-            <li>Incumplir deberes funcionales</li>
-            <li>Extralimitarse en funciones</li>
-            <li>Usar cargo para fines personales</li>
-            <li>Omitir o retardar trámites</li>
-            <li>Recibir dadivas o regalos</li>
-            <li>Amenazar ciudadanos</li>
-            <li>Causar daño a bienes del Estado</li>
+          <ul class="def-list">
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Incumplir deberes funcionales</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>No hacer lo que el cargo exige constituye falta. No se requiere que el incumplimiento cause daño — basta con que se deje de hacer lo que la norma ordena.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Extralimitarse en funciones</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Actuar más allá de las competencias asignadas. En el derecho público solo se puede hacer lo que la ley expresamente autoriza.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Usar cargo para fines personales</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Aprovechar la posición oficial para obtener beneficios propios o para terceros. Es una de las formas más comunes de corrupción.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Omitir o retardar trámites</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Dejar de tramitar o dilatar sin justificación peticiones, procesos o documentos que deben resolverse en términos legales. Viola el derecho de petición.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Recibir dádivas o regalos</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Aceptar beneficios (dinero, regalos, viajes, comidas) de personas que tengan interés en las decisiones del servidor compromete su imparcialidad.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Amenazar ciudadanos</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Intimidar, coaccionar o presionar a ciudadanos para que actúen de determinada manera. Viola la dignidad humana y el Estado de Derecho.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Causar daño a bienes del Estado</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Destruir, deteriorar, perder o sustraer bienes públicos. Puede generar responsabilidad disciplinaria, fiscal y penal de forma simultánea.</p></div></li>
           </ul>
         </div>
       </div>
@@ -1524,27 +1412,27 @@
     <div class="section-body">
       <div class="grid2">
         <div class="mini-card">
-          <div class="mc-title">Funciones clave</div>
+          <div class="mc-title">Funciones clave de Word — Con su significado</div>
           <ul>
-            <li>Formatos y estilos de texto</li>
-            <li>Tablas e imágenes</li>
-            <li>Tabla de contenido automática</li>
-            <li>Combinación de correspondencia</li>
-            <li>Control de cambios y comentarios</li>
-            <li>Macros y plantillas</li>
-            <li>Encabezados, pies de página, numeración</li>
+            <li><strong>Formatos y estilos de texto:</strong> aplicar jerarquía visual al documento (Título 1, Título 2, Normal); los estilos permiten cambiar todo el formato del documento con un solo clic y son la base para generar tablas de contenido automáticas.</li>
+            <li><strong>Tablas e imágenes:</strong> organizar datos en filas y columnas dentro del documento; insertar gráficos o imágenes con texto integrado. Las tablas se usan para comparativos, cronogramas y formatos oficiales.</li>
+            <li><strong>Tabla de contenido automática:</strong> Word genera el índice del documento automáticamente usando los títulos; si el documento cambia, se actualiza con un clic. Indispensable en informes y estudios largos.</li>
+            <li><strong>Combinación de correspondencia (Mail Merge):</strong> genera múltiples cartas personalizadas a partir de una plantilla y una base de datos; por ejemplo, 500 comunicaciones distintas con un solo documento modelo.</li>
+            <li><strong>Control de cambios y comentarios:</strong> herramienta para revisión colaborativa; cada modificación queda registrada con el nombre del autor; los comentarios permiten sugerir sin modificar el texto original.</li>
+            <li><strong>Macros y plantillas:</strong> una macro automatiza tareas repetitivas (ej. siempre aplicar el mismo encabezado); una plantilla es un modelo preconfigurado para crear documentos estandarizados.</li>
+            <li><strong>Encabezados, pies de página y numeración:</strong> elementos que aparecen en todas las páginas (logo, nombre entidad, número de página); imprescindibles en documentos oficiales para trazabilidad y presentación formal.</li>
           </ul>
         </div>
         <div class="mini-card">
-          <div class="mc-title">Atajos esenciales</div>
+          <div class="mc-title">Atajos esenciales — Qué hace cada uno</div>
           <ul>
-            <li><code>Ctrl+B</code> Negrita</li>
-            <li><code>Ctrl+K</code> Cursiva</li>
-            <li><code>Ctrl+Z</code> Deshacer</li>
-            <li><code>Ctrl+F</code> Buscar</li>
-            <li><code>Ctrl+H</code> Reemplazar</li>
-            <li><code>F7</code> Revisar ortografía</li>
-            <li><code>Ctrl+Enter</code> Salto de página</li>
+            <li><code>Ctrl+B</code> <strong>Negrita:</strong> pone en negrilla el texto seleccionado para destacarlo.</li>
+            <li><code>Ctrl+K</code> <strong>Cursiva:</strong> aplica formato itálico; se usa para citas, términos técnicos o énfasis.</li>
+            <li><code>Ctrl+Z</code> <strong>Deshacer:</strong> revierte la última acción realizada; permite corregir errores sin rehacer todo el trabajo.</li>
+            <li><code>Ctrl+F</code> <strong>Buscar:</strong> abre el panel de búsqueda para encontrar palabras dentro del documento.</li>
+            <li><code>Ctrl+H</code> <strong>Buscar y reemplazar:</strong> encuentra una palabra y la reemplaza por otra en todo el documento de una sola vez.</li>
+            <li><code>F7</code> <strong>Revisar ortografía:</strong> inicia la revisión ortográfica y gramatical del documento completo.</li>
+            <li><code>Ctrl+Enter</code> <strong>Salto de página:</strong> fuerza el inicio de una nueva página en el punto donde está el cursor; útil para separar secciones.</li>
           </ul>
         </div>
       </div>
@@ -1562,26 +1450,26 @@
     <div class="section-body">
       <div class="grid2">
         <div class="mini-card">
-          <div class="mc-title">Fórmulas esenciales</div>
+          <div class="mc-title">Fórmulas esenciales — Con su uso real</div>
           <ul>
-            <li><code>=SUMA()</code> Sumar rangos</li>
-            <li><code>=PROMEDIO()</code> Media aritmética</li>
-            <li><code>=CONTAR.SI()</code> Contar con criterio</li>
-            <li><code>=BUSCARV()</code> Buscar en tabla</li>
-            <li><code>=SI()</code> Condicional lógico</li>
-            <li><code>=CONCATENAR()</code> Unir textos</li>
-            <li><code>=TEXTO()</code> Formatear valores</li>
+            <li><code>=SUMA(A1:A10)</code> <strong>Suma:</strong> suma todos los valores en el rango indicado. Ej: total de contratos ejecutados en un mes.</li>
+            <li><code>=PROMEDIO(B1:B50)</code> <strong>Promedio:</strong> calcula la media aritmética. Ej: promedio de días que tarda resolver una petición.</li>
+            <li><code>=CONTAR.SI(C1:C100,"Bogotá")</code> <strong>Contar con criterio:</strong> cuenta celdas que cumplen una condición. Ej: cuántos contratos son de Bogotá.</li>
+            <li><code>=BUSCARV(valor, tabla, col, 0)</code> <strong>Buscar vertical:</strong> busca un valor en la primera columna de una tabla y devuelve el dato de otra columna. Ej: buscar el nombre del contratista por su NIT.</li>
+            <li><code>=SI(D2>1000000,"Alto","Bajo")</code> <strong>Condicional:</strong> evalúa una condición y devuelve un resultado u otro. Ej: clasificar contratos por monto.</li>
+            <li><code>=CONCATENAR(E2," ",F2)</code> <strong>Unir textos:</strong> une el contenido de varias celdas en una sola. Ej: unir nombre y apellido en un campo.</li>
+            <li><code>=TEXTO(G2,"dd/mm/aaaa")</code> <strong>Formatear valores:</strong> convierte un número o fecha en texto con formato específico. Ej: mostrar fechas en formato colombiano.</li>
           </ul>
         </div>
         <div class="mini-card">
-          <div class="mc-title">Herramientas de análisis</div>
+          <div class="mc-title">Herramientas de análisis — Con su significado</div>
           <ul>
-            <li>Tablas dinámicas (Pivot Tables)</li>
-            <li>Filtros automáticos y avanzados</li>
-            <li>Gráficas estadísticas</li>
-            <li>Formato condicional</li>
-            <li>Validación de datos</li>
-            <li>Protección de hojas</li>
+            <li><strong>Tablas dinámicas (Pivot Tables):</strong> resumen y cruzan grandes volúmenes de datos sin fórmulas; permiten ver totales por categoría, departamento, mes, etc. con solo arrastrar campos. Son la herramienta más poderosa de Excel para análisis.</li>
+            <li><strong>Filtros automáticos y avanzados:</strong> muestran solo las filas que cumplen ciertos criterios; los avanzados permiten filtrar por múltiples condiciones complejas simultáneamente.</li>
+            <li><strong>Gráficas estadísticas:</strong> representan visualmente los datos (barras, líneas, pastel, dispersión); facilitan la interpretación y comunicación de resultados en informes.</li>
+            <li><strong>Formato condicional:</strong> cambia automáticamente el color de una celda según su valor; ej. colorear en rojo los contratos vencidos, en verde los activos.</li>
+            <li><strong>Validación de datos:</strong> restringe el tipo de dato que se puede ingresar en una celda (solo fechas, solo números positivos, solo opciones de una lista); evita errores de captura.</li>
+            <li><strong>Protección de hojas:</strong> bloquea celdas o rangos para que otros usuarios no puedan modificar fórmulas o datos sensibles; útil en formularios y plantillas oficiales.</li>
           </ul>
         </div>
       </div>
@@ -1599,25 +1487,25 @@
     <div class="section-body">
       <div class="grid2">
         <div class="mini-card">
-          <div class="mc-title">PowerPoint</div>
+          <div class="mc-title">PowerPoint — Con su significado</div>
           <ul>
-            <li>Diseño de diapositivas con patrones</li>
-            <li>Animaciones y transiciones</li>
-            <li>SmartArt y gráficas</li>
-            <li>Insertar video y audio</li>
-            <li>Presentación con narración</li>
-            <li>Exportar a PDF o video</li>
+            <li><strong>Diseño con patrones (Patrón de diapositivas):</strong> plantilla maestra que define colores, fuentes y posición de elementos en todas las diapositivas; garantiza coherencia visual y ahorra tiempo al hacer cambios globales.</li>
+            <li><strong>Animaciones y transiciones:</strong> las animaciones mueven objetos dentro de una diapositiva (aparece el texto, entra un gráfico); las transiciones controlan cómo se pasa de una diapositiva a la siguiente. Deben usarse con moderación en contextos formales.</li>
+            <li><strong>SmartArt:</strong> gráficos prediseñados para representar visualmente procesos, jerarquías, ciclos y relaciones; convierte texto en diagramas de forma automática.</li>
+            <li><strong>Insertar video y audio:</strong> permite incluir clips multimedia dentro de la presentación; útil para evidencias, contexto o demostración de procesos.</li>
+            <li><strong>Presentación con narración:</strong> graba la voz del expositor diapositiva a diapositiva; permite enviar la presentación para que se vea sola, sin necesidad de un presentador en vivo.</li>
+            <li><strong>Exportar a PDF o video:</strong> convierte el archivo .pptx en un formato no editable (PDF) o en video .mp4; asegura que el diseño se vea igual en cualquier dispositivo sin tener PowerPoint instalado.</li>
           </ul>
         </div>
         <div class="mini-card">
-          <div class="mc-title">Correo Electrónico institucional</div>
+          <div class="mc-title">Correo electrónico institucional — Con su significado</div>
           <ul>
-            <li>Protocolo de comunicación oficial</li>
-            <li>Asunto claro y preciso</li>
-            <li>CC y CCO correctamente usados</li>
-            <li>Adjuntos con nombre descriptivo</li>
-            <li>Firma corporativa</li>
-            <li>Reglas de clasificación de mensajes</li>
+            <li><strong>Protocolo de comunicación oficial:</strong> normas que rigen el correo electrónico como comunicación formal; tiene el mismo valor jurídico que un oficio en papel cuando cumple los requisitos (identificación, asunto, firma).</li>
+            <li><strong>Asunto claro y preciso:</strong> la línea de asunto debe resumir el contenido en máximo 8 palabras; facilita la búsqueda, la priorización y el archivo del correo.</li>
+            <li><strong>CC (con copia) y CCO (con copia oculta):</strong> CC informa a terceros que verán quiénes más recibieron el mensaje; CCO envía copia sin revelar el destinatario a los demás. Se usa incorrectamente copiar a personas innecesarias (sobrecarga de bandeja).</li>
+            <li><strong>Adjuntos con nombre descriptivo:</strong> los archivos deben nombrarse con contenido identificable (ej. "Informe_Auditoria_Contratos_Marzo2025.pdf"), no genéricos como "documento1.pdf".</li>
+            <li><strong>Firma corporativa:</strong> bloque de texto al final del correo con nombre, cargo, dependencia, teléfono y logo institucional; es la identificación oficial del emisor.</li>
+            <li><strong>Reglas de clasificación de mensajes:</strong> filtros automáticos que organizan los correos entrantes en carpetas según remitente, palabras clave o importancia; evitan que mensajes importantes se pierdan en la bandeja de entrada.</li>
           </ul>
         </div>
       </div>
@@ -1668,12 +1556,12 @@
       <div class="grid2">
         <div class="mini-card">
           <div class="mc-title">Tipos de red por alcance</div>
-          <ul>
-            <li><strong>LAN:</strong> Red de área local (oficina)</li>
-            <li><strong>MAN:</strong> Red de área metropolitana (ciudad)</li>
-            <li><strong>WAN:</strong> Red de área amplia (país/mundo)</li>
-            <li><strong>WLAN:</strong> Red local inalámbrica (Wi-Fi)</li>
-            <li><strong>VPN:</strong> Red privada virtual (acceso remoto seguro)</li>
+          <ul class="def-list">
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">LAN — Red de Área Local</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Conecta dispositivos dentro de un área pequeña como una oficina o edificio. Alta velocidad, baja latencia. Ej: los equipos de una sede de la CGR conectados entre sí.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">MAN — Red de Área Metropolitana</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Cubre una ciudad o área geográfica amplia. Conecta varias sedes u oficinas dentro de una misma ciudad. Ej: red que une las gerencias de una entidad en Bogotá.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">WAN — Red de Área Amplia</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Conecta redes en grandes distancias (países, continentes). La más grande es Internet. Permite que las gerencias departamentales de la CGR se comuniquen con Bogotá.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">WLAN — Red Local Inalámbrica (Wi-Fi)</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>LAN sin cables, usando ondas de radio. Permite movilidad dentro del área de cobertura del punto de acceso. Usa estándares IEEE 802.11.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">VPN — Red Privada Virtual</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Crea un "túnel" cifrado sobre Internet para acceder de forma segura a la red interna de una entidad desde cualquier lugar. Fundamental para el teletrabajo seguro.</p></div></li>
           </ul>
         </div>
         <div class="mini-card">
@@ -1750,24 +1638,24 @@
       <div class="grid2">
         <div class="mini-card">
           <div class="mc-title">Derechos del titular (ARCO)</div>
-          <ul>
-            <li><strong>A</strong>cceder a sus datos</li>
-            <li><strong>R</strong>ectificar datos incorrectos</li>
-            <li><strong>C</strong>ancelar/suprimir datos</li>
-            <li><strong>O</strong>ponerse al tratamiento</li>
+          <ul class="def-list">
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Acceder a sus datos</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>El titular puede solicitar en cualquier momento a la entidad que le muestre qué datos personales suyos tiene almacenados y para qué los usa.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Rectificar datos incorrectos</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Si un dato está desactualizado o es erróneo (ej: dirección incorrecta), el titular puede exigir que se corrija de forma gratuita y oportuna.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Cancelar / suprimir datos</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Cuando el dato ya no es necesario para la finalidad que justificó su recolección, el titular puede pedir que sea eliminado de la base de datos.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Oponerse al tratamiento</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>El titular puede oponerse a que sus datos sean tratados para fines específicos (ej: publicidad), aunque haya dado autorización inicial.</p></div></li>
           </ul>
         </div>
         <div class="mini-card">
           <div class="mc-title">Principios (Art. 4 Ley 1581)</div>
-          <ul>
-            <li>Legalidad</li>
-            <li>Finalidad</li>
-            <li>Libertad (autorización previa)</li>
-            <li>Veracidad / Calidad</li>
-            <li>Transparencia</li>
-            <li>Acceso y circulación restringida</li>
-            <li>Seguridad</li>
-            <li>Confidencialidad</li>
+          <ul class="def-list">
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Legalidad</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>El tratamiento de datos solo puede realizarse de acuerdo con lo establecido en la Ley 1581/2012 y normas concordantes.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Finalidad</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Los datos solo pueden usarse para la finalidad legítima, específica y explícita que motivó su recolección. No se pueden usar para otros fines.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Libertad (autorización previa)</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Solo se pueden tratar datos con el consentimiento previo, expreso e informado del titular. Nadie puede obligar a una persona a autorizar el tratamiento.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Veracidad / Calidad</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>La información debe ser completa, exacta, actualizada y comprobable. Está prohibido tratar datos parciales, incompletos o fraccionados.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Transparencia</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>El titular tiene derecho a obtener información sobre la existencia de datos suyos y sobre el tratamiento que se les da, en cualquier momento.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Acceso y circulación restringida</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Solo pueden acceder a los datos quienes estén autorizados por el titular o por la ley. Su circulación entre terceros requiere consentimiento o habilitación legal.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Seguridad</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>El responsable debe implementar medidas técnicas y administrativas para proteger los datos frente a adulteración, pérdida, uso no autorizado o fraude.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Confidencialidad</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Todas las personas que intervengan en el tratamiento están obligadas a guardar reserva sobre la información, incluso después de finalizada su relación con el responsable.</p></div></li>
           </ul>
         </div>
       </div>
@@ -1834,11 +1722,11 @@
       <div class="grid2">
         <div class="mini-card">
           <div class="mc-title">Modelos de despliegue</div>
-          <ul>
-            <li><strong>Pública:</strong> Recursos compartidos (AWS, Azure)</li>
-            <li><strong>Privada:</strong> Solo para una organización</li>
-            <li><strong>Híbrida:</strong> Combina pública y privada</li>
-            <li><strong>Comunitaria:</strong> Compartida por sector (ej: Nube Gov)</li>
+          <ul class="def-list">
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Nube Pública</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Recursos de cómputo compartidos entre múltiples clientes gestionados por un proveedor externo (AWS, Azure, Google Cloud). Menor costo, alta escalabilidad, pero menos control.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Nube Privada</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Infraestructura exclusiva para una sola organización, en sus propias instalaciones o en un datacenter dedicado. Mayor control y seguridad, pero mayor costo.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Nube Híbrida</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Combina nube pública y privada. Los datos sensibles van a la privada y las cargas variables a la pública. Ofrece flexibilidad y control sobre la información crítica.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Nube Comunitaria</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Compartida por varias organizaciones del mismo sector (ej: entidades de gobierno). Permite compartir costos manteniendo estándares comunes de seguridad y cumplimiento.</p></div></li>
           </ul>
         </div>
         <div class="mini-card">
@@ -1888,11 +1776,11 @@
         </div>
         <div class="mini-card">
           <div class="mc-title">Principios ACID</div>
-          <ul>
-            <li><strong>A</strong>tomicidad: Todo o nada</li>
-            <li><strong>C</strong>onsistencia: Estado válido siempre</li>
-            <li><strong>I</strong>solamiento: Transacciones independientes</li>
-            <li><strong>D</strong>urabilidad: Persistencia confirmada</li>
+          <ul class="def-list">
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Atomicidad — Todo o nada</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Una transacción es una unidad indivisible. Si una parte falla, toda la operación se revierte (rollback). Ej: si se descuenta dinero de una cuenta pero falla el abono a otra, se cancela todo.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Consistencia — Estado válido siempre</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>La base de datos pasa de un estado válido a otro estado válido. Las reglas de integridad (restricciones, claves foráneas) nunca se violan durante una transacción.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Isolamiento — Transacciones independientes</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Varias transacciones simultáneas no se interfieren entre sí. Cada una se ejecuta como si fuera la única, evitando lecturas sucias o datos inconsistentes.</p></div></li>
+            <li class="def-item"><div class="def-item-header" onclick="toggleDef(this)"><span class="di-term">Durabilidad — Persistencia confirmada</span><span class="di-arrow">▼</span></div><div class="def-item-body"><p>Una vez confirmada (commit) una transacción, sus cambios son permanentes incluso si el sistema falla. Los datos se guardan en disco de forma segura.</p></div></li>
           </ul>
         </div>
       </div>
@@ -1951,26 +1839,30 @@
     <div class="section-body">
       <div class="grid2">
         <div class="mini-card">
-          <div class="mc-title">Windows — Configuraciones clave</div>
+          <div class="mc-title">Windows — Configuraciones clave con su significado</div>
           <ul>
-            <li>Gestión de usuarios y grupos locales</li>
-            <li>Políticas de grupo (GPO)</li>
-            <li>Administrador de tareas</li>
-            <li>Visor de eventos (Event Viewer)</li>
-            <li>Panel de control / Configuración</li>
-            <li>Registro del sistema (regedit)</li>
-            <li>Firewall de Windows Defender</li>
+            <li><strong>Gestión de usuarios y grupos locales:</strong> crear, modificar y eliminar cuentas de usuario en el equipo; asignar permisos por grupos (Administradores, Usuarios estándar). Fundamental para controlar quién accede a qué recursos.</li>
+            <li><strong>Políticas de grupo (GPO):</strong> reglas centralizadas que se aplican a múltiples equipos en una red corporativa; permiten configurar seguridad, restricciones y ajustes de forma masiva sin tocar cada PC individualmente.</li>
+            <li><strong>Administrador de tareas (Task Manager):</strong> muestra los procesos activos, el uso de CPU, RAM, disco y red en tiempo real; permite terminar aplicaciones que no responden e identificar procesos maliciosos.</li>
+            <li><strong>Visor de eventos (Event Viewer):</strong> registro cronológico de todo lo que ocurre en el sistema (errores, advertencias, inicios de sesión, fallos de aplicación); es la primera herramienta para diagnosticar problemas.</li>
+            <li><strong>Panel de control / Configuración:</strong> interfaz para ajustar configuraciones del sistema operativo (red, pantalla, impresoras, actualizaciones, seguridad). En Windows 10/11 coexisten ambas interfaces.</li>
+            <li><strong>Registro del sistema (regedit):</strong> base de datos jerárquica que almacena la configuración de Windows y las aplicaciones instaladas; modificarlo incorrectamente puede dañar el sistema operativo.</li>
+            <li><strong>Firewall de Windows Defender:</strong> filtro de red que controla qué tráfico puede entrar o salir del equipo; bloquea conexiones no autorizadas y protege contra accesos remotos maliciosos.</li>
           </ul>
         </div>
         <div class="mini-card">
-          <div class="mc-title">Linux — Comandos esenciales</div>
+          <div class="mc-title">Linux — Comandos esenciales con su significado</div>
           <ul>
-            <li><code>ls / cd / pwd</code> Navegar</li>
-            <li><code>chmod / chown</code> Permisos</li>
-            <li><code>ps aux / top</code> Procesos</li>
-            <li><code>df -h / du -sh</code> Disco</li>
-            <li><code>sudo apt update</code> Actualizar</li>
-            <li><code>systemctl</code> Servicios</li>
+            <li><code>ls</code> <strong>Listar:</strong> muestra el contenido del directorio actual. <code>ls -la</code> incluye archivos ocultos y permisos.</li>
+            <li><code>cd</code> <strong>Cambiar directorio:</strong> navegar entre carpetas. <code>cd /etc</code> va a la carpeta de configuración del sistema.</li>
+            <li><code>pwd</code> <strong>Print Working Directory:</strong> muestra la ruta completa donde estás actualmente.</li>
+            <li><code>chmod</code> <strong>Cambiar permisos:</strong> define quién puede leer, escribir o ejecutar un archivo. <code>chmod 755 archivo</code> da permisos de ejecución.</li>
+            <li><code>chown</code> <strong>Cambiar propietario:</strong> asigna un usuario y grupo como dueños de un archivo o directorio.</li>
+            <li><code>ps aux</code> <strong>Ver procesos:</strong> lista todos los procesos activos con su ID (PID), usuario y consumo de recursos.</li>
+            <li><code>top</code> <strong>Monitor en tiempo real:</strong> muestra los procesos ordenados por uso de CPU/RAM, actualizándose cada segundo.</li>
+            <li><code>df -h</code> <strong>Espacio en disco:</strong> muestra el uso del disco en formato legible por humanos (GB, MB).</li>
+            <li><code>sudo apt update && sudo apt upgrade</code> <strong>Actualizar sistema:</strong> descarga la lista de actualizaciones disponibles e instala las más recientes.</li>
+            <li><code>systemctl start/stop/status servicio</code> <strong>Gestionar servicios:</strong> inicia, detiene o consulta el estado de un servicio del sistema (ej. servidor web, base de datos).</li>
           </ul>
         </div>
       </div>
@@ -2088,24 +1980,6 @@
   const tabBtns = document.querySelectorAll('.tab-btn');
   const panels = document.querySelectorAll('.tab-panel');
   const content = document.querySelector('.content');
-  const sidebar = document.getElementById('sidebar');
-  const menuToggle = document.getElementById('menuToggle');
-  const sidebarBackdrop = document.getElementById('sidebarBackdrop');
-
-  function closeSidebar() {
-    sidebar.classList.remove('open');
-    sidebarBackdrop.classList.remove('visible');
-    menuToggle.setAttribute('aria-expanded', 'false');
-  }
-
-  function toggleSidebar() {
-    const isOpen = sidebar.classList.toggle('open');
-    sidebarBackdrop.classList.toggle('visible', isOpen);
-    menuToggle.setAttribute('aria-expanded', String(isOpen));
-  }
-
-  menuToggle.addEventListener('click', toggleSidebar);
-  sidebarBackdrop.addEventListener('click', closeSidebar);
 
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -2118,7 +1992,7 @@
       content.scrollTo({ top: 0, behavior: 'smooth' });
       window.scrollTo({ top: 0, behavior: 'smooth' });
       // Close mobile sidebar
-      closeSidebar();
+      document.getElementById('sidebar').classList.remove('open');
     });
   });
 
@@ -2134,9 +2008,14 @@
     if (firstSection) firstSection.classList.add('open');
   });
 
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) closeSidebar();
-  });
+  // ── Definition item toggle
+  function toggleDef(header) {
+    const item = header.parentElement;
+    // Close siblings
+    const siblings = item.parentElement.querySelectorAll('.def-item');
+    siblings.forEach(s => { if (s !== item) s.classList.remove('open'); });
+    item.classList.toggle('open');
+  }
 </script>
 </body>
 </html>
