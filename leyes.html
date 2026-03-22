@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Normativa Jurídica Colombiana</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold:       #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-dim:   #7A5E2A;
+    --ink:        #0E0D0B;
+    --ink-soft:   #1C1A16;
+    --ink-mid:    #2B2820;
+    --paper:      #F5F0E8;
+    --paper-warm: #EDE6D6;
+    --cream:      #FAF6EE;
+    --text-main:  #1C1A16;
+    --text-muted: #6B6047;
+    --text-light: #9C8E72;
+    --red:        #B84040;
+    --green:      #3A7A52;
+    --blue:       #2B5A8A;
+    --border:     rgba(201,168,76,0.25);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--ink);
+    color: var(--paper);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    padding: 80px 40px 60px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.2s;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--cream);
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.4s;
+  }
+
+  .hero h1 span { color: var(--gold); }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--text-light);
+    font-style: italic;
+    font-weight: 300;
+    max-width: 560px;
+    margin: 0 auto 36px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.6s;
+  }
+
+  .hero-divider {
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.8s;
+  }
+  .hero-divider::before, .hero-divider::after {
+    content: ''; height: 1px; width: 80px; background: var(--border);
+  }
+  .hero-divider span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em; color: var(--gold-dim);
+    text-transform: uppercase;
+  }
+
+  /* ── CONTROLS ── */
+  .controls {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(14,13,11,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 40px;
+    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+  }
+
+  .search-wrap {
+    flex: 1; min-width: 200px; position: relative;
+  }
+  .search-wrap svg {
+    position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+    color: var(--gold-dim); pointer-events: none;
+  }
+  #search {
+    width: 100%;
+    background: rgba(201,168,76,0.06);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 14px 10px 40px;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.9rem;
+    color: var(--paper);
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  #search::placeholder { color: var(--text-muted); }
+  #search:focus {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.1);
+  }
+
+  .filter-group { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .filter-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .filter-btn:hover { border-color: var(--gold-dim); color: var(--gold-light); }
+  .filter-btn.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ── COUNTER ── */
+  .results-bar {
+    padding: 18px 40px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .results-bar strong { color: var(--gold); }
+
+  /* ── GRID ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 1px;
+    padding: 24px 40px 80px;
+  }
+
+  /* ── CARD ── */
+  .card {
+    position: relative;
+    background: var(--ink-soft);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 28px;
+    cursor: pointer;
+    transition: border-color 0.25s, background 0.25s, transform 0.2s;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--card-accent, var(--gold));
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover {
+    background: rgba(201,168,76,0.04);
+    border-color: rgba(201,168,76,0.4);
+    transform: translateY(-2px);
+  }
+  .card:hover::before { transform: scaleY(1); }
+
+  .card-type {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--card-accent, var(--gold));
+    margin-bottom: 10px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card-type::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .card-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .card-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--text-muted);
+    margin-bottom: 14px;
+  }
+
+  .card-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--paper-warm);
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+
+  .card-desc {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-style: italic;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-tags {
+    display: flex; gap: 6px; flex-wrap: wrap; margin-top: 16px;
+  }
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 0.1em;
+    padding: 3px 8px;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+  .tag-prohibicion { background: rgba(184,64,64,0.18); color: #E07070; border: 1px solid rgba(184,64,64,0.3); }
+  .tag-obligacion  { background: rgba(43,90,138,0.18); color: #70A0D0; border: 1px solid rgba(43,90,138,0.3); }
+  .tag-permiso     { background: rgba(58,122,82,0.18);  color: #70B890; border: 1px solid rgba(58,122,82,0.3); }
+  .tag-referencia  { background: rgba(201,168,76,0.12); color: var(--gold); border: 1px solid var(--border); }
+
+  /* ── MODAL ── */
+  .overlay {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(10,9,8,0.85);
+    backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .overlay.open { opacity: 1; pointer-events: all; }
+
+  .modal {
+    background: var(--ink-soft);
+    border: 1px solid rgba(201,168,76,0.35);
+    border-radius: 4px;
+    max-width: 720px; width: 100%;
+    max-height: 88vh;
+    overflow-y: auto;
+    position: relative;
+    transform: translateY(24px) scale(0.97);
+    transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+  }
+  .overlay.open .modal { transform: none; }
+
+  .modal::-webkit-scrollbar { width: 4px; }
+  .modal::-webkit-scrollbar-track { background: transparent; }
+  .modal::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
+
+  .modal-header {
+    position: sticky; top: 0;
+    background: var(--ink-soft);
+    border-bottom: 1px solid var(--border);
+    padding: 24px 28px;
+    display: flex; align-items: flex-start; gap: 16px;
+    z-index: 10;
+  }
+  .modal-accent {
+    width: 4px; flex-shrink: 0; border-radius: 2px;
+    align-self: stretch;
+    background: var(--modal-accent, var(--gold));
+  }
+  .modal-header-text { flex: 1; }
+  .modal-type {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--cream); line-height: 1.2;
+  }
+  .modal-subtitle {
+    font-size: 0.82rem; color: var(--text-muted);
+    margin-top: 4px; font-style: italic;
+  }
+  .modal-close {
+    background: none; border: 1px solid var(--border);
+    border-radius: 3px; width: 34px; height: 34px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--text-muted);
+    transition: all 0.2s; flex-shrink: 0;
+  }
+  .modal-close:hover { border-color: var(--gold); color: var(--gold); }
+
+  .modal-body { padding: 28px; }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold-dim);
+    margin-bottom: 8px; margin-top: 24px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .section-label:first-child { margin-top: 0; }
+
+  .section-content {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--paper-warm);
+  }
+
+  .pill-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+  .pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 0.12em;
+    padding: 5px 12px; border-radius: 30px;
+    text-transform: uppercase;
+  }
+  .pill-donde  { background: rgba(43,90,138,0.2);   color: #7AAAD8; border: 1px solid rgba(43,90,138,0.3); }
+  .pill-cuando { background: rgba(58,122,82,0.2);   color: #7ABFA0; border: 1px solid rgba(58,122,82,0.3); }
+
+  /* ── HIDDEN ── */
+  .card.hidden { display: none; }
+
+  /* ── EMPTY ── */
+  .empty {
+    grid-column: 1/-1;
+    text-align: center;
+    padding: 80px 40px;
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 1.1rem;
+    display: none;
+  }
+  .empty.visible { display: block; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SCROLL TO TOP ── */
+  .scroll-top {
+    position: fixed; bottom: 32px; right: 32px; z-index: 150;
+    width: 44px; height: 44px;
+    background: var(--gold);
+    border: none; border-radius: 3px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+    box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+  }
+  .scroll-top.visible { opacity: 1; pointer-events: all; }
+  .scroll-top:hover { background: var(--gold-light); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .hero { padding: 60px 24px 40px; }
+    .controls { padding: 12px 20px; }
+    .grid { padding: 16px 20px 60px; grid-template-columns: 1fr; }
+    .results-bar { padding: 14px 20px 0; }
+    .modal-body { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <p class="hero-label">República de Colombia · Marco Normativo</p>
+  <h1>Normativa <span>Jurídica</span><br>Colombiana</h1>
+  <p class="hero-sub">Catálogo interactivo de leyes, decretos y acuerdos aplicables a la administración pública</p>
+  <div class="hero-divider"><span>19 normas identificadas</span></div>
+</header>
+
+<!-- ── CONTROLS ── -->
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input id="search" type="text" placeholder="Buscar norma, tema o año…">
+  </div>
+  <div class="filter-group">
+    <button class="filter-btn active" data-filter="all">Todas</button>
+    <button class="filter-btn" data-filter="constitucion">Constitución</button>
+    <button class="filter-btn" data-filter="ley">Leyes</button>
+    <button class="filter-btn" data-filter="decreto">Decretos</button>
+    <button class="filter-btn" data-filter="acuerdo">Acuerdos</button>
+    <button class="filter-btn" data-filter="referencia">Referenciadas</button>
+  </div>
+</div>
+
+<p class="results-bar"><strong id="count">19</strong> normas encontradas</p>
+
+<!-- ── GRID ── -->
+<main class="grid" id="grid">
+  <p class="empty" id="empty">No se encontraron normas con ese criterio.</p>
+</main>
+
+<!-- ── MODAL ── -->
+<div class="overlay" id="overlay" role="dialog" aria-modal="true">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-accent" id="modalAccent"></div>
+      <div class="modal-header-text">
+        <p class="modal-type" id="modalType"></p>
+        <h2 class="modal-title" id="modalTitle"></h2>
+        <p class="modal-subtitle" id="modalSubtitle"></p>
+      </div>
+      <button class="modal-close" id="closeModal" aria-label="Cerrar">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path d="M18 6 6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p class="section-label">Resumen</p>
+      <p class="section-content" id="modalResumen"></p>
+
+      <p class="section-label">Dónde se aplica</p>
+      <div class="pill-row" id="modalDonde"></div>
+
+      <p class="section-label">Para qué sirve</p>
+      <p class="section-content" id="modalSirve"></p>
+
+      <p class="section-label">Cuándo se usa</p>
+      <p class="section-content" id="modalCuando"></p>
+    </div>
+  </div>
+</div>
+
+<!-- ── SCROLL TOP ── -->
+<button class="scroll-top" id="scrollTop" aria-label="Volver arriba">
+  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+    <path d="M18 15l-6-6-6 6"/>
+  </svg>
+</button>
+
+<script>
+const NORMAS = [
+  {
+    tipo: "constitucion",
+    tipoLabel: "Constitución",
+    num: "Constitución",
+    year: "1991",
+    titulo: "Constitución Política de Colombia",
+    subtitulo: "Norma de normas — Carta Fundamental del Estado",
+    resumen: "Es la norma suprema del ordenamiento jurídico colombiano. Establece la organización del Estado, los derechos y deberes fundamentales de los ciudadanos, las ramas del poder público y los principios que rigen la función pública. Todo el marco normativo del Estado debe estar en concordancia con ella.",
+    donde: ["Todo el territorio nacional", "Todas las personas", "Entidades públicas y privadas"],
+    sirve: "Sirve como marco jurídico supremo. Es la base para la creación de todo el ordenamiento jurídico colombiano. Protege derechos fundamentales (derecho de petición, Art. 23), define la estructura del Estado (Art. 113–120), establece los principios de la función administrativa (Art. 209) y crea organismos como la Contaduría General de la Nación (Art. 354).",
+    cuando: "Se usa en cualquier acción legal, administrativa o judicial. Es la referencia primaria para interponer tutelas, verificar la constitucionalidad de normas, fundamentar actos administrativos y proteger derechos fundamentales.",
+    tags: ["permiso", "obligacion"],
+    acento: "#C9A84C",
+    principal: true
+  },
+  {
+    tipo: "ley",
+    tipoLabel: "Ley Estatutaria",
+    num: "Ley 594",
+    year: "2000",
+    titulo: "Ley General de Archivos",
+    subtitulo: "Regula la función archivística del Estado colombiano",
+    resumen: "Establece las reglas y principios generales que regulan la función archivística del Estado. Define conceptos clave como archivo, gestión documental, tabla de retención documental y patrimonio documental. Crea el Sistema Nacional de Archivos liderado por el Archivo General de la Nación (AGN).",
+    donde: ["Toda la administración pública (nacional, departamental, municipal)", "Entidades privadas que cumplen funciones públicas"],
+    sirve: "Ordena la gestión documental desde la creación del documento hasta su disposición final (conservación o eliminación), garantizando la transparencia, el acceso a la información y la preservación del patrimonio documental de la Nación.",
+    cuando: "Se usa en la creación, organización, conservación y administración de los archivos de entidades públicas. Es la base para elaborar las Tablas de Retención Documental (TRD), los Programas de Gestión Documental (PGD) y para regular el acceso ciudadano a documentos públicos.",
+    tags: ["obligacion", "permiso"],
+    acento: "#C9A84C",
+    principal: true
+  },
+  {
+    tipo: "ley",
+    tipoLabel: "Ley",
+    num: "Ley 1437",
+    year: "2011",
+    titulo: "Código de Procedimiento Administrativo y de lo Contencioso Administrativo (CPACA)",
+    subtitulo: "Regula los procedimientos administrativos y la jurisdicción contencioso-administrativa",
+    resumen: "Código que regula los procedimientos administrativos en Colombia (Parte Primera) y la organización y funciones de la Jurisdicción de lo Contencioso Administrativo (Parte Segunda). Unifica las reglas para la actuación de las autoridades y los particulares frente al Estado.",
+    donde: ["Organismos y entidades de las ramas del poder público", "Órganos autónomos e independientes", "Particulares que cumplan funciones administrativas"],
+    sirve: "Garantiza los derechos de las personas en sus relaciones con el Estado. Establece reglas para el derecho de petición, notificaciones, recursos (reposición, apelación), silencio administrativo y medios de control judicial (nulidad, restablecimiento del derecho, reparación directa).",
+    cuando: "Se usa en todas las actuaciones administrativas: presentar peticiones, interponer recursos, notificar actos, y en todos los procesos judiciales contencioso-administrativos para demandar a entidades públicas por actos ilegales.",
+    tags: ["obligacion", "permiso"],
+    acento: "#2B5A8A",
+    principal: true
+  },
+  {
+    tipo: "ley",
+    tipoLabel: "Ley Estatutaria",
+    num: "Ley 1755",
+    year: "2015",
+    titulo: "Ley Estatutaria del Derecho de Petición",
+    subtitulo: "Sustituyó el Título II del CPACA — regula el derecho de petición",
+    resumen: "Regula de manera específica el derecho fundamental de petición. Define sus modalidades, términos, requisitos y procedimientos. Establece que el derecho de petición es gratuito, puede ser verbal o escrito, y debe ser resuelto de fondo en los términos legales: 15 días (general), 10 días (documentos), 30 días (consultas), 5 días (traslado).",
+    donde: ["Autoridades públicas", "Organizaciones privadas que garantizan derechos fundamentales", "EPS, AFP, Cajas de Compensación, entidades privadas"],
+    sirve: "Garantiza que cualquier ciudadano pueda hacer solicitudes respetuosas al Estado o a entidades privadas y obtener una respuesta oportuna, clara y de fondo. Define el procedimiento para peticiones incompletas, irrespetuosas, reiterativas o con información reservada.",
+    cuando: "Se usa cada vez que un ciudadano quiere pedir información, solicitar copias de documentos, formular quejas o reclamos, o exigir el reconocimiento de un derecho ante cualquier entidad pública o privada.",
+    tags: ["permiso", "obligacion"],
+    acento: "#2B5A8A",
+    principal: true
+  },
+  {
+    tipo: "ley",
+    tipoLabel: "Ley",
+    num: "Ley 734",
+    year: "2002",
+    titulo: "Código Disciplinario Único",
+    subtitulo: "Régimen disciplinario de los servidores públicos (referenciada en documentos)",
+    resumen: "Era el código que establecía los deberes, prohibiciones, faltas y sanciones disciplinarias para los servidores públicos. Aunque fue derogada por la Ley 1952 de 2019, se cita en los documentos como base normativa para las sanciones por no atender el derecho de petición (Art. 31 de la Ley 1755).",
+    donde: ["Todos los servidores públicos del país"],
+    sirve: "Define las faltas disciplinarias, los grados de culpabilidad (dolo y culpa) y las sanciones: amonestación escrita, multa, suspensión e inhabilidad, destitución e inhabilidad general. Las faltas contra el patrimonio documental son gravísimas.",
+    cuando: "Se cita cuando un funcionario incumple sus deberes, especialmente cuando no responde oportunamente un derecho de petición o destruye patrimonio documental. Actualmente aplica la Ley 1952 de 2019 (Código General Disciplinario).",
+    tags: ["prohibicion", "obligacion"],
+    acento: "#B84040",
+    principal: true
+  },
+  {
+    tipo: "ley",
+    tipoLabel: "Ley",
+    num: "Ley 1712",
+    year: "2014",
+    titulo: "Ley de Transparencia y del Derecho de Acceso a la Información Pública",
+    subtitulo: "Regula el acceso a la información pública y la transparencia activa",
+    resumen: "Ley estatutaria que regula el derecho fundamental de acceso a la información pública. Establece los principios de máxima publicidad y transparencia, define la información pública y los procedimientos para acceder a ella, así como las restricciones y reservas.",
+    donde: ["Todos los sujetos obligados que generen, administren o posean información pública"],
+    sirve: "Garantiza que los ciudadanos puedan conocer y acceder a la información del Estado, promoviendo el control social y la lucha contra la corrupción. Define qué información debe publicarse de manera proactiva (transparencia activa) y la que puede solicitarse.",
+    cuando: "Se usa para solicitar información a entidades públicas, para que las entidades publiquen su información de manera proactiva, y para definir las restricciones de información clasificada o reservada, en concordancia con la Ley 1755.",
+    tags: ["permiso", "obligacion"],
+    acento: "#3A7A52",
+    principal: false
+  },
+  {
+    tipo: "ley",
+    tipoLabel: "Ley",
+    num: "Ley 298",
+    year: "1996",
+    titulo: "Creación de la Contaduría General de la Nación",
+    subtitulo: "Desarrolla el Art. 354 de la Constitución",
+    resumen: "Desarrolla el artículo 354 de la Constitución, creando la Contaduría General de la Nación (CGN) como Unidad Administrativa Especial adscrita al Ministerio de Hacienda y Crédito Público. Define su naturaleza, objeto y funciones de uniformar, centralizar y consolidar la contabilidad pública.",
+    donde: ["Contaduría General de la Nación", "Todas las entidades que deben rendir cuentas bajo normativa contable pública"],
+    sirve: "Establece el organismo rector de la contabilidad pública en Colombia, encargado de elaborar el balance general de la Nación, determinar las normas contables y ejercer funciones de inspección y sanción sobre el cumplimiento contable del Estado.",
+    cuando: "Se usa como marco legal de creación y funcionamiento de la CGN. Sus resoluciones y directrices contables son de obligatorio cumplimiento para todas las entidades públicas. Se invoca en auditorías, inspecciones y procesos sancionatorios contables.",
+    tags: ["obligacion"],
+    acento: "#C9A84C",
+    principal: true
+  },
+  {
+    tipo: "ley",
+    tipoLabel: "Ley",
+    num: "Ley 909",
+    year: "2004",
+    titulo: "Empleo Público y Carrera Administrativa",
+    subtitulo: "Regula el sistema de empleo público por mérito",
+    resumen: "Regula el sistema de empleo público y la carrera administrativa. Determina los tipos de empleos (carrera, libre nombramiento y remoción), los procesos de selección por mérito y el régimen de ingreso, permanencia y retiro del servicio público colombiano.",
+    donde: ["Servidores públicos de la Rama Ejecutiva", "Otras entidades a las que la ley les extiende su aplicación"],
+    sirve: "Garantiza el principio de mérito en el ingreso y ascenso a la función pública, promoviendo la profesionalización y estabilidad del talento humano al servicio del Estado.",
+    cuando: "Se usa en convocatorias públicas para proveer empleos, en evaluaciones del desempeño laboral, en la gestión de plantas de personal y en la elaboración de manuales de funciones y competencias. Es base del Decreto 815 de 2018.",
+    tags: ["obligacion"],
+    acento: "#2B5A8A",
+    principal: false
+  },
+  {
+    tipo: "ley",
+    tipoLabel: "Ley",
+    num: "Ley 489",
+    year: "1998",
+    titulo: "Organización y Funcionamiento de Entidades del Orden Nacional",
+    subtitulo: "Estructura la administración pública nacional",
+    resumen: "Dicta normas sobre la organización y funcionamiento de las entidades del orden nacional. Establece los principios de la función administrativa, la descentralización, la delegación y la creación de entidades públicas (ministerios, departamentos administrativos, superintendencias).",
+    donde: ["Organismos y entidades de la Rama Ejecutiva del orden nacional", "Entidades territoriales en lo pertinente"],
+    sirve: "Estructura la administración pública nacional, define los tipos de entidades públicas y regula sus relaciones con el Gobierno Nacional. Es base del funcionamiento del Sistema Nacional de Archivos y del Consejo Directivo del AGN.",
+    cuando: "Se usa como marco para la creación y modificación de entidades públicas, para la delegación de funciones, y para definir las relaciones entre entidades del sector central y descentralizado.",
+    tags: ["obligacion"],
+    acento: "#2B5A8A",
+    principal: false
+  },
+  {
+    tipo: "ley",
+    tipoLabel: "Ley",
+    num: "Ley 1474",
+    year: "2011",
+    titulo: "Estatuto Anticorrupción",
+    subtitulo: "Fortalece la prevención, investigación y sanción de la corrupción",
+    resumen: "Dicta normas para fortalecer los mecanismos de prevención, investigación y sanción de actos de corrupción y la efectividad del control de la gestión pública. Establece herramientas como el Plan Anticorrupción y de Atención al Ciudadano.",
+    donde: ["Todas las entidades públicas", "Todos los servidores públicos"],
+    sirve: "Previene la corrupción en la administración pública, estableciendo el Plan Anticorrupción, la rendición de cuentas, y fortaleciendo los sistemas de control interno. Obliga a las entidades a publicar sus planes de acción.",
+    cuando: "Se usa en la planeación anual de las entidades (Plan de Acción) y para definir la Política de Transparencia, Lucha contra la Corrupción y Acceso a la Información Pública dentro del MIPG.",
+    tags: ["prohibicion", "obligacion"],
+    acento: "#B84040",
+    principal: false
+  },
+  {
+    tipo: "ley",
+    tipoLabel: "Ley",
+    num: "Ley 152",
+    year: "1994",
+    titulo: "Ley Orgánica del Plan de Desarrollo",
+    subtitulo: "Regula la elaboración y evaluación de los Planes de Desarrollo",
+    resumen: "Establece los procedimientos y mecanismos para la elaboración, aprobación, ejecución, seguimiento y evaluación de los Planes de Desarrollo Nacional y Territoriales. Garantiza la participación ciudadana en el proceso de planeación.",
+    donde: ["La Nación", "Entidades territoriales (departamentos, municipios, distritos)"],
+    sirve: "Institucionaliza el proceso de planeación en el Estado, garantizando la armonía entre los planes nacionales y territoriales y la participación ciudadana en la definición de prioridades.",
+    cuando: "Se usa en el ciclo de planeación de las entidades públicas: elaboración de planes estratégicos, planes de acción anuales y como referente para alinear la gestión institucional con el Plan Nacional de Desarrollo.",
+    tags: ["obligacion"],
+    acento: "#3A7A52",
+    principal: false
+  },
+  {
+    tipo: "ley",
+    tipoLabel: "Ley",
+    num: "Ley 2052",
+    year: "2020",
+    titulo: "Racionalización de Trámites",
+    subtitulo: "Simplifica trámites y mejora la relación Estado-ciudadano",
+    resumen: "Establece disposiciones transversales para la racionalización de trámites en la rama ejecutiva y particulares que cumplen funciones públicas. Busca simplificar procedimientos, digitalizar servicios y mejorar la relación Estado-ciudadano.",
+    donde: ["Rama ejecutiva del nivel nacional y territorial", "Particulares que cumplen funciones públicas"],
+    sirve: "Ordena la creación de dependencias únicas de relación con el ciudadano, estandariza y simplifica trámites, y garantiza que los servicios se presten de manera digital, reduciendo cargas administrativas a los ciudadanos.",
+    cuando: "Se usa para implementar la política de Servicio al Ciudadano y la de Racionalización de Trámites en el marco del MIPG, y cuando una entidad busca reducir o simplificar sus trámites y servicios.",
+    tags: ["obligacion", "permiso"],
+    acento: "#3A7A52",
+    principal: false
+  },
+  {
+    tipo: "decreto",
+    tipoLabel: "Decreto",
+    num: "Decreto 1083",
+    year: "2015",
+    titulo: "Decreto Único Reglamentario del Sector Función Pública",
+    subtitulo: "Compila y reglamenta las normas del sector de Función Pública",
+    resumen: "Decreto que compila y reglamenta las normas del sector de Función Pública. En él se establece el Modelo Integrado de Planeación y Gestión (MIPG) y las competencias laborales generales. El Decreto 815 de 2018 lo modifica en materia de competencias.",
+    donde: ["Organismos y entidades de la Rama Ejecutiva", "Todos los servidores públicos"],
+    sirve: "Sirve como código normativo para temas de gestión pública: empleo público, racionalización de trámites, control interno, planeación. Contiene la base legal para la operación del MIPG y los manuales de funciones.",
+    cuando: "Se usa como referencia principal para todo lo relacionado con la gestión del talento humano, la planeación institucional y la estructura del sistema de gestión en entidades del orden nacional.",
+    tags: ["obligacion"],
+    acento: "#7A5E2A",
+    principal: false
+  },
+  {
+    tipo: "decreto",
+    tipoLabel: "Decreto",
+    num: "Decreto 1499",
+    year: "2017",
+    titulo: "Integración de los Sistemas de Gestión y Control Interno (MIPG)",
+    subtitulo: "Dio origen al Modelo Integrado de Planeación y Gestión",
+    resumen: "Modificó el Decreto 1083 de 2015 para integrar el Sistema de Gestión y el Sistema de Control Interno en un solo sistema, dando origen al MIPG como herramienta de gestión pública integral basada en resultados.",
+    donde: ["Entidades de la Rama Ejecutiva del orden nacional", "Con criterios diferenciales: entidades del orden territorial"],
+    sirve: "Unifica y simplifica los modelos de gestión de las entidades, articulando planeación, gestión y control en un modelo integral orientado a la generación de resultados con calidad para los ciudadanos.",
+    cuando: "Es el decreto fundamental que establece la estructura y funcionamiento del MIPG, base de todo el Manual Operativo y la medición del desempeño institucional de las entidades públicas colombianas.",
+    tags: ["obligacion"],
+    acento: "#7A5E2A",
+    principal: false
+  },
+  {
+    tipo: "decreto",
+    tipoLabel: "Decreto",
+    num: "Decreto 815",
+    year: "2018",
+    titulo: "Competencias Laborales para Empleos Públicos",
+    subtitulo: "Modifica el Decreto 1083/2015 en materia de competencias comportamentales",
+    resumen: "Modificó el Decreto 1083 de 2015 para actualizar las competencias laborales generales (comportamentales) de los servidores públicos según nivel jerárquico: Directivo, Asesor, Profesional, Técnico y Asistencial. Competencias comunes: aprendizaje continuo, orientación al usuario, trabajo en equipo.",
+    donde: ["Entidades a las que se aplican los Decretos Ley 770 y 785 de 2005", "Entidades del orden nacional y territorial"],
+    sirve: "Estandariza las competencias y conductas asociadas para el buen desempeño en cada nivel del empleo público, orientando los procesos de selección, evaluación del desempeño y el desarrollo del talento humano.",
+    cuando: "Se usa para elaborar los manuales específicos de funciones y competencias laborales, como base para las convocatorias de empleo público y para la evaluación del desempeño en el marco de la Dimensión de Talento Humano del MIPG.",
+    tags: ["obligacion"],
+    acento: "#7A5E2A",
+    principal: true
+  },
+  {
+    tipo: "decreto",
+    tipoLabel: "Decreto",
+    num: "Decreto 1693",
+    year: "2023",
+    titulo: "Estructura de la Contaduría General de la Nación",
+    subtitulo: "Modifica la estructura interna de la CGN",
+    resumen: "Modifica la estructura interna de la Contaduría General de la Nación y determina las funciones de cada una de sus dependencias. Actualiza la organización institucional de la entidad conforme a las necesidades actuales del Estado.",
+    donde: ["Contaduría General de la Nación exclusivamente"],
+    sirve: "Organiza internamente las dependencias de la CGN, asigna y redistribuye funciones entre sus áreas, y actualiza la estructura para cumplir eficientemente con su misión de rector de la contabilidad pública.",
+    cuando: "Aplica cuando se reorganizan internamente las dependencias de la CGN, cuando se asignan funciones a nuevas áreas, o cuando se realizan procesos de reestructuración institucional de la entidad.",
+    tags: ["obligacion"],
+    acento: "#C9A84C",
+    principal: true
+  },
+  {
+    tipo: "decreto",
+    tipoLabel: "Decreto",
+    num: "Decreto 1694",
+    year: "2023",
+    titulo: "Planta de Personal — Contaduría General de la Nación (I)",
+    subtitulo: "Primera modificación de la planta de personal de la CGN en 2023",
+    resumen: "Modifica la planta de personal de la Contaduría General de la Nación, ajustando el número y tipo de cargos disponibles en la entidad para responder a sus funciones y necesidades institucionales.",
+    donde: ["Contaduría General de la Nación exclusivamente"],
+    sirve: "Ajusta la capacidad operativa de la CGN mediante la creación, supresión o modificación de cargos, garantizando que la entidad cuente con el talento humano suficiente para ejercer sus funciones de rector contable.",
+    cuando: "Se usa en procesos de reestructuración institucional, cuando se crean nuevas dependencias o cuando se redistribuye el talento humano entre las áreas de la CGN.",
+    tags: ["obligacion"],
+    acento: "#C9A84C",
+    principal: true
+  },
+  {
+    tipo: "decreto",
+    tipoLabel: "Decreto",
+    num: "Decreto 1436",
+    year: "2024",
+    titulo: "Planta de Personal — Contaduría General de la Nación (II)",
+    subtitulo: "Segunda modificación de la planta de personal de la CGN",
+    resumen: "Realiza una nueva modificación a la planta de personal de la CGN, complementando los ajustes realizados por el Decreto 1694 de 2023. Actualiza la estructura de personal para responder a las necesidades funcionales y presupuestales vigentes.",
+    donde: ["Contaduría General de la Nación exclusivamente"],
+    sirve: "Complementa la reestructuración de personal iniciada en 2023, ajustando la planta de cargos de la CGN a las exigencias del nuevo marco normativo y a las prioridades presupuestales del Gobierno Nacional.",
+    cuando: "Aplica en el marco de la reestructuración continua de la entidad, en procesos de modificación de planta de personal y como referente para los procesos de selección y provisión de cargos en la CGN.",
+    tags: ["obligacion"],
+    acento: "#C9A84C",
+    principal: true
+  },
+  {
+    tipo: "acuerdo",
+    tipoLabel: "Acuerdo",
+    num: "Acuerdo 001",
+    year: "2024",
+    titulo: "Acuerdo Único de la Función Archivística — AGN",
+    subtitulo: "Expedido por el Consejo Directivo del Archivo General de la Nación",
+    resumen: "Acto administrativo del Consejo Directivo del AGN que establece de manera unificada los criterios técnicos y jurídicos para implementar la función archivística. Es uno de los archivos subidos como documento principal y desarrolla en detalle la Ley 594 de 2000.",
+    donde: ["Administración pública en todos sus niveles (nacional, departamental, municipal)", "Entidades privadas que cumplen funciones públicas"],
+    sirve: "Es la norma técnica y regulatoria más detallada sobre cómo crear, organizar, transferir, conservar y disponer los documentos de archivo (físicos y electrónicos). Base para elaborar el PGD, las TRD, los inventarios y el Sistema Integrado de Conservación (SIC).",
+    cuando: "Se usa como guía obligatoria para la gestión documental. Aplica al elaborar programas de gestión documental, tablas de retención, transferencias de archivos y cuando el AGN realiza inspecciones o asistencias técnicas a entidades.",
+    tags: ["obligacion"],
+    acento: "#C9A84C",
+    principal: true
+  },
+
+  // REFERENCIADAS SECUNDARIAMENTE
+  {
+    tipo: "referencia",
+    tipoLabel: "Referencia Normativa",
+    num: "Ley 80",
+    year: "1989",
+    titulo: "Creación del Archivo General de la Nación",
+    subtitulo: "Referenciada en la Ley 594 de 2000",
+    resumen: "Crea el Archivo General de la Nación como entidad rectora de la política archivística en Colombia. La Ley 594 de 2000 la referencia como base de las funciones del AGN y su parágrafo modifica su artículo sobre destrucción de documentos históricos.",
+    donde: ["Sistema archivístico nacional"],
+    sirve: "Establece las funciones originales del AGN y sirve como antecedente histórico de la política archivística colombiana.",
+    cuando: "Se invoca como referencia histórica cuando se estudian las competencias del Archivo General de la Nación y su evolución normativa.",
+    tags: ["referencia"],
+    acento: "#7A5E2A",
+    principal: false
+  }
+];
+
+// ──────────────────────────────────────────────
+// RENDER
+// ──────────────────────────────────────────────
+const grid    = document.getElementById('grid');
+const empty   = document.getElementById('empty');
+const countEl = document.getElementById('count');
+const overlay = document.getElementById('overlay');
+const modal   = document.getElementById('modal');
+
+function tagHTML(tag) {
+  const map = {
+    prohibicion: ['tag-prohibicion','Prohibición'],
+    obligacion:  ['tag-obligacion', 'Obligación'],
+    permiso:     ['tag-permiso',    'Permiso'],
+    referencia:  ['tag-referencia', 'Referencia'],
+  };
+  const [cls, label] = map[tag] || ['tag-referencia', tag];
+  return `<span class="tag ${cls}">${label}</span>`;
+}
+
+function renderCards(list) {
+  // remove old cards
+  document.querySelectorAll('.card').forEach(c => c.remove());
+  empty.classList.remove('visible');
+  countEl.textContent = list.length;
+
+  if (list.length === 0) { empty.classList.add('visible'); return; }
+
+  list.forEach((n, i) => {
+    const el = document.createElement('div');
+    el.className = 'card';
+    el.dataset.tipo = n.tipo;
+    el.style.animationDelay = `${i * 0.04}s`;
+    el.style.setProperty('--card-accent', n.acento);
+    el.innerHTML = `
+      <div class="card-type">${n.tipoLabel}</div>
+      <div class="card-num">${n.num}</div>
+      <div class="card-year">— ${n.year} —</div>
+      <div class="card-title">${n.titulo}</div>
+      <div class="card-desc">${n.resumen}</div>
+      <div class="card-tags">${n.tags.map(tagHTML).join('')}</div>`;
+    el.addEventListener('click', () => openModal(n));
+    grid.insertBefore(el, empty);
+  });
+}
+
+// ──────────────────────────────────────────────
+// MODAL
+// ──────────────────────────────────────────────
+function openModal(n) {
+  document.getElementById('modalAccent').style.background   = n.acento;
+  document.getElementById('modalType').textContent          = n.tipoLabel;
+  document.getElementById('modalTitle').textContent         = `${n.num} de ${n.year}`;
+  document.getElementById('modalSubtitle').textContent      = n.subtitulo;
+  document.getElementById('modalResumen').textContent       = n.resumen;
+  document.getElementById('modalSirve').textContent         = n.sirve;
+  document.getElementById('modalCuando').textContent        = n.cuando;
+  document.getElementById('modalDonde').innerHTML           = n.donde.map(d =>
+    `<span class="pill pill-donde">${d}</span>`).join('');
+  overlay.style.setProperty('--modal-accent', n.acento);
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+document.getElementById('closeModal').addEventListener('click', closeModal);
+overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+function closeModal() {
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ──────────────────────────────────────────────
+// FILTER + SEARCH
+// ──────────────────────────────────────────────
+let activeFilter = 'all';
+let searchTerm   = '';
+
+function applyFilters() {
+  const q = searchTerm.toLowerCase();
+  const filtered = NORMAS.filter(n => {
+    const matchFilter = activeFilter === 'all' || n.tipo === activeFilter;
+    const matchSearch = !q ||
+      n.num.toLowerCase().includes(q) ||
+      n.titulo.toLowerCase().includes(q) ||
+      n.resumen.toLowerCase().includes(q) ||
+      n.year.includes(q);
+    return matchFilter && matchSearch;
+  });
+  renderCards(filtered);
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.filter;
+    applyFilters();
+  });
+});
+
+document.getElementById('search').addEventListener('input', e => {
+  searchTerm = e.target.value;
+  applyFilters();
+});
+
+// ──────────────────────────────────────────────
+// SCROLL TOP
+// ──────────────────────────────────────────────
+const scrollBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => {
+  scrollBtn.classList.toggle('visible', window.scrollY > 300);
+});
+scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// ── INIT ──
+renderCards(NORMAS);
+</script>
+</body>
+</html>
